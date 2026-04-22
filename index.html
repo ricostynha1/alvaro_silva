@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Álvaro Silva - Ph.D. candidate in software engineering, research on verification-aware languages, Dafny, Verus, and hardware verification.">
+	<title>Álvaro Silva | Research, Verification, and Engineering</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #f5f1ea;
+			--bg-alt: #ece5db;
+			--surface: rgba(255, 255, 255, 0.72);
+			--surface-strong: #ffffff;
+			--text: #17212b;
+			--muted: #5c6773;
+			--line: rgba(23, 33, 43, 0.10);
+			--accent: #0f766e;
+			--accent-strong: #134e4a;
+			--accent-soft: rgba(15, 118, 110, 0.12);
+			--shadow: 0 22px 60px rgba(23, 33, 43, 0.10);
+			--radius-xl: 30px;
+			--radius-lg: 22px;
+			--radius-md: 16px;
+			--max-width: 1160px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			margin: 0;
+			color: var(--text);
+			background:
+				radial-gradient(circle at top left, rgba(15, 118, 110, 0.16), transparent 28%),
+				radial-gradient(circle at 85% 10%, rgba(180, 83, 9, 0.14), transparent 26%),
+				linear-gradient(180deg, var(--bg) 0%, #f7f3ee 45%, #f2ece4 100%);
+			font-family: "Manrope", sans-serif;
+			line-height: 1.6;
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			background-image:
+				linear-gradient(rgba(23, 33, 43, 0.03) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(23, 33, 43, 0.03) 1px, transparent 1px);
+			background-size: 36px 36px;
+			mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 82%);
+			opacity: 0.65;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: var(--accent-strong);
+		}
+
+		.page {
+			width: min(calc(100% - 32px), var(--max-width));
+			margin: 0 auto;
+			position: relative;
+			z-index: 1;
+		}
+
+		.topbar {
+			position: sticky;
+			top: 16px;
+			z-index: 20;
+			margin: 16px auto 0;
+			border: 1px solid var(--line);
+			border-radius: 24px;
+			background: rgba(255, 255, 255, 0.65);
+			backdrop-filter: blur(16px);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 16px 22px;
+			gap: 16px;
+			box-shadow: 0 10px 30px rgba(23, 33, 43, 0.06);
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			min-width: 0;
+		}
+
+		.brand-text {
+			display: grid;
+			min-width: 0;
+		}
+
+		.brand-text strong {
+			font-size: 1.02rem;
+			line-height: 1.05;
+		}
+
+		.brand-text span {
+			font-size: 0.88rem;
+			color: var(--muted);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.social-links {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.social-link {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: inline-grid;
+			place-items: center;
+			background: rgba(15, 118, 110, 0.08);
+			border: 1px solid rgba(15, 118, 110, 0.12);
+			color: var(--accent-strong);
+			transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+		}
+
+		.social-link:hover {
+			transform: translateY(-1px);
+			background: rgba(15, 118, 110, 0.14);
+			box-shadow: 0 10px 18px rgba(15, 118, 110, 0.12);
+		}
+
+		.social-link svg {
+			width: 18px;
+			height: 18px;
+			fill: currentColor;
+		}
+
+		.nav {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 12px 16px;
+			font-size: 0.95rem;
+		}
+
+		.nav a {
+			color: var(--muted);
+		}
+
+		.nav a:hover {
+			color: var(--text);
+		}
+
+		.hero {
+			padding: 34px 0 20px;
+		}
+
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 0.78fr 1.62fr;
+			gap: 28px;
+			align-items: stretch;
+		}
+
+		.hero-main,
+		.hero-side,
+		.panel,
+		.feature,
+		.timeline-item,
+		.publication,
+		.contact-card {
+			border: 1px solid var(--line);
+			background: var(--surface);
+			backdrop-filter: blur(16px);
+			box-shadow: var(--shadow);
+		}
+
+		.hero-main {
+			padding: 34px;
+			border-radius: var(--radius-xl);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-rail {
+			display: grid;
+			gap: 16px;
+			align-content: start;
+		}
+
+		.hero-photo {
+			padding: 0;
+			border-radius: var(--radius-xl);
+			overflow: hidden;
+			background: linear-gradient(160deg, rgba(15, 118, 110, 0.92), rgba(19, 78, 74, 0.86));
+			height: 100%;
+		}
+
+		.nav-card {
+			padding: 20px;
+			border-radius: var(--radius-xl);
+			display: grid;
+			gap: 14px;
+			align-content: start;
+			justify-items: stretch;
+		}
+
+		.nav-card h2 {
+			font-family: "Sora", "Manrope", sans-serif;
+			font-size: 1.45rem;
+			margin: 0;
+		}
+
+		.nav-links {
+			display: grid;
+			gap: 10px;
+		}
+
+		.nav-link {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 14px 16px;
+			border-radius: 18px;
+			border: 1px solid rgba(15, 118, 110, 0.12);
+			background: rgba(15, 118, 110, 0.08);
+			color: var(--accent-strong);
+			font-weight: 800;
+		}
+
+		.nav-link span {
+			color: var(--muted);
+			font-weight: 600;
+		}
+
+		.nav-link:hover {
+			background: rgba(15, 118, 110, 0.14);
+		}
+
+		.hero-photo img {
+			width: 100%;
+			height: 100%;
+			display: block;
+			object-fit: cover;
+			object-position: 10% center;
+		}
+
+		.hero-main::after {
+			content: "";
+			position: absolute;
+			inset: auto -8% -24% auto;
+			width: 320px;
+			height: 320px;
+			border-radius: 50%;
+			background: radial-gradient(circle, rgba(15, 118, 110, 0.16), transparent 68%);
+			pointer-events: none;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 8px 14px;
+			border-radius: 999px;
+			background: var(--accent-soft);
+			color: var(--accent-strong);
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.02em;
+			margin-bottom: 18px;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			margin: 0;
+			line-height: 1.06;
+			letter-spacing: -0.03em;
+		}
+
+		h1 {
+			font-family: "Sora", "Manrope", sans-serif;
+			font-size: clamp(2.25rem, 4.1vw, 3.9rem);
+			max-width: 11.5ch;
+		}
+
+		.hero-copy {
+			margin: 18px 0 0;
+			max-width: 63ch;
+			font-size: 1.07rem;
+			color: var(--muted);
+		}
+
+		.hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 28px;
+		}
+
+		.hero-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin: 16px 0 14px;
+		}
+
+		.button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 13px 18px;
+			border-radius: 999px;
+			border: 1px solid transparent;
+			font-weight: 700;
+			transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+		}
+
+		.button:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 14px 28px rgba(15, 118, 110, 0.18);
+		}
+
+		.button.primary {
+			background: linear-gradient(145deg, var(--accent), var(--accent-strong));
+			color: #fff;
+		}
+
+		.button.secondary {
+			background: rgba(255, 255, 255, 0.8);
+			border-color: rgba(23, 33, 43, 0.12);
+		}
+
+		.hero-points {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 12px;
+			margin-top: 28px;
+		}
+
+		.point {
+			padding: 16px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.66);
+			border: 1px solid rgba(23, 33, 43, 0.08);
+		}
+
+		.point strong {
+			display: block;
+			font-size: 1.05rem;
+			margin-bottom: 4px;
+		}
+
+		.point span {
+			font-size: 0.92rem;
+			color: var(--muted);
+		}
+
+		.hero-side {
+			padding: 22px;
+			border-radius: var(--radius-xl);
+			display: grid;
+			gap: 14px;
+			align-content: start;
+			justify-items: stretch;
+		}
+
+		.portrait {
+			min-height: 260px;
+			border-radius: var(--radius-xl);
+			background: linear-gradient(160deg, rgba(15, 118, 110, 0.92), rgba(19, 78, 74, 0.86));
+			color: #fff;
+			padding: 0;
+			position: relative;
+			overflow: hidden;
+			aspect-ratio: 0.9 / 1;
+		}
+
+		.portrait img {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: 12% center;
+			filter: saturate(1.02) contrast(1.02);
+		}
+
+		.portrait::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgba(8, 15, 20, 0.10) 0%, rgba(8, 15, 20, 0.18) 52%, rgba(8, 15, 20, 0.58) 100%);
+			z-index: 0;
+		}
+
+		.portrait::after {
+			content: "";
+			position: absolute;
+			inset: auto -10% -18% auto;
+			width: 170px;
+			height: 170px;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.10);
+		}
+
+		.chip {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 12px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.14);
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			color: #fff;
+			font-size: 0.84rem;
+			font-weight: 700;
+		}
+
+		.side-list {
+			display: grid;
+			gap: 12px;
+		}
+
+		.side-item {
+			padding: 14px 16px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.68);
+			border: 1px solid rgba(23, 33, 43, 0.08);
+		}
+
+		.side-item strong {
+			display: block;
+			margin-bottom: 4px;
+		}
+
+		.side-item span {
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.section {
+			padding: 34px 0 0;
+		}
+
+		.section-head {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: end;
+			gap: 14px;
+			margin-bottom: 18px;
+		}
+
+		.section-head > div {
+			flex: 1 1 auto;
+		}
+
+		.section-head h2 {
+			font-family: "Sora", "Manrope", sans-serif;
+			font-size: clamp(2rem, 4vw, 3rem);
+		}
+
+		.section-head p {
+			margin: 0;
+			max-width: none;
+			color: var(--muted);
+			font-size: 0.96rem;
+		}
+
+		.panel {
+			border-radius: var(--radius-xl);
+			padding: 26px;
+		}
+
+		.feature-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 16px;
+		}
+
+		.feature {
+			border-radius: 24px;
+			padding: 22px;
+			background: rgba(255, 255, 255, 0.72);
+			min-height: 100%;
+			display: grid;
+			gap: 14px;
+		}
+
+		.feature h3 {
+			font-size: 1.15rem;
+		}
+
+		.feature p {
+			margin: 0;
+			color: var(--muted);
+		}
+
+		.feature .tag {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: fit-content;
+			padding: 7px 11px;
+			border-radius: 999px;
+			background: var(--accent-soft);
+			color: var(--accent-strong);
+			font-size: 0.78rem;
+			font-weight: 800;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+		}
+
+		.timeline {
+			display: grid;
+			gap: 14px;
+		}
+
+		.timeline-item {
+			border-radius: 22px;
+			padding: 20px 22px;
+			display: grid;
+			gap: 10px;
+			background: rgba(255, 255, 255, 0.72);
+		}
+
+		.timeline-top {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: baseline;
+		}
+
+		.timeline-top h3 {
+			font-size: 1.1rem;
+		}
+
+		.timeline-top span {
+			color: var(--muted);
+			font-size: 0.94rem;
+		}
+
+		.timeline-item ul {
+			margin: 0;
+			padding-left: 1.1rem;
+			color: var(--muted);
+		}
+
+		.timeline-item li + li {
+			margin-top: 6px;
+		}
+
+		.grid-two {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+
+		.publication {
+			border-radius: 22px;
+			padding: 20px;
+			background: rgba(255, 255, 255, 0.72);
+			display: grid;
+			gap: 10px;
+		}
+
+		.publication strong {
+			font-size: 1rem;
+		}
+
+		.publication span {
+			color: var(--muted);
+			font-size: 0.94rem;
+		}
+
+		.contact-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 16px;
+		}
+
+		.contact-card {
+			border-radius: 24px;
+			padding: 24px;
+			background: rgba(255, 255, 255, 0.72);
+			grid-column: 1 / -1;
+		}
+
+		.contact-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.contact-links a {
+			display: inline-flex;
+			align-items: center;
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(15, 118, 110, 0.08);
+			border: 1px solid rgba(15, 118, 110, 0.12);
+			font-weight: 700;
+			color: var(--accent-strong);
+		}
+
+		.footer {
+			padding: 26px 0 42px;
+			color: var(--muted);
+			font-size: 0.94rem;
+		}
+
+		.footer-inner {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: center;
+			padding-top: 16px;
+			border-top: 1px solid rgba(23, 33, 43, 0.10);
+		}
+
+		.reveal {
+			animation: rise 0.7s ease both;
+		}
+
+		.delay-1 { animation-delay: 0.08s; }
+		.delay-2 { animation-delay: 0.16s; }
+		.delay-3 { animation-delay: 0.24s; }
+		.delay-4 { animation-delay: 0.32s; }
+
+		@keyframes rise {
+			from {
+				opacity: 0;
+				transform: translateY(18px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 1024px) {
+			.hero-grid,
+			.feature-grid,
+			.grid-two,
+			.contact-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-photo {
+				aspect-ratio: 1 / 1;
+				max-width: 420px;
+			}
+
+			.feature-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width: 720px) {
+			.page {
+				width: min(calc(100% - 22px), var(--max-width));
+			}
+
+			.topbar {
+				position: static;
+				border-radius: 20px;
+				padding: 12px 14px;
+				gap: 8px;
+			}
+
+			.brand-text strong {
+				font-size: 0.96rem;
+			}
+
+			.brand-text span {
+				font-size: 0.8rem;
+			}
+
+			.social-link {
+				width: 32px;
+				height: 32px;
+			}
+
+			.social-link svg {
+				width: 14px;
+				height: 14px;
+			}
+
+			.social-links {
+				gap: 6px;
+			}
+
+			.nav {
+				justify-content: flex-start;
+			}
+
+			.social-links {
+				justify-content: flex-start;
+			}
+
+			.hero {
+				padding-top: 18px;
+			}
+
+			.hero-main,
+			.hero-photo,
+			.nav-card,
+			.panel {
+				padding: 22px;
+				border-radius: 24px;
+			}
+
+			h1 {
+				font-size: clamp(2.5rem, 14vw, 4rem);
+			}
+
+			.hero-points,
+			.feature-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-photo {
+				max-width: none;
+				aspect-ratio: 4 / 5;
+			}
+
+			.hero-copy {
+				font-size: 1rem;
+			}
+
+			.section {
+				padding-top: 26px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header class="topbar reveal">
+			<div class="brand">
+				<div class="brand-text">
+					<strong>Álvaro Silva</strong>
+					<span>Verification, research, and practical software engineering</span>
+				</div>
+			</div>
+			<div class="social-links" aria-label="Social links">
+					<a class="social-link" href="mailto:alvaro.silva@fe.up.pt" aria-label="Email" title="Email">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 3.2V17h16V8.2l-8 5.2-8-5.2ZM5.3 7l6.7 4.36L18.7 7H5.3Z"/></svg>
+				</a>
+				<a class="social-link" href="https://www.linkedin.com/in/AlvaroFestasSilva/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 6.5A1.94 1.94 0 1 1 3.06 6.5a1.94 1.94 0 0 1 3.88 0ZM3.4 8.8h3.08V21H3.4V8.8Zm5.5 0h2.95v1.67h.04c.41-.78 1.43-1.61 2.94-1.61 3.15 0 3.73 2.07 3.73 4.76V21h-3.08v-5.03c0-1.2-.02-2.75-1.68-2.75-1.68 0-1.94 1.31-1.94 2.66V21H8.9V8.8Z"/></svg>
+				</a>
+				<a class="social-link" href="https://github.com/ricostynha1" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.4-1-.9-1.3-.9-1.3-.8-.5.1-.5.1-.5.9.1 1.3 1 1.3 1 .8 1.3 2.1.9 2.6.7.1-.6.3-.9.5-1.1-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-1.9 1-2.6-.1-.2-.4-1.2.1-2.5 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5.2 0c1.9-1.3 2.8-1 2.8-1 .5 1.3.2 2.3.1 2.5.6.7 1 1.5 1 2.6 0 3.7-2.3 4.6-4.5 4.8.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2Z"/></svg>
+				</a>
+				<a class="social-link" href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer" aria-label="GitLab" title="GitLab">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 8.2 9.4h7.6L12 21.2Zm0 0 3.8-11.8h5.1L12 21.2Zm0 0L3 9.4h5.2L12 21.2ZM3 9.4l2.5-7.6c.1-.4.7-.4.8 0l1.8 5.6H3Zm18 0h-5.1l1.8-5.6c.1-.4.7-.4.8 0L21 9.4Z"/></svg>
+				</a>
+				<a class="social-link" href="https://orcid.org/0009-0005-2941-9942" target="_blank" rel="noreferrer" aria-label="ORCID" title="ORCID">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.9 2A10 10 0 1 0 22 12 10 10 0 0 0 11.9 2Zm-3.2 4.2v11.6H7V6.2h1.7Zm2.8 0c2.4 0 4.2 1.6 4.2 5.8 0 3.8-1.8 5.8-4.2 5.8H9.6V6.2h1.9Zm0 10c1.4 0 2.5-1.2 2.5-4.2 0-3.2-1.1-4.2-2.5-4.2h-.2v8.4h.2Z"/></svg>
+				</a>
+			</div>
+		</header>
+
+		<main class="container">
+			<section class="hero">
+				<div class="hero-grid">
+					<div class="hero-rail">
+						<div class="hero-photo reveal delay-1">
+							<img src="alvaro_photo_new.png" alt="Portrait of Álvaro Silva">
+						</div>
+						<aside class="nav-card reveal delay-2" aria-label="Site pages">
+							<h2>Open the full pages</h2>
+							<div class="nav-links">
+								<a class="nav-link" href="projects.html" target="_blank" rel="noreferrer">Projects <span>full page</span></a>
+								<a class="nav-link" href="publications.html" target="_blank" rel="noreferrer">Publications <span>full page</span></a>
+								<a class="nav-link" href="software.html" target="_blank" rel="noreferrer">Software <span>activity heat</span></a>
+							</div>
+						</aside>
+					</div>
+					<article class="hero-main reveal delay-2">
+						<div class="eyebrow">Ph.D. candidate at FEUP affiliated with CMU</div>
+						<div class="hero-links">
+							<a class="button secondary" href="https://cmuportugal.org/students/alvaro-silva/" target="_blank" rel="noreferrer">CMU page</a>
+							<a class="button secondary" href="https://sigarra.up.pt/feup/pt/func_geral.formview?p_codigo=604879" target="_blank" rel="noreferrer">FEUP page</a>
+						</div>
+						<h1>Building verification tools people actually want to use.</h1>
+						<p class="hero-copy">
+							I work at the intersection of formal methods, software engineering, and hardware verification.
+							My current research focuses on improving the usability of verification-aware languages, with a strong emphasis on Dafny,
+							alongside work on VeriFixer and adjacent verification ecosystems such as Verus. I am doing my Ph.D. under the supervision
+							of <a href="https://web.fe.up.pt/~afmendes/" target="_blank" rel="noreferrer">Alexandra Mendes</a> and
+							co-supervision of <a href="https://www.cs.cmu.edu/~rubenm/" target="_blank" rel="noreferrer">Ruben Martins</a>.
+						</p>
+						<div class="hero-actions">
+							<a class="button primary" href="#projects">Explore projects</a>
+							<a class="button secondary" href="#contact">Get in touch</a>
+						</div>
+						<div class="hero-points">
+							<div class="point">
+								<strong>Research</strong>
+								<span>Usability of verification-aware languages, Dafny, proof support, and AI-assisted verification.</span>
+							</div>
+							<div class="point">
+								<strong>Industry</strong>
+								<span>Four years in ASIC verification, with MIPI camera controllers and ISO 26262 experience.</span>
+							</div>
+							<div class="point">
+								<strong>Teaching</strong>
+								<span>Guest assistant in Functional Programming, Logic Programming, Python, and Computing Systems.</span>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="section" id="projects">
+				<div class="section-head">
+					<div>
+						<h2>Featured work</h2>
+					</div>
+				</div>
+				<div class="feature-grid">
+					<article class="feature reveal delay-1">
+						<span class="tag">Research</span>
+						<h3>Dafny usability research</h3>
+						<p>
+							I investigate how AI and better tool feedback can improve the experience of writing and proving programs in Dafny.
+							The goal is not only stronger automation, but clearer proof workflows and more approachable formal development.
+						</p>
+					</article>
+					<article class="feature reveal delay-2">
+						<span class="tag">Project</span>
+						<h3>VeriFixer</h3>
+						<p>
+							Research on automated repair for verification-aware languages, starting with Dafny.
+							The project aims to reduce the gap between verification errors and actionable fixes.
+						</p>
+					</article>
+					<article class="feature reveal delay-3">
+						<span class="tag">Exploration</span>
+						<h3>Verus and verification ergonomics</h3>
+						<p>
+							Verus is a useful comparison point for thinking about how verification can integrate with systems programming.
+							It fits naturally into a broader story about making formal methods more usable and more widely adopted.
+						</p>
+					</article>
+					<article class="feature reveal delay-4">
+						<span class="tag">Industry</span>
+						<h3>MIPI camera controllers</h3>
+						<p>
+							As verification lead engineer, I built constrained-random environments, temporal assertions, and formal checks
+							for CSI-2 camera controllers in automotive-oriented contexts.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="section" id="experience">
+				<div class="section-head">
+					<div>
+						<h2>Experience</h2>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="timeline">
+						<article class="timeline-item reveal delay-1">
+							<div class="timeline-top">
+								<h3>Ph.D. Candidate, FEUP affiliated CMU</h3>
+								<span>Sep 2024 - ongoing · Porto, Portugal</span>
+							</div>
+							<ul>
+								<li>Grant under the CMU Portugal Affiliated Ph.D. Program.</li>
+								<li>Researching the usability of formal tools, with a focus on Dafny.</li>
+								<li>Member of the VeriFixer project.</li>
+							</ul>
+						</article>
+						<article class="timeline-item reveal delay-2">
+							<div class="timeline-top">
+								<h3>Guest Assistant, FEUP</h3>
+								<span>Sep 2024 - ongoing · Porto, Portugal</span>
+							</div>
+							<ul>
+								<li>Lecturing Functional and Logic Programming, Fundamentals of Programming in Python, and Computing Systems.</li>
+							</ul>
+						</article>
+						<article class="timeline-item reveal delay-3">
+							<div class="timeline-top">
+								<h3>ASIC Digital Design Staff Engineer, Synopsys</h3>
+								<span>Aug 2021 - Sep 2024 · Porto, Portugal</span>
+							</div>
+							<ul>
+								<li>Functional verification for digital IP, especially automotive products.</li>
+								<li>ISO 26262 certification for automotive safety products.</li>
+								<li>Applied formal verification with VCFormal and wrote assertions from specifications.</li>
+							</ul>
+						</article>
+						<article class="timeline-item reveal delay-4">
+							<div class="timeline-top">
+								<h3>Researcher, INESC TEC</h3>
+								<span>Oct 2020 - Aug 2021 · Porto, Portugal</span>
+							</div>
+							<ul>
+								<li>Integrated the European research project TRUST AI.</li>
+								<li>Held two research scholarships during this period.</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="education">
+				<div class="section-head">
+					<div>
+						<h2>Education and awards</h2>
+					</div>
+				</div>
+				<div class="grid-two">
+					<article class="panel reveal delay-1">
+						<h3>Education</h3>
+						<div class="timeline" style="margin-top: 16px;">
+							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
+								<div class="timeline-top">
+									<h3>Integrated Masters in Electrical and Computer Engineering</h3>
+									<span>FEUP · 2016 - 2021</span>
+								</div>
+								<ul>
+									<li>Graduated with 19/20.</li>
+									<li>Minor in Telecommunications.</li>
+									<li>Specialization in Micro-electronics.</li>
+								</ul>
+							</div>
+							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
+								<div class="timeline-top">
+									<h3>Erasmus exchange master student</h3>
+									<span>TUM · 2019 - 2020</span>
+								</div>
+								<ul>
+									<li>One semester at Technische Universität München.</li>
+								</ul>
+							</div>
+						</div>
+					</article>
+					<article class="panel reveal delay-2">
+						<h3>Recognition</h3>
+						<div class="timeline" style="margin-top: 16px;">
+							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
+								<div class="timeline-top">
+									<h3>Merit awards</h3>
+								</div>
+								<ul>
+									<li>Merit scholarship awards in 2016-2017 and 2017-2018.</li>
+									<li>Incentivo 2018 award as one of the top 20 first-year students at FEUP.</li>
+								</ul>
+							</div>
+							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
+								<div class="timeline-top">
+									<h3>Leadership and collaboration</h3>
+								</div>
+								<ul>
+									<li>Team leader on a 40-person university project.</li>
+									<li>Worked on wireless sensor and SDR-based communication systems.</li>
+								</ul>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="section" id="publications">
+				<div class="section-head">
+					<div>
+						<h2>Selected publications</h2>
+					</div>
+				</div>
+				<div class="grid-two">
+					<article class="publication reveal delay-1">
+						<strong>Leveraging Large Language Models to Boost Dafny's Developers Productivity</strong>
+						<span>FormaliSE 2024 · Álvaro Silva, Alexandra Mendes, and João F. Ferreira</span>
+					</article>
+					<article class="publication reveal delay-2">
+						<strong>Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny</strong>
+						<span>arXiv, accepted in SEFM 2025 · Carolina Carreira, Álvaro Silva, Alexandre Abreu, and Alexandra Mendes</span>
+					</article>
+					<article class="publication reveal delay-3">
+						<strong>Inferring Multiple Helper Dafny Assertions with LLMs</strong>
+						<span>arXiv, under review 2025 · Álvaro Silva, Alexandra Mendes, and Ruben Martins</span>
+					</article>
+					<article class="publication reveal delay-4">
+						<strong>Using Dimensional Aware Genetic Programming to find interpretable Dispatching Rules for the Job Shop Scheduling Problem</strong>
+						<span>Master's thesis · Faculty of Engineering of the University of Porto, 2021</span>
+					</article>
+				</div>
+			</section>
+
+			<section class="section" id="contact">
+				<div class="section-head">
+					<div>
+						<h2>Contact</h2>
+					</div>
+				</div>
+				<div class="contact-grid">
+					<article class="contact-card reveal delay-1">
+						<h3>Let’s talk about verification, research, and practical tooling.</h3>
+						<p style="margin: 14px 0 0; color: var(--muted);">
+							If you want to discuss Dafny, Verus, program repair, hardware verification, or research collaborations,
+							use one of the links below.
+						</p>
+						<div class="contact-links">
+							<a href="mailto:alvaro.silva@fe.up.pt">Email</a>
+							<a href="https://www.linkedin.com/in/AlvaroFestasSilva/" target="_blank" rel="noreferrer">LinkedIn</a>
+							<a href="https://github.com/ricostynha1" target="_blank" rel="noreferrer">GitHub</a>
+							<a href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer">GitLab</a>
+							<a href="https://orcid.org/0009-0005-2941-9942" target="_blank" rel="noreferrer">ORCID</a>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="footer-inner">
+				<span>Built for GitHub Pages.</span>
+				<span>Álvaro Silva · Verification, research, and systems engineering.</span>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+%%%%%%%%%%%%%%%%%
+% This is an example CV created using altacv.cls (v1.6.4, 13 Nov 2021) written by
+% LianTze Lim (liantze@gmail.com), based on the
+% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
+%
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%%%%%%%%%%%%%%%
+
+%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
+% \documentclass[10pt,a4paper,normalphoto]{altacv}
+
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+
+%% AltaCV uses the fontawesome5 package.
+%% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
+
+% Change the page layout if you need to
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
+
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+\ifxetexorluatex
+  % If using xelatex or lualatex:
+  \setmainfont{Lato}
+\else
+  % If using pdflatex:
+  \usepackage[default]{lato}
+\fi
+
+% Change the colours if you want to
+\definecolor{VividPurple}{HTML}{3E0097}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+% \colorlet{name}{black}
+% \colorlet{tagline}{PastelRed}
+\colorlet{heading}{VividPurple}
+\colorlet{headingrule}{VividPurple}
+% \colorlet{subheading}{PastelRed}
+\colorlet{accent}{VividPurple}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Change some fonts, if necessary
+% \renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+% \renewcommand{\personalinfofont}{\footnotesize}
+% \renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+% \renewcommand{\cvsubsectionfont}{\large\bfseries}
+
+% Change the bullets for itemize and rating marker
+% for \cvskill if you want to
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+%% Use (and optionally edit if necessary) this .tex if you
+%% want to use an author-year reference style like APA(6)
+%% for your publication list
+\input{pubs-authoryear}
+
+%% Use (and optionally edit if necessary) this .tex if you
+%% want an originally numerical reference style like IEEE
+%% for your publication list
+% \input{pubs-num}
+
+%% sample.bib contains your publications
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{Álvaro Silva}
+\tagline{Ph.D Candidate in Software Enginnering FEUP affiliated with Carnegie Mellom }
+% Cropped to square from https://en.wikipedia.org/wiki/Marissa_Mayer#/media/File:Marissa_Mayer_May_2014_(cropped).jpg, CC-BY 2.0
+%% You can add multiple photos on the left or right
+\photoR{2.5cm}{alvaro_photo_better.jpg}
+% \photoL{2cm}{Yacht_High,Suitcase_High}
+%\personalinfo{%
+  % Not all of these are required!
+  % You can add your own with \printinfo{symbol}{detail}
+%  \email{amfpsilva@hotmail.com}
+%    \orcid{0009-0005-2941-9942}
+%  \linkedin{AlvaroFestasSilva}
+%       \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+%  \gitlab{ricostynha}
+%  \github{ricostynha1}   
+%}
+
+
+\definecolor{linkcolor}{RGB}{0,100,200}
+
+\newcommand{\socialicon}[3]{%
+  \href{#1\sociallinkcolor #3}{\textcolor{VividPurple}{#2}}%
+}
+
+\newcommand{\sociallinkcolor}{}
+\personalinfo{%
+  \email{amfpsilva@hotmail.com}
+  \orcid{0009-0005-2941-9942}
+  %\socialicon{https://orcid.org/}{{\faOrcid}}{0009-0005-2941-9942}\quad
+  \socialicon{https://www.linkedin.com/in/}{{\faLinkedinIn}}{AlvaroFestasSilva}\quad
+  \socialicon{https://gitlab.com/}{{\faGitlab}}{ricostynha}\quad
+  \socialicon{https://github.com/}{{\faGithub}}{ricostynha1}
+}
+
+\makecvheader
+
+%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
+\AtBeginEnvironment{itemize}{\small}
+
+%% Set the left/right column width ratio to 6:4.
+\columnratio{0.55}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+
+\cvsection{Experience}
+\cvevent{Ph.D Candidate}{FEUP affiliated CMU}{September 2024 -- Ongoing}{Porto, Portugal}
+\begin{itemize}
+\item Grant CMU Portugal Affiliated Ph.D. Program
+\item Research increase usability of formal tools with focus on Dafny
+\item Member of the project Verifixer
+\end{itemize}
+\divider
+
+\cvevent{Guest Assistant}{FEUP}{ Sep 2024 - Ongoing}{Porto, Portugal}
+\begin{itemize}
+\item Lectured classes of Functional and Logic Programming, Fundaments of Programming in Python and Computing Systems
+\end{itemize}
+\divider
+
+\cvevent{ASIC Digital Design Staff Enginner}{Synopsys}{Aug 2021 - Sep 2024}{Porto, Portugal}
+\begin{itemize}
+\item Carry out functional verification for digital IP with focus on Automotive products.
+\item Certificated in ISO 26262 for automotive safety products
+\item Explore and apply formal verification (using VCFormal).
+\item Create assertions to verify properties of the design from specifications.
+\end{itemize}
+\divider
+
+\cvevent{Researcher}{INESC TEC}{ Oct 2020 - Aug 2021}{Porto, Portugal}
+\begin{itemize}
+\item Integrated the European investigation project TRUST AI.
+\item Granted two research scholarships during that time.    
+    
+\end{itemize}
+\divider
+% \divider
+
+% \cvevent{Product Engineer}{Google}{23 June 1999 -- 2001}{Palo Alto, CA}
+
+% \begin{itemize}
+% \item Joined the company as employe \#20 and female employee \#1
+% \item Developed targeted advertisement in order to use user's search queries and show them related ads
+% \end{itemize}
+
+\cvsection{Education}
+
+\cvevent{Integrated Masters in Electrical and Computer Engineering}{Faculty of Engineering of the University of Porto (FEUP)}{Sept 2016 -- June 2021}{ Graduated with \textbf{19}/20}
+Minor in Telecommunications 
+Specialization in Micro-electronics
+
+\divider
+
+\cvevent{Erasmus Exchange Master student 1 semester}{Technische Universität München (TUM)}{Oct 2019 - March 2020}{\textbf{1.27} maximum 1 scale 5-1}
+
+
+
+% use ONLY \newpage if you want to force a page break for
+% ONLY the currentc column
+\newpage
+
+\cvsection{Projects}
+\begin{itemize}
+ \item \textbf{Current investigation:} 
+
+I am pursuing my Ph.D. under the supervision of Professor Alexandra Mendes from the Faculty of Engineering of the University of Porto, with co-supervision from Professor Ruben Martins from Carnegie Mellon University.
+
+I am investigating ways to apply recent advances in artificial intelligence to enhance the usability of verification-aware languages, focusing on Dafny. I have already published work on this subject. I am also exploring other usability improvements for Dafny, such as better proof visualizations.  I plan to use this usability improvements to explore Dafny as a platform for hardware modeling and verification as a new application domain for the language.
+
+ \item \textbf{VeriFixer: Automated Repair of Verification-Aware Languages:} I am a researcher on this project that intends to develops an open-source tool to automatically fix code issues identified by software verifiers, starting with the Dafny language. Funded through a competitive FCT grant and involving INESC TEC, INESC ID, and Carnegie Mellon University, it aims to bridge the gap between error detection and correction, reducing manual effort in building reliable software for critical domains.
+ 
+    \item \textbf{MIPI Camera Controllers:} I was the verification lead engineer on the new CSI2 camera controllers. The project demands high competences in creating reliable and extensive verification environments.
+
+    The environments model the Device under test (DUT) and stimulate it with all kinds of constrained randomized traffic. I also wrote a lot of temporal assertions and applied formal methods to small parts of the design when stronger behaviour assurances are needed.
+
+    I have extensive knowledge in MIPI specifications and to convert them to assertions modules.
+    
+
+    \item \textbf{Wind Flow:} I was a \textbf{team leader} in a university project of \textbf{40 people}. My team (10 members) was responsible for implementing a communication wireless physical protocol using an SDR (software-defined radio). The project was a mesh of high-speed wind sensors that communicate wirelessly through long distances. 
+    
+    
+    \item \textbf{Research Paper graph:} I was a member of a three-member team. The project consisted of a GUI Web-based application exposing research papers in graph structures and clustering papers by similarity. The details can be seen in \underline{
+    \href{https://github.com/Jibbow/research-paper-graph}{research-paper-graph}}. I was responsible for doing the \textbf{AI clustering} distances between nodes which are plotted for the different publications. 
+    
+\end{itemize}
+
+%% Switch to the right column. This will now automatically move to the second
+%% page if the content is too long.
+\switchcolumn
+
+
+\cvsection{Accomplishments}
+
+\textbf{Merit Awards}
+\begin{itemize}
+  \item Received in 2016-2017 and 2017-2018 the \textbf{Merit scholarship} awards by academic excellency at FEUP. 
+
+    \item Received the award \textbf{Incentivo} 2018 at FEUP by being one of the \textbf{top 20} 1st year students.
+\end{itemize}
+
+
+%\textbf{Science Awards}
+    
+%    \begin{itemize}
+%        \item \textbf{Bronze medal} in the National \textbf{Mathematics Olympiads} 2011 and  National \textbf{Chemistry Olympiads} 2015
+%         \item Represented Portugal in the International\textbf{ Ibero-American Chemistry Olympiads}  2016.
+        %\item 1st place in \textbf{Elídio Pinho} science fair 2015
+%    \end{itemize}
+
+
+\cvsection{ACADEMIC OUTPUT}
+
+\textbf{Papers}
+\begin{itemize}
+\item 
+Silva, Álvaro, Alexandra Mendes, and João F. Ferreira. "Leveraging Large Language Models to Boost Dafny's Developers Productivity." FormaliSE 2024 (2024).
+\item
+Carreira, Carolina; Silva, Álvaro; Abreu, Alexandre; Mendes, Alexandra. “Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny.” 
+arXiv (accepted in SEFM 2025)
+\item 
+Silva, Álvaro, Alexandra Mendes, and Ruben Martins. “Inferring Multiple Helper Dafny Assertions with LLMs.” 
+arXiv (under review 2025)
+\end{itemize}
+
+\textbf{Thesis}
+\begin{itemize}
+    \item Silva, Álvaro. "Using Dimensional Aware Genetic Programming to find interpretable Dispatching Rules for the Job Shop Scheduling Problem". Faculty of Engineering of the University of Porto. (2021).
+\end{itemize}
+
+\textbf{Conference Presentations}
+\begin{itemize}
+\item Silva, Álvaro, Bruno Maurício. "A Simple Approach to Lamport's State Machine Replication". IJUP'2021- 14º edition. Oral communication. (2021)
+\end{itemize}
+
+\textbf{Supervising of thesis}
+\begin{itemize}
+\item
+de Jesus, Renato Pedrosa. "Evaluating High-Level SystemC Formal Verification Compared to RTL Verification." (2024) (Company supervisor of the thesis).
+\end{itemize}
+
+
+\cvsection{Service}
+\begin{itemize}
+    \item \textbf{Reviewer}, Symposium on Formal Methods (FM 2026)
+    \item \textbf{Artifact Evaluator}, FormaliSE 2026
+\end{itemize}
+%\cvsection{Strengths}
+
+%\cvtag{Hard-working} 
+%\cvtag{Innovator} 
+%\cvtag {Analytics}  \\
+%\cvtag{Team-player}
+%\cvtag{Coding} 
+%\cvtag{Hardware} \\
+%\cvtag{AI} 
+%\cvtag{Leadership}
+%\cvtag {Problem Solving}
+
+
+
+\cvsection{Languages}
+
+\cvskill{Portuguese}{5}
+\cvskill{English}{5}
+%\cvskill{Spanish}{3.5}
+%\cvskill{German}{2} %% supports X.5 values.
+
+\cvsection{Programming}
+\cvskill{C}{5}
+\cvskill{Python}{5}
+%\cvskill{Verilog}{5}
+\cvskill{SystemVerilog/UVM}{5}
+\cvskill{Dafny}{4.5}
+\cvskill{C++}{4}
+\cvskill{Haskell}{3.5}
+
+%\cvskill{Bash}{3.5}
+%\cvskill{Lean4}{2}
+
+\newpage
+
+\cvsection{References}
+
+%\cvref{name}{email}{mailing address}
+\divider
+
+\cvref{Prof.\ Alexandra Mendes }{INESC TEC and FEUP}{afmendes@fe.up.pt}
+
+\divider
+
+\cvref{Prof.\ Ruben Martins }{Carnegie Mellon}{rubenm@cs.cmu.edu}
+
+\divider
+
+\cvref{Manager ASIC Digital Design.\ Rafael Franco}{Synopsys}{arr.franco@outlook.com}
+
+\divider
+\cvref{Prof.\ Gonçalo Reis Figueira}{INESC TEC and FEUP}{lfigueira@fe.up.pt}
+
+
+
+\end{paracol}
+
+\end{document}
