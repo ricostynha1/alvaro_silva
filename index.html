@@ -3,1051 +3,598 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Álvaro Silva - Ph.D. candidate in software engineering, research on verification-aware languages, Dafny, Verus, and hardware verification.">
-	<title>Álvaro Silva | Research, Verification, and Engineering</title>
+	<title>Álvaro Silva · Formal verification, made usable</title>
+	<meta name="description" content="Álvaro Silva: Ph.D. candidate at FEUP and CMU Portugal working on the usability of verification-aware languages such as Dafny, including LLM-assisted proofs, fault localization, and specification quality.">
+	<meta property="og:title" content="Álvaro Silva · Formal verification, made usable">
+	<meta property="og:description" content="Ph.D. candidate at FEUP and CMU Portugal researching the usability of Dafny and other verification-aware languages.">
+	<meta property="og:image" content="assets/alvaro.jpg">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5fd6'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' fill='%23ffffff'>Á</text></svg>">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+	<link rel="stylesheet" href="assets/site.css">
 	<style>
-		:root {
-			--bg: #f5f1ea;
-			--bg-alt: #ece5db;
-			--surface: rgba(255, 255, 255, 0.72);
-			--surface-strong: #ffffff;
-			--text: #17212b;
-			--muted: #5c6773;
-			--line: rgba(23, 33, 43, 0.10);
-			--accent: #0f766e;
-			--accent-strong: #134e4a;
-			--accent-soft: rgba(15, 118, 110, 0.12);
-			--shadow: 0 22px 60px rgba(23, 33, 43, 0.10);
-			--radius-xl: 30px;
-			--radius-lg: 22px;
-			--radius-md: 16px;
-			--max-width: 1160px;
-		}
-
-		* {
-			box-sizing: border-box;
-		}
-
-		html {
-			scroll-behavior: smooth;
-		}
-
-		body {
-			margin: 0;
-			color: var(--text);
-			background:
-				radial-gradient(circle at top left, rgba(15, 118, 110, 0.16), transparent 28%),
-				radial-gradient(circle at 85% 10%, rgba(180, 83, 9, 0.14), transparent 26%),
-				linear-gradient(180deg, var(--bg) 0%, #f7f3ee 45%, #f2ece4 100%);
-			font-family: "Manrope", sans-serif;
-			line-height: 1.6;
-			min-height: 100vh;
-			overflow-x: hidden;
-		}
-
-		body::before {
-			content: "";
-			position: fixed;
-			inset: 0;
-			pointer-events: none;
-			background-image:
-				linear-gradient(rgba(23, 33, 43, 0.03) 1px, transparent 1px),
-				linear-gradient(90deg, rgba(23, 33, 43, 0.03) 1px, transparent 1px);
-			background-size: 36px 36px;
-			mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 82%);
-			opacity: 0.65;
-		}
-
-		a {
-			color: inherit;
-			text-decoration: none;
-		}
-
-		a:hover {
-			color: var(--accent-strong);
-		}
-
-		.page {
-			width: min(calc(100% - 32px), var(--max-width));
-			margin: 0 auto;
-			position: relative;
-			z-index: 1;
-		}
-
-		.topbar {
-			position: sticky;
-			top: 16px;
-			z-index: 20;
-			margin: 16px auto 0;
-			border: 1px solid var(--line);
-			border-radius: 24px;
-			background: rgba(255, 255, 255, 0.65);
-			backdrop-filter: blur(16px);
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 16px 22px;
-			gap: 16px;
-			box-shadow: 0 10px 30px rgba(23, 33, 43, 0.06);
-		}
-
-		.brand {
-			display: flex;
-			align-items: center;
-			gap: 14px;
-			min-width: 0;
-		}
-
-		.brand-text {
-			display: grid;
-			min-width: 0;
-		}
-
-		.brand-text strong {
-			font-size: 1.02rem;
-			line-height: 1.05;
-		}
-
-		.brand-text span {
-			font-size: 0.88rem;
-			color: var(--muted);
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
-		.social-links {
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			gap: 10px;
-			flex-wrap: wrap;
-		}
-
-		.social-link {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			display: inline-grid;
-			place-items: center;
-			background: rgba(15, 118, 110, 0.08);
-			border: 1px solid rgba(15, 118, 110, 0.12);
-			color: var(--accent-strong);
-			transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-		}
-
-		.social-link:hover {
-			transform: translateY(-1px);
-			background: rgba(15, 118, 110, 0.14);
-			box-shadow: 0 10px 18px rgba(15, 118, 110, 0.12);
-		}
-
-		.social-link svg {
-			width: 18px;
-			height: 18px;
-			fill: currentColor;
-		}
-
-		.nav {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			justify-content: flex-end;
-			gap: 12px 16px;
-			font-size: 0.95rem;
-		}
-
-		.nav a {
-			color: var(--muted);
-		}
-
-		.nav a:hover {
-			color: var(--text);
-		}
-
-		.hero {
-			padding: 34px 0 20px;
-		}
+		/* ---------- Hero ---------- */
+		.hero { padding: 64px 0 0; }
 
 		.hero-grid {
 			display: grid;
-			grid-template-columns: 0.78fr 1.62fr;
-			gap: 28px;
-			align-items: stretch;
+			grid-template-columns: 1.2fr 0.8fr;
+			gap: 56px;
+			align-items: center;
 		}
 
-		.hero-main,
-		.hero-side,
-		.panel,
-		.feature,
-		.timeline-item,
-		.publication,
-		.contact-card {
-			border: 1px solid var(--line);
-			background: var(--surface);
-			backdrop-filter: blur(16px);
+		.hero-grid > * { min-width: 0; }
+
+		.hero h1 { font-size: clamp(3.2rem, 7.4vw, 6.4rem); margin-top: 18px; }
+
+		.hero-lede {
+			margin-top: 28px;
+			max-width: 56ch;
+			font-size: 1.12rem;
+			color: var(--ink-soft);
+		}
+
+		.hero-lede a { text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+		.hero-lede a:hover { text-decoration-color: var(--accent); }
+
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+
+		.portrait-stage { position: relative; padding-bottom: 92px; }
+
+		.portrait {
+			position: relative;
+			border-radius: 18px;
+			overflow: hidden;
+			aspect-ratio: 4 / 5;
+			background: #dfe7f2;
 			box-shadow: var(--shadow);
 		}
 
-		.hero-main {
-			padding: 34px;
-			border-radius: var(--radius-xl);
-			position: relative;
-			overflow: hidden;
-		}
+		.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 
-		.hero-rail {
-			display: grid;
-			gap: 16px;
-			align-content: start;
-		}
-
-		.hero-photo {
-			padding: 0;
-			border-radius: var(--radius-xl);
-			overflow: hidden;
-			background: linear-gradient(160deg, rgba(15, 118, 110, 0.92), rgba(19, 78, 74, 0.86));
-			height: 100%;
-		}
-
-		.nav-card {
-			padding: 20px;
-			border-radius: var(--radius-xl);
-			display: grid;
-			gap: 14px;
-			align-content: start;
-			justify-items: stretch;
-		}
-
-		.nav-card h2 {
-			font-family: "Sora", "Manrope", sans-serif;
-			font-size: 1.45rem;
-			margin: 0;
-		}
-
-		.nav-links {
-			display: grid;
-			gap: 10px;
-		}
-
-		.nav-link {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 12px;
-			padding: 14px 16px;
-			border-radius: 18px;
-			border: 1px solid rgba(15, 118, 110, 0.12);
-			background: rgba(15, 118, 110, 0.08);
-			color: var(--accent-strong);
-			font-weight: 800;
-		}
-
-		.nav-link span {
-			color: var(--muted);
-			font-weight: 600;
-		}
-
-		.nav-link:hover {
-			background: rgba(15, 118, 110, 0.14);
-		}
-
-		.hero-photo img {
-			width: 100%;
-			height: 100%;
-			display: block;
-			object-fit: cover;
-			object-position: 10% center;
-		}
-
-		.hero-main::after {
-			content: "";
+		.portrait figcaption {
 			position: absolute;
-			inset: auto -8% -24% auto;
-			width: 320px;
-			height: 320px;
-			border-radius: 50%;
-			background: radial-gradient(circle, rgba(15, 118, 110, 0.16), transparent 68%);
-			pointer-events: none;
+			top: 14px;
+			right: 14px;
+			padding: 4px 9px;
+			border-radius: 6px;
+			background: rgba(13, 26, 51, 0.62);
+			backdrop-filter: blur(6px);
+			color: var(--on-dark);
+			font-family: var(--mono);
+			font-size: 0.7rem;
 		}
 
-		.eyebrow {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			padding: 8px 14px;
-			border-radius: 999px;
-			background: var(--accent-soft);
-			color: var(--accent-strong);
-			font-size: 0.85rem;
-			font-weight: 700;
-			letter-spacing: 0.02em;
-			margin-bottom: 18px;
-		}
-
-		h1,
-		h2,
-		h3,
-		h4 {
-			margin: 0;
-			line-height: 1.06;
-			letter-spacing: -0.03em;
-		}
-
-		h1 {
-			font-family: "Sora", "Manrope", sans-serif;
-			font-size: clamp(2.25rem, 4.1vw, 3.9rem);
-			max-width: 11.5ch;
-		}
-
-		.hero-copy {
-			margin: 18px 0 0;
-			max-width: 63ch;
-			font-size: 1.07rem;
-			color: var(--muted);
-		}
-
-		.hero-actions {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 12px;
-			margin-top: 28px;
-		}
-
-		.hero-links {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 12px;
-			margin: 16px 0 14px;
-		}
-
-		.button {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			gap: 10px;
-			padding: 13px 18px;
-			border-radius: 999px;
-			border: 1px solid transparent;
-			font-weight: 700;
-			transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-		}
-
-		.button:hover {
-			transform: translateY(-1px);
-			box-shadow: 0 14px 28px rgba(15, 118, 110, 0.18);
-		}
-
-		.button.primary {
-			background: linear-gradient(145deg, var(--accent), var(--accent-strong));
-			color: #fff;
-		}
-
-		.button.secondary {
-			background: rgba(255, 255, 255, 0.8);
-			border-color: rgba(23, 33, 43, 0.12);
-		}
-
-		.hero-points {
-			display: grid;
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			gap: 12px;
-			margin-top: 28px;
-		}
-
-		.point {
-			padding: 16px;
-			border-radius: 18px;
-			background: rgba(255, 255, 255, 0.66);
-			border: 1px solid rgba(23, 33, 43, 0.08);
-		}
-
-		.point strong {
-			display: block;
-			font-size: 1.05rem;
-			margin-bottom: 4px;
-		}
-
-		.point span {
-			font-size: 0.92rem;
-			color: var(--muted);
-		}
-
-		.hero-side {
-			padding: 22px;
-			border-radius: var(--radius-xl);
-			display: grid;
-			gap: 14px;
-			align-content: start;
-			justify-items: stretch;
-		}
-
-		.portrait {
-			min-height: 260px;
-			border-radius: var(--radius-xl);
-			background: linear-gradient(160deg, rgba(15, 118, 110, 0.92), rgba(19, 78, 74, 0.86));
-			color: #fff;
-			padding: 0;
-			position: relative;
-			overflow: hidden;
-			aspect-ratio: 0.9 / 1;
-		}
-
-		.portrait img {
+		.portrait-stage .code {
 			position: absolute;
-			inset: 0;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			object-position: 12% center;
-			filter: saturate(1.02) contrast(1.02);
+			left: -64px;
+			right: 24px;
+			bottom: 0;
 		}
 
-		.portrait::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(180deg, rgba(8, 15, 20, 0.10) 0%, rgba(8, 15, 20, 0.18) 52%, rgba(8, 15, 20, 0.58) 100%);
-			z-index: 0;
+		.status-verifying, .status-done { display: inline-flex; align-items: center; gap: 6px; }
+		.status-done { display: none; }
+		.verified .status-verifying { display: none; }
+		.verified .status-done { display: inline-flex; }
+
+		.spinner {
+			width: 10px; height: 10px; border-radius: 50%;
+			border: 2px solid rgba(255, 255, 255, 0.2); border-top-color: var(--code-kw);
+			animation: spin 0.8s linear infinite;
 		}
 
-		.portrait::after {
-			content: "";
-			position: absolute;
-			inset: auto -10% -18% auto;
-			width: 170px;
-			height: 170px;
-			border-radius: 50%;
-			background: rgba(255, 255, 255, 0.10);
-		}
+		@keyframes spin { to { transform: rotate(360deg); } }
 
-		.chip {
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			padding: 8px 12px;
-			border-radius: 999px;
-			background: rgba(255, 255, 255, 0.14);
-			border: 1px solid rgba(255, 255, 255, 0.18);
-			color: #fff;
-			font-size: 0.84rem;
-			font-weight: 700;
-		}
-
-		.side-list {
+		.facts {
 			display: grid;
-			gap: 12px;
+			grid-template-columns: repeat(4, 1fr);
+			margin-top: 72px;
+			border-top: 1px solid var(--line-strong);
+			border-bottom: 1px solid var(--line);
 		}
 
-		.side-item {
-			padding: 14px 16px;
-			border-radius: 18px;
-			background: rgba(255, 255, 255, 0.68);
-			border: 1px solid rgba(23, 33, 43, 0.08);
+		.fact { padding: 18px 20px 18px 0; }
+		.fact + .fact { padding-left: 20px; border-left: 1px solid var(--line); }
+		.fact .kicker { display: block; margin-bottom: 4px; }
+		.fact strong { font-weight: 600; font-size: 0.98rem; }
+
+		@media (max-width: 980px) {
+			.hero-grid { grid-template-columns: 1fr; gap: 40px; }
+			.portrait-stage { max-width: 460px; }
+			.portrait-stage .code { left: 24px; right: -12px; }
+			.facts { grid-template-columns: 1fr 1fr; }
+			.fact:nth-child(3) { padding-left: 0; border-left: 0; }
+			.fact:nth-child(n+3) { border-top: 1px solid var(--line); }
 		}
 
-		.side-item strong {
-			display: block;
-			margin-bottom: 4px;
+		@media (max-width: 560px) {
+			.hero { padding-top: 36px; }
+			.portrait-stage { padding-bottom: 0; }
+			.portrait-stage .code { position: relative; left: 0; right: 0; margin-top: -40px; margin-inline: 10px; }
+			.facts { grid-template-columns: 1fr; }
+			.fact, .fact + .fact { padding-left: 0; border-left: 0; }
+			.fact + .fact { border-top: 1px solid var(--line); }
 		}
 
-		.side-item span {
-			color: var(--muted);
-			font-size: 0.92rem;
-		}
+		/* ---------- News log ---------- */
+		.log { list-style: none; margin: 0; padding: 0; }
 
-		.section {
-			padding: 34px 0 0;
-		}
-
-		.section-head {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			align-items: end;
-			gap: 14px;
-			margin-bottom: 18px;
-		}
-
-		.section-head > div {
-			flex: 1 1 auto;
-		}
-
-		.section-head h2 {
-			font-family: "Sora", "Manrope", sans-serif;
-			font-size: clamp(2rem, 4vw, 3rem);
-		}
-
-		.section-head p {
-			margin: 0;
-			max-width: none;
-			color: var(--muted);
-			font-size: 0.96rem;
-		}
-
-		.panel {
-			border-radius: var(--radius-xl);
-			padding: 26px;
-		}
-
-		.feature-grid {
+		.log li {
 			display: grid;
-			grid-template-columns: repeat(4, minmax(0, 1fr));
-			gap: 16px;
-		}
-
-		.feature {
-			border-radius: 24px;
-			padding: 22px;
-			background: rgba(255, 255, 255, 0.72);
-			min-height: 100%;
-			display: grid;
-			gap: 14px;
-		}
-
-		.feature h3 {
-			font-size: 1.15rem;
-		}
-
-		.feature p {
-			margin: 0;
-			color: var(--muted);
-		}
-
-		.feature .tag {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			width: fit-content;
-			padding: 7px 11px;
-			border-radius: 999px;
-			background: var(--accent-soft);
-			color: var(--accent-strong);
-			font-size: 0.78rem;
-			font-weight: 800;
-			letter-spacing: 0.05em;
-			text-transform: uppercase;
-		}
-
-		.timeline {
-			display: grid;
-			gap: 14px;
-		}
-
-		.timeline-item {
-			border-radius: 22px;
-			padding: 20px 22px;
-			display: grid;
-			gap: 10px;
-			background: rgba(255, 255, 255, 0.72);
-		}
-
-		.timeline-top {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			gap: 12px;
+			grid-template-columns: 200px 1fr;
+			gap: 24px;
+			padding: 16px 0;
+			border-bottom: 1px dashed var(--line);
 			align-items: baseline;
 		}
 
-		.timeline-top h3 {
-			font-size: 1.1rem;
-		}
+		.log time { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); }
+		.log .chip { margin-right: 8px; vertical-align: 1px; }
+		.log a { text-underline-offset: 3px; text-decoration-color: var(--line-strong); }
 
-		.timeline-top span {
-			color: var(--muted);
-			font-size: 0.94rem;
-		}
+		@media (max-width: 720px) { .log li { grid-template-columns: 1fr; gap: 4px; } }
 
-		.timeline-item ul {
-			margin: 0;
-			padding-left: 1.1rem;
-			color: var(--muted);
-		}
+		/* ---------- Research threads ---------- */
+		.threads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 
-		.timeline-item li + li {
-			margin-top: 6px;
-		}
-
-		.grid-two {
+		.thread {
+			position: relative;
 			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 16px;
-		}
-
-		.publication {
-			border-radius: 22px;
-			padding: 20px;
-			background: rgba(255, 255, 255, 0.72);
-			display: grid;
-			gap: 10px;
-		}
-
-		.publication strong {
-			font-size: 1rem;
-		}
-
-		.publication span {
-			color: var(--muted);
-			font-size: 0.94rem;
-		}
-
-		.contact-grid {
-			display: grid;
-			grid-template-columns: 1.1fr 0.9fr;
-			gap: 16px;
-		}
-
-		.contact-card {
-			border-radius: 24px;
-			padding: 24px;
-			background: rgba(255, 255, 255, 0.72);
-			grid-column: 1 / -1;
-		}
-
-		.contact-links {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-			margin-top: 18px;
-		}
-
-		.contact-links a {
-			display: inline-flex;
-			align-items: center;
-			padding: 10px 14px;
-			border-radius: 999px;
-			background: rgba(15, 118, 110, 0.08);
-			border: 1px solid rgba(15, 118, 110, 0.12);
-			font-weight: 700;
-			color: var(--accent-strong);
-		}
-
-		.footer {
-			padding: 26px 0 42px;
-			color: var(--muted);
-			font-size: 0.94rem;
-		}
-
-		.footer-inner {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
+			grid-template-rows: auto auto 1fr auto;
 			gap: 12px;
-			align-items: center;
-			padding-top: 16px;
-			border-top: 1px solid rgba(23, 33, 43, 0.10);
+			padding: 28px;
+			overflow: hidden;
 		}
 
-		.reveal {
-			animation: rise 0.7s ease both;
+		.thread .num {
+			font-family: var(--serif);
+			font-size: 4.6rem;
+			line-height: 0.8;
+			color: var(--accent);
+			opacity: 0.9;
 		}
 
-		.delay-1 { animation-delay: 0.08s; }
-		.delay-2 { animation-delay: 0.16s; }
-		.delay-3 { animation-delay: 0.24s; }
-		.delay-4 { animation-delay: 0.32s; }
+		.thread h3 { font-size: 1.32rem; }
+		.thread p { color: var(--muted); }
 
-		@keyframes rise {
-			from {
-				opacity: 0;
-				transform: translateY(18px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
+		.thread .outputs { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 8px; }
+
+		.thread .glyph {
+			position: absolute;
+			right: 22px;
+			top: 22px;
+			font-family: var(--mono);
+			font-size: 0.78rem;
+			color: var(--faint);
 		}
 
-		@media (max-width: 1024px) {
-			.hero-grid,
-			.feature-grid,
-			.grid-two,
-			.contact-grid {
-				grid-template-columns: 1fr;
-			}
+		@media (max-width: 760px) { .threads { grid-template-columns: 1fr; } .thread { padding: 22px; } }
 
-			.hero-photo {
-				aspect-ratio: 1 / 1;
-				max-width: 420px;
-			}
+		/* ---------- Path ---------- */
+		.path { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+		.path h3.kicker { margin-bottom: 18px; }
 
-			.feature-grid {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-			}
+		.steps { list-style: none; margin: 0; padding: 0; position: relative; }
+		.steps::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: var(--line-strong); }
+
+		.step { position: relative; padding: 0 0 28px 30px; }
+		.step::before {
+			content: ""; position: absolute; left: 0; top: 7px;
+			width: 11px; height: 11px; border-radius: 50%;
+			background: var(--bg); border: 2px solid var(--ink);
+		}
+		.step.now::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-wash); }
+
+		.step h4 { font-size: 1.06rem; }
+		.step .where { color: var(--muted); font-size: 0.94rem; }
+		.step .when { font-family: var(--mono); font-size: 0.76rem; color: var(--faint); display: block; margin-bottom: 2px; }
+		.step ul { margin: 8px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+		.step li + li { margin-top: 3px; }
+
+		@media (max-width: 860px) { .path { grid-template-columns: 1fr; gap: 24px; } }
+
+		/* ---------- Teaching & service ---------- */
+		.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+		.trio .card h3 { font-size: 1.1rem; margin: 10px 0 10px; }
+		.trio ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+		.trio li + li { margin-top: 6px; }
+		@media (max-width: 860px) { .trio { grid-template-columns: 1fr; } }
+
+		/* ---------- Contact ---------- */
+		.contact {
+			margin-top: 112px;
+			padding: 64px 48px;
+			border-radius: 22px;
+			background: var(--code-bg);
+			color: var(--on-dark);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+			position: relative;
+			overflow: hidden;
 		}
 
-		@media (max-width: 720px) {
-			.page {
-				width: min(calc(100% - 22px), var(--max-width));
-			}
-
-			.topbar {
-				position: static;
-				border-radius: 20px;
-				padding: 12px 14px;
-				gap: 8px;
-			}
-
-			.brand-text strong {
-				font-size: 0.96rem;
-			}
-
-			.brand-text span {
-				font-size: 0.8rem;
-			}
-
-			.social-link {
-				width: 32px;
-				height: 32px;
-			}
-
-			.social-link svg {
-				width: 14px;
-				height: 14px;
-			}
-
-			.social-links {
-				gap: 6px;
-			}
-
-			.nav {
-				justify-content: flex-start;
-			}
-
-			.social-links {
-				justify-content: flex-start;
-			}
-
-			.hero {
-				padding-top: 18px;
-			}
-
-			.hero-main,
-			.hero-photo,
-			.nav-card,
-			.panel {
-				padding: 22px;
-				border-radius: 24px;
-			}
-
-			h1 {
-				font-size: clamp(2.5rem, 14vw, 4rem);
-			}
-
-			.hero-points,
-			.feature-grid {
-				grid-template-columns: 1fr;
-			}
-
-			.hero-photo {
-				max-width: none;
-				aspect-ratio: 4 / 5;
-			}
-
-			.hero-copy {
-				font-size: 1rem;
-			}
-
-			.section {
-				padding-top: 26px;
-			}
+		.contact::after {
+			content: "∎";
+			position: absolute;
+			right: 40px;
+			bottom: -40px;
+			font-size: 16rem;
+			line-height: 1;
+			color: var(--on-dark);
+			opacity: 0.06;
 		}
+
+		.contact .kicker { color: var(--code-dim); }
+		.contact h2 { font-size: clamp(2.6rem, 6vw, 4.8rem); margin-top: 14px; max-width: 14ch; }
+		.contact h2 em { color: var(--code-kw); }
+		.contact p { margin-top: 18px; max-width: 54ch; color: rgba(238, 244, 255, 0.75); }
+		.contact .email {
+			display: inline-block;
+			margin-top: 26px;
+			font-family: var(--mono);
+			font-size: clamp(1rem, 2.6vw, 1.4rem);
+			color: var(--on-dark);
+			text-decoration: none;
+			border-bottom: 1px solid rgba(238, 244, 255, 0.4);
+			padding-bottom: 2px;
+			word-break: break-all;
+		}
+		.contact .email:hover { border-color: var(--on-dark); }
+		.contact .socials { margin-top: 28px; position: relative; z-index: 1; }
+		.contact .btn { color: var(--on-dark); border-color: rgba(238, 244, 255, 0.3); }
+		.contact .btn:hover { border-color: var(--on-dark); }
+
+		@media (max-width: 560px) { .contact { padding: 40px 22px; } }
 	</style>
 </head>
 <body>
-	<div class="page">
-		<header class="topbar reveal">
-			<div class="brand">
-				<div class="brand-text">
-					<strong>Álvaro Silva</strong>
-					<span>Verification, research, and practical software engineering</span>
+	<header class="nav">
+		<div class="wrap">
+			<a class="mark" href="index.html"><span class="mark-glyph">Á</span>Álvaro Silva</a>
+			<ul class="nav-links" id="nav-links">
+				<li><a href="#research">Research</a></li>
+				<li><a href="publications.html">Publications</a></li>
+				<li><a href="projects.html">Projects</a></li>
+				<li><a href="software.html">Software</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+			<div class="nav-tools">
+				<button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+				</button>
+				<button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<main class="wrap">
+		<!-- ================= HERO ================= -->
+		<section class="hero">
+			<div class="hero-grid">
+				<div>
+					<span class="chip ok"><span class="dot"></span>Ph.D. candidate · FEUP × CMU Portugal</span>
+					<h1 class="display">Making formal proofs <em>usable</em>.</h1>
+					<p class="hero-lede">
+						I'm Álvaro, a software-verification researcher in Porto. I build tools that make verification-aware languages like
+						<strong>Dafny</strong> easier to work with. That means LLMs that suggest the missing assertion, debuggers that point to
+						the line where a proof broke, and diagnostics that check whether a verified spec says anything useful.
+						I'm advised by <a href="https://web.fe.up.pt/~afmendes/" target="_blank" rel="noreferrer">Alexandra Mendes</a> (FEUP / INESC TEC)
+						and <a href="https://www.cs.cmu.edu/~rubenm/" target="_blank" rel="noreferrer">Ruben Martins</a> (Carnegie Mellon).
+					</p>
+					<div class="hero-actions">
+						<a class="btn solid" href="publications.html">
+							Read the papers
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+						</a>
+						<a class="btn" href="mailto:alvaro.silva@fe.up.pt">alvaro.silva@fe.up.pt</a>
+					</div>
+				</div>
+
+				<div class="portrait-stage">
+					<figure class="portrait" style="margin:0">
+						<img src="assets/alvaro.jpg" alt="Portrait of Álvaro Silva wearing glasses and a light-blue shirt" width="760" height="934">
+						<figcaption>fig. 1 — porto, pt</figcaption>
+					</figure>
+					<div class="code" id="spec" aria-label="A playful Dafny-style specification of Álvaro's research">
+						<div class="code-bar">
+							<span class="lights"><i></i><i></i><i></i></span>
+							<span>research.dfy</span>
+						</div>
+<pre><span class="kw">method</span> <span class="ty">Research</span>(dev: <span class="ty">Developer</span>) <span class="kw">returns</span> (p: <span class="ty">Proof</span>)
+  <span class="kw">requires</span> dev.writes(<span class="st">"Dafny"</span>)
+  <span class="kw">ensures</span>  p.verified &amp;&amp; p.understood
+  <span class="kw">ensures</span>  dev.effort &lt; <span class="kw">old</span>(dev.effort)</pre>
+						<div class="code-status">
+							<span class="status-verifying"><span class="spinner"></span>verifying…</span>
+							<span class="status-done ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>1 verified, 0 errors</span>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="social-links" aria-label="Social links">
-					<a class="social-link" href="mailto:alvaro.silva@fe.up.pt" aria-label="Email" title="Email">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 3.2V17h16V8.2l-8 5.2-8-5.2ZM5.3 7l6.7 4.36L18.7 7H5.3Z"/></svg>
-				</a>
-				<a class="social-link" href="https://www.linkedin.com/in/AlvaroFestasSilva/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 6.5A1.94 1.94 0 1 1 3.06 6.5a1.94 1.94 0 0 1 3.88 0ZM3.4 8.8h3.08V21H3.4V8.8Zm5.5 0h2.95v1.67h.04c.41-.78 1.43-1.61 2.94-1.61 3.15 0 3.73 2.07 3.73 4.76V21h-3.08v-5.03c0-1.2-.02-2.75-1.68-2.75-1.68 0-1.94 1.31-1.94 2.66V21H8.9V8.8Z"/></svg>
-				</a>
-				<a class="social-link" href="https://github.com/ricostynha1" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.4-1-.9-1.3-.9-1.3-.8-.5.1-.5.1-.5.9.1 1.3 1 1.3 1 .8 1.3 2.1.9 2.6.7.1-.6.3-.9.5-1.1-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-1.9 1-2.6-.1-.2-.4-1.2.1-2.5 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5.2 0c1.9-1.3 2.8-1 2.8-1 .5 1.3.2 2.3.1 2.5.6.7 1 1.5 1 2.6 0 3.7-2.3 4.6-4.5 4.8.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2Z"/></svg>
-				</a>
-				<a class="social-link" href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer" aria-label="GitLab" title="GitLab">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 8.2 9.4h7.6L12 21.2Zm0 0 3.8-11.8h5.1L12 21.2Zm0 0L3 9.4h5.2L12 21.2ZM3 9.4l2.5-7.6c.1-.4.7-.4.8 0l1.8 5.6H3Zm18 0h-5.1l1.8-5.6c.1-.4.7-.4.8 0L21 9.4Z"/></svg>
-				</a>
-				<a class="social-link" href="https://orcid.org/0009-0005-2941-9942" target="_blank" rel="noreferrer" aria-label="ORCID" title="ORCID">
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.9 2A10 10 0 1 0 22 12 10 10 0 0 0 11.9 2Zm-3.2 4.2v11.6H7V6.2h1.7Zm2.8 0c2.4 0 4.2 1.6 4.2 5.8 0 3.8-1.8 5.8-4.2 5.8H9.6V6.2h1.9Zm0 10c1.4 0 2.5-1.2 2.5-4.2 0-3.2-1.1-4.2-2.5-4.2h-.2v8.4h.2Z"/></svg>
-				</a>
+
+			<div class="facts">
+				<div class="fact"><span class="kicker">Program</span><strong>CMU Portugal Affiliated Ph.D.</strong></div>
+				<div class="fact"><span class="kicker">Focus</span><strong>Dafny · LLMs · Proof debugging</strong></div>
+				<div class="fact"><span class="kicker">Before</span><strong>3 yrs ASIC verification at Synopsys</strong></div>
+				<div class="fact"><span class="kicker">Also</span><strong>Guest assistant at FEUP</strong></div>
 			</div>
-		</header>
+		</section>
 
-		<main class="container">
-			<section class="hero">
-				<div class="hero-grid">
-					<div class="hero-rail">
-						<div class="hero-photo reveal delay-1">
-							<img src="alvaro_photo_new.png" alt="Portrait of Álvaro Silva">
-						</div>
-						<aside class="nav-card reveal delay-2" aria-label="Site pages">
-							<h2>Open the full pages</h2>
-							<div class="nav-links">
-								<a class="nav-link" href="projects.html" target="_blank" rel="noreferrer">Projects <span>full page</span></a>
-								<a class="nav-link" href="publications.html" target="_blank" rel="noreferrer">Publications <span>full page</span></a>
-								<a class="nav-link" href="software.html" target="_blank" rel="noreferrer">Software <span>activity heat</span></a>
-							</div>
-						</aside>
-					</div>
-					<article class="hero-main reveal delay-2">
-						<div class="eyebrow">Ph.D. candidate at FEUP affiliated with CMU</div>
-						<div class="hero-links">
-							<a class="button secondary" href="https://cmuportugal.org/students/alvaro-silva/" target="_blank" rel="noreferrer">CMU page</a>
-							<a class="button secondary" href="https://sigarra.up.pt/feup/pt/func_geral.formview?p_codigo=604879" target="_blank" rel="noreferrer">FEUP page</a>
-						</div>
-						<h1>Building verification tools people actually want to use.</h1>
-						<p class="hero-copy">
-							I work at the intersection of formal methods, software engineering, and hardware verification.
-							My current research focuses on improving the usability of verification-aware languages, with a strong emphasis on Dafny,
-							alongside work on VeriFixer and adjacent verification ecosystems such as Verus. I am doing my Ph.D. under the supervision
-							of <a href="https://web.fe.up.pt/~afmendes/" target="_blank" rel="noreferrer">Alexandra Mendes</a> and
-							co-supervision of <a href="https://www.cs.cmu.edu/~rubenm/" target="_blank" rel="noreferrer">Ruben Martins</a>.
-						</p>
-						<div class="hero-actions">
-							<a class="button primary" href="#projects">Explore projects</a>
-							<a class="button secondary" href="#contact">Get in touch</a>
-						</div>
-						<div class="hero-points">
-							<div class="point">
-								<strong>Research</strong>
-								<span>Usability of verification-aware languages, Dafny, proof support, and AI-assisted verification.</span>
-							</div>
-							<div class="point">
-								<strong>Industry</strong>
-								<span>Four years in ASIC verification, with MIPI camera controllers and ISO 26262 experience.</span>
-							</div>
-							<div class="point">
-								<strong>Teaching</strong>
-								<span>Guest assistant in Functional Programming, Logic Programming, Python, and Computing Systems.</span>
-							</div>
-						</div>
-					</article>
-				</div>
-			</section>
-
-			<section class="section" id="projects">
-				<div class="section-head">
-					<div>
-						<h2>Featured work</h2>
-					</div>
-				</div>
-				<div class="feature-grid">
-					<article class="feature reveal delay-1">
-						<span class="tag">Research</span>
-						<h3>Dafny usability research</h3>
-						<p>
-							I investigate how AI and better tool feedback can improve the experience of writing and proving programs in Dafny.
-							The goal is not only stronger automation, but clearer proof workflows and more approachable formal development.
-						</p>
-					</article>
-					<article class="feature reveal delay-2">
-						<span class="tag">Project</span>
-						<h3>VeriFixer</h3>
-						<p>
-							Research on automated repair for verification-aware languages, starting with Dafny.
-							The project aims to reduce the gap between verification errors and actionable fixes.
-						</p>
-					</article>
-					<article class="feature reveal delay-3">
-						<span class="tag">Exploration</span>
-						<h3>Verus and verification ergonomics</h3>
-						<p>
-							Verus is a useful comparison point for thinking about how verification can integrate with systems programming.
-							It fits naturally into a broader story about making formal methods more usable and more widely adopted.
-						</p>
-					</article>
-					<article class="feature reveal delay-4">
-						<span class="tag">Industry</span>
-						<h3>MIPI camera controllers</h3>
-						<p>
-							As verification lead engineer, I built constrained-random environments, temporal assertions, and formal checks
-							for CSI-2 camera controllers in automotive-oriented contexts.
-						</p>
-					</article>
-				</div>
-			</section>
-
-			<section class="section" id="experience">
-				<div class="section-head">
-					<div>
-						<h2>Experience</h2>
-					</div>
-				</div>
-				<div class="panel">
-					<div class="timeline">
-						<article class="timeline-item reveal delay-1">
-							<div class="timeline-top">
-								<h3>Ph.D. Candidate, FEUP affiliated CMU</h3>
-								<span>Sep 2024 - ongoing · Porto, Portugal</span>
-							</div>
-							<ul>
-								<li>Grant under the CMU Portugal Affiliated Ph.D. Program.</li>
-								<li>Researching the usability of formal tools, with a focus on Dafny.</li>
-								<li>Member of the VeriFixer project.</li>
-							</ul>
-						</article>
-						<article class="timeline-item reveal delay-2">
-							<div class="timeline-top">
-								<h3>Guest Assistant, FEUP</h3>
-								<span>Sep 2024 - ongoing · Porto, Portugal</span>
-							</div>
-							<ul>
-								<li>Lecturing Functional and Logic Programming, Fundamentals of Programming in Python, and Computing Systems.</li>
-							</ul>
-						</article>
-						<article class="timeline-item reveal delay-3">
-							<div class="timeline-top">
-								<h3>ASIC Digital Design Staff Engineer, Synopsys</h3>
-								<span>Aug 2021 - Sep 2024 · Porto, Portugal</span>
-							</div>
-							<ul>
-								<li>Functional verification for digital IP, especially automotive products.</li>
-								<li>ISO 26262 certification for automotive safety products.</li>
-								<li>Applied formal verification with VCFormal and wrote assertions from specifications.</li>
-							</ul>
-						</article>
-						<article class="timeline-item reveal delay-4">
-							<div class="timeline-top">
-								<h3>Researcher, INESC TEC</h3>
-								<span>Oct 2020 - Aug 2021 · Porto, Portugal</span>
-							</div>
-							<ul>
-								<li>Integrated the European research project TRUST AI.</li>
-								<li>Held two research scholarships during this period.</li>
-							</ul>
-						</article>
-					</div>
-				</div>
-			</section>
-
-			<section class="section" id="education">
-				<div class="section-head">
-					<div>
-						<h2>Education and awards</h2>
-					</div>
-				</div>
-				<div class="grid-two">
-					<article class="panel reveal delay-1">
-						<h3>Education</h3>
-						<div class="timeline" style="margin-top: 16px;">
-							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
-								<div class="timeline-top">
-									<h3>Integrated Masters in Electrical and Computer Engineering</h3>
-									<span>FEUP · 2016 - 2021</span>
-								</div>
-								<ul>
-									<li>Graduated with 19/20.</li>
-									<li>Minor in Telecommunications.</li>
-									<li>Specialization in Micro-electronics.</li>
-								</ul>
-							</div>
-							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
-								<div class="timeline-top">
-									<h3>Erasmus exchange master student</h3>
-									<span>TUM · 2019 - 2020</span>
-								</div>
-								<ul>
-									<li>One semester at Technische Universität München.</li>
-								</ul>
-							</div>
-						</div>
-					</article>
-					<article class="panel reveal delay-2">
-						<h3>Recognition</h3>
-						<div class="timeline" style="margin-top: 16px;">
-							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
-								<div class="timeline-top">
-									<h3>Merit awards</h3>
-								</div>
-								<ul>
-									<li>Merit scholarship awards in 2016-2017 and 2017-2018.</li>
-									<li>Incentivo 2018 award as one of the top 20 first-year students at FEUP.</li>
-								</ul>
-							</div>
-							<div class="timeline-item" style="box-shadow: none; background: rgba(255, 255, 255, 0.7);">
-								<div class="timeline-top">
-									<h3>Leadership and collaboration</h3>
-								</div>
-								<ul>
-									<li>Team leader on a 40-person university project.</li>
-									<li>Worked on wireless sensor and SDR-based communication systems.</li>
-								</ul>
-							</div>
-						</div>
-					</article>
-				</div>
-			</section>
-
-			<section class="section" id="publications">
-				<div class="section-head">
-					<div>
-						<h2>Selected publications</h2>
-					</div>
-				</div>
-				<div class="grid-two">
-					<article class="publication reveal delay-1">
-						<strong>Leveraging Large Language Models to Boost Dafny's Developers Productivity</strong>
-						<span>FormaliSE 2024 · Álvaro Silva, Alexandra Mendes, and João F. Ferreira</span>
-					</article>
-					<article class="publication reveal delay-2">
-						<strong>Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny</strong>
-						<span>arXiv, accepted in SEFM 2025 · Carolina Carreira, Álvaro Silva, Alexandre Abreu, and Alexandra Mendes</span>
-					</article>
-					<article class="publication reveal delay-3">
-						<strong>Inferring Multiple Helper Dafny Assertions with LLMs</strong>
-						<span>arXiv, under review 2025 · Álvaro Silva, Alexandra Mendes, and Ruben Martins</span>
-					</article>
-					<article class="publication reveal delay-4">
-						<strong>Using Dimensional Aware Genetic Programming to find interpretable Dispatching Rules for the Job Shop Scheduling Problem</strong>
-						<span>Master's thesis · Faculty of Engineering of the University of Porto, 2021</span>
-					</article>
-				</div>
-			</section>
-
-			<section class="section" id="contact">
-				<div class="section-head">
-					<div>
-						<h2>Contact</h2>
-					</div>
-				</div>
-				<div class="contact-grid">
-					<article class="contact-card reveal delay-1">
-						<h3>Let’s talk about verification, research, and practical tooling.</h3>
-						<p style="margin: 14px 0 0; color: var(--muted);">
-							If you want to discuss Dafny, Verus, program repair, hardware verification, or research collaborations,
-							use one of the links below.
-						</p>
-						<div class="contact-links">
-							<a href="mailto:alvaro.silva@fe.up.pt">Email</a>
-							<a href="https://www.linkedin.com/in/AlvaroFestasSilva/" target="_blank" rel="noreferrer">LinkedIn</a>
-							<a href="https://github.com/ricostynha1" target="_blank" rel="noreferrer">GitHub</a>
-							<a href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer">GitLab</a>
-							<a href="https://orcid.org/0009-0005-2941-9942" target="_blank" rel="noreferrer">ORCID</a>
-						</div>
-					</article>
-				</div>
-			</section>
-		</main>
-
-		<footer class="footer">
-			<div class="footer-inner">
-				<span>Built for GitHub Pages.</span>
-				<span>Álvaro Silva · Verification, research, and systems engineering.</span>
+		<!-- ================= NOW ================= -->
+		<section class="section" id="now">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">01</span> / Changelog</span>
+				<h2>Lately</h2>
 			</div>
-		</footer>
-	</div>
+			<ol class="log reveal">
+				<li>
+					<time datetime="2026-09">Sep 2026</time>
+					<div><span class="chip">preprint</span><a href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">DSpec2Test</a>: tests generated from Dafny specifications alone, which kill 93.9% of mutants.</div>
+				</li>
+				<li>
+					<time datetime="2026-08">Aug 2026</time>
+					<div><span class="chip">preprint</span><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse</a>: proof-coverage analysis that flags specifications which verify but say little.</div>
+				</li>
+				<li>
+					<time datetime="2026-08">Aug 2026</time>
+					<div><span class="chip ok">ISSRE 2026</span><a href="https://arxiv.org/abs/2608.05399" target="_blank" rel="noreferrer">Automated fault localization for Dafny</a> will appear at the 37th IEEE ISSRE.</div>
+				</li>
+				<li>
+					<time datetime="2026">2026</time>
+					<div><span class="chip accent">service</span>Reviewer for FM 2026 and artifact evaluator for FormaliSE 2026.</div>
+				</li>
+				<li>
+					<time datetime="2025-11">Nov 2025</time>
+					<div><span class="chip ok">SEFM 2025</span><a href="https://link.springer.com/chapter/10.1007/978-3-032-10444-1_13" target="_blank" rel="noreferrer">Can LLMs help students prove software correctness?</a> published in the SEFM 2025 proceedings.</div>
+				</li>
+				<li>
+					<time datetime="2025-10">Oct 2025</time>
+					<div><span class="chip">preprint</span><a href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">DAISY</a>: LLMs that infer several missing helper assertions in Dafny at once.</div>
+				</li>
+			</ol>
+		</section>
+
+		<!-- ================= RESEARCH ================= -->
+		<section class="section" id="research">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">02</span> / Research</span>
+				<div>
+					<h2>Four threads, one question</h2>
+					<p class="aside" style="grid-column:auto">What would make a working developer reach for a verifier, and keep using it?</p>
+				</div>
+			</div>
+			<div class="threads">
+				<article class="card thread reveal">
+					<span class="glyph">assert ?</span>
+					<span class="num">i</span>
+					<h3>LLM-assisted proof</h3>
+					<p>Language models that fill in the tedious parts of a proof, such as helper assertions and lemmas, while the verifier checks every suggestion. I also study how students use these assistants when they write proofs.</p>
+					<div class="outputs"><span class="chip accent">DAISY</span><span class="chip">FormaliSE '24</span><span class="chip">SEFM '25</span></div>
+				</article>
+				<article class="card thread reveal">
+					<span class="glyph">✗ → ✓</span>
+					<span class="num">ii</span>
+					<h3>Debugging &amp; repair</h3>
+					<p>When verification fails, I want the tool to say where and why. This thread covers fault localization from counterexamples, single-transformation repair, and the FCT-funded VeriFixer project with INESC TEC, INESC-ID and CMU.</p>
+					<div class="outputs"><span class="chip ok">ISSRE '26</span><span class="chip accent">DafnyFix</span><span class="chip accent">VeriFixer</span></div>
+				</article>
+				<article class="card thread reveal">
+					<span class="glyph">ensures true</span>
+					<span class="num">iii</span>
+					<h3>Specification quality</h3>
+					<p>A proof that verifies can still rest on a weak spec. ProofPulse measures which spec elements a proof actually relies on, and DSpec2Test turns the spec itself into a test suite.</p>
+					<div class="outputs"><span class="chip accent">ProofPulse</span><span class="chip accent">DSpec2Test</span><span class="chip">MutDafny</span></div>
+				</article>
+				<article class="card thread reveal">
+					<span class="glyph">rtl ∪ rust</span>
+					<span class="num">iv</span>
+					<h3>Beyond Dafny</h3>
+					<p>I spent three years verifying hardware with SystemVerilog, UVM and VCFormal, and I want to bring that experience back into the work. Current interests are Dafny as a language for hardware models, Verus for verified Rust, and agent-aware editors such as TraceLean.</p>
+					<div class="outputs"><span class="chip">Verus</span><span class="chip">SystemVerilog</span><span class="chip accent">TraceLean IDE</span></div>
+				</article>
+			</div>
+		</section>
+
+		<!-- ================= PUBLICATIONS ================= -->
+		<section class="section" id="publications">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">03</span> / Selected papers</span>
+				<div>
+					<h2>Publications</h2>
+					<p class="aside" style="grid-column:auto"><a href="publications.html">Full list with abstracts and links →</a></p>
+				</div>
+			</div>
+			<div class="scholar-metrics reveal" data-scholar-metrics hidden style="margin:0 0 32px"></div>
+			<ol class="pubs reveal">
+				<li class="pub">
+					<div class="pub-venue"><strong>ISSRE</strong>2026</div>
+					<div>
+						<h3><a href="https://arxiv.org/abs/2608.05399" target="_blank" rel="noreferrer">Improving Debugging in Verification-Aware Languages Through Automated Fault Localization: A Case Study in Dafny</a></h3>
+						<p class="authors"><span class="me">Álvaro Silva</span>, Isabel Amaral, João Pascoal Faria, Alexandra Mendes</p>
+					</div>
+				</li>
+				<li class="pub">
+					<div class="pub-venue"><strong>arXiv</strong>2026</div>
+					<div>
+						<h3><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse: Interactive Proof Coverage Analysis for Dafny</a></h3>
+						<p class="authors"><span class="me">Álvaro F. Silva</span>, Ruben Martins, Alexandra Mendes</p>
+					</div>
+				</li>
+				<li class="pub">
+					<div class="pub-venue"><strong>arXiv</strong>2025</div>
+					<div>
+						<h3><a href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">Inferring Multiple Helper Dafny Assertions with LLMs</a></h3>
+						<p class="authors"><span class="me">Álvaro Silva</span>, Alexandra Mendes, Ruben Martins</p>
+					</div>
+				</li>
+				<li class="pub">
+					<div class="pub-venue"><strong>SEFM</strong>2025</div>
+					<div>
+						<h3><a href="https://link.springer.com/chapter/10.1007/978-3-032-10444-1_13" target="_blank" rel="noreferrer">Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny</a></h3>
+						<p class="authors">Carolina Carreira, <span class="me">Álvaro Silva</span>, Alexandre Abreu, Alexandra Mendes</p>
+					</div>
+				</li>
+				<li class="pub">
+					<div class="pub-venue"><strong>FormaliSE</strong>2024</div>
+					<div>
+						<h3><a href="https://arxiv.org/abs/2401.00963" target="_blank" rel="noreferrer">Leveraging Large Language Models to Boost Dafny's Developers Productivity</a></h3>
+						<p class="authors"><span class="me">Álvaro Silva</span>, Alexandra Mendes, João F. Ferreira</p>
+					</div>
+				</li>
+			</ol>
+		</section>
+
+		<!-- ================= PATH ================= -->
+		<section class="section" id="path">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">04</span> / Path</span>
+				<h2>From silicon to proofs</h2>
+			</div>
+			<div class="path">
+				<div class="reveal">
+					<h3 class="kicker">Experience</h3>
+					<ol class="steps">
+						<li class="step now">
+							<span class="when">Sep 2024 — now</span>
+							<h4>Ph.D. Candidate</h4>
+							<div class="where">FEUP, affiliated with Carnegie Mellon University</div>
+							<ul>
+								<li>CMU Portugal Affiliated Ph.D. Program grant.</li>
+								<li>Usability of verification-aware languages, with a focus on Dafny.</li>
+								<li>Researcher on the VeriFixer project.</li>
+							</ul>
+						</li>
+						<li class="step now">
+							<span class="when">Sep 2024 — now</span>
+							<h4>Guest Assistant</h4>
+							<div class="where">FEUP</div>
+							<ul>
+								<li>Functional &amp; Logic Programming, Programming Fundamentals (Python), Computing Systems.</li>
+							</ul>
+						</li>
+						<li class="step">
+							<span class="when">Aug 2021 — Sep 2024</span>
+							<h4>ASIC Digital Design Staff Engineer</h4>
+							<div class="where">Synopsys · Porto</div>
+							<ul>
+								<li>Verification lead for MIPI CSI-2 camera controllers.</li>
+								<li>Functional and formal verification (VCFormal) of automotive IP; ISO 26262 certified.</li>
+							</ul>
+						</li>
+						<li class="step">
+							<span class="when">Oct 2020 — Aug 2021</span>
+							<h4>Researcher</h4>
+							<div class="where">INESC TEC · Porto</div>
+							<ul>
+								<li>European project TRUST-AI; two research scholarships.</li>
+							</ul>
+						</li>
+					</ol>
+				</div>
+				<div class="reveal">
+					<h3 class="kicker">Education &amp; awards</h3>
+					<ol class="steps">
+						<li class="step">
+							<span class="when">2016 — 2021</span>
+							<h4>Integrated M.Sc. in Electrical &amp; Computer Engineering</h4>
+							<div class="where">FEUP · final grade 19/20</div>
+							<ul>
+								<li>Specialization in Microelectronics, minor in Telecommunications.</li>
+								<li>Thesis: interpretable dispatching rules for job-shop scheduling with dimensionally aware genetic programming.</li>
+							</ul>
+						</li>
+						<li class="step">
+							<span class="when">2019 — 2020</span>
+							<h4>Erasmus exchange semester</h4>
+							<div class="where">Technische Universität München · GPA 1.27</div>
+						</li>
+						<li class="step">
+							<span class="when">2017 — 2018</span>
+							<h4>Merit scholarships &amp; Incentivo award</h4>
+							<div class="where">FEUP</div>
+							<ul>
+								<li>Merit scholarships in 2016–17 and 2017–18.</li>
+								<li>Incentivo 2018, awarded to the top 20 first-year students.</li>
+							</ul>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</section>
+
+		<!-- ================= TEACHING & SERVICE ================= -->
+		<section class="section" id="service">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">05</span> / Community</span>
+				<h2>Teaching &amp; service</h2>
+			</div>
+			<div class="trio">
+				<article class="card reveal">
+					<span class="kicker">Teaching</span>
+					<h3>FEUP guest assistant</h3>
+					<ul>
+						<li>Functional and Logic Programming</li>
+						<li>Fundamentals of Programming (Python)</li>
+						<li>Computing Systems</li>
+					</ul>
+				</article>
+				<article class="card reveal">
+					<span class="kicker">Service</span>
+					<h3>Program &amp; artifact committees</h3>
+					<ul>
+						<li>Reviewer, Symposium on Formal Methods (FM 2026)</li>
+						<li>Artifact Evaluator, FormaliSE 2026</li>
+					</ul>
+				</article>
+				<article class="card reveal">
+					<span class="kicker">Mentoring</span>
+					<h3>Thesis supervision</h3>
+					<ul>
+						<li>Industry supervisor of R. P. de Jesus, <em>Evaluating High-Level SystemC Formal Verification Compared to RTL Verification</em> (2024).</li>
+					</ul>
+				</article>
+			</div>
+		</section>
+
+		<!-- ================= CONTACT ================= -->
+		<section class="contact reveal" id="contact">
+			<span class="kicker">06 / Contact</span>
+			<h2 class="display">Let's prove something <em>together</em>.</h2>
+			<p>I'm happy to talk about Dafny, Verus, program repair, LLMs for verification, or hardware verification, whether you have a collaboration in mind or just a question.</p>
+			<a class="email" href="mailto:alvaro.silva@fe.up.pt">alvaro.silva@fe.up.pt</a>
+			<div class="socials">
+				<a class="btn" href="https://github.com/ricostynha1" target="_blank" rel="noreferrer">GitHub</a>
+				<a class="btn" href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer">GitLab</a>
+				<a class="btn" href="https://www.linkedin.com/in/AlvaroFestasSilva/" target="_blank" rel="noreferrer">LinkedIn</a>
+				<a class="btn" href="https://scholar.google.com/citations?user=24BoIRsAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">Google Scholar</a>
+				<a class="btn" href="https://orcid.org/0009-0005-2941-9942" target="_blank" rel="noreferrer">ORCID</a>
+				<a class="btn" href="https://cmuportugal.org/students/alvaro-silva/" target="_blank" rel="noreferrer">CMU Portugal</a>
+				<a class="btn" href="https://sigarra.up.pt/feup/pt/func_geral.formview?p_codigo=604879" target="_blank" rel="noreferrer">FEUP</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="wrap">
+			<span>© <span id="year">2026</span> Álvaro Silva · Porto, Portugal</span>
+			<code>assert site.handcrafted;</code>
+		</div>
+	</footer>
+
+	<script src="assets/site.js"></script>
+	<script src="data/scholar.js"></script>
+	<script src="assets/scholar.js"></script>
+	<script>
+		// Fake a verifier run on the hero spec.
+		(function () {
+			const spec = document.getElementById('spec');
+			if (!spec) return;
+			const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1600;
+			setTimeout(() => spec.classList.add('verified'), delay);
+		})();
+	</script>
 </body>
 </html>

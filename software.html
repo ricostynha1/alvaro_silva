@@ -3,599 +3,149 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Álvaro Silva software activity page with GitHub and GitLab profile links and activity heatmaps.">
-	<title>Software | Álvaro Silva</title>
+	<title>Software · Álvaro Silva</title>
+	<meta name="description" content="Álvaro Silva's live software activity: GitHub and GitLab contribution heatmaps and recently active projects.">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5fd6'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' fill='%23ffffff'>Á</text></svg>">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+	<link rel="stylesheet" href="assets/site.css">
 	<style>
-		:root {
-			--bg: #f5f1ea;
-			--surface: rgba(255, 255, 255, 0.78);
-			--surface-soft: rgba(255, 255, 255, 0.62);
-			--text: #17212b;
-			--muted: #5c6773;
-			--line: rgba(23, 33, 43, 0.10);
-			--accent: #0f766e;
-			--accent-strong: #134e4a;
-			--accent-soft: rgba(15, 118, 110, 0.12);
-			--shadow: 0 18px 40px rgba(23, 33, 43, 0.08);
-			--radius-xl: 30px;
-			--radius-lg: 22px;
-			--radius-md: 16px;
-			--max-width: 1160px;
-		}
-
-		* {
-			box-sizing: border-box;
-		}
-
-		html {
-			scroll-behavior: smooth;
-		}
-
-		body {
-			margin: 0;
-			color: var(--text);
-			background:
-				radial-gradient(circle at top left, rgba(15, 118, 110, 0.16), transparent 28%),
-				radial-gradient(circle at 85% 10%, rgba(180, 83, 9, 0.14), transparent 26%),
-				linear-gradient(180deg, var(--bg) 0%, #f7f3ee 45%, #f2ece4 100%);
-			font-family: "Manrope", sans-serif;
-			line-height: 1.6;
-			min-height: 100vh;
-			overflow-x: hidden;
-		}
-
-		body::before {
-			content: "";
-			position: fixed;
-			inset: 0;
-			pointer-events: none;
-			background-image:
-				linear-gradient(rgba(23, 33, 43, 0.03) 1px, transparent 1px),
-				linear-gradient(90deg, rgba(23, 33, 43, 0.03) 1px, transparent 1px);
-			background-size: 36px 36px;
-			mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 82%);
-			opacity: 0.65;
-		}
-
-		a {
-			color: inherit;
-			text-decoration: none;
-		}
-
-		.page {
-			width: min(calc(100% - 32px), var(--max-width));
-			margin: 0 auto;
-			position: relative;
-			z-index: 1;
-			padding: 16px 0 42px;
-		}
-
-		.topbar {
-			position: sticky;
-			top: 16px;
-			z-index: 20;
-			border: 1px solid var(--line);
-			border-radius: 24px;
-			background: rgba(255, 255, 255, 0.65);
-			backdrop-filter: blur(16px);
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 16px 22px;
-			gap: 16px;
-			box-shadow: 0 10px 30px rgba(23, 33, 43, 0.06);
-		}
-
-		.brand {
-			display: grid;
-			gap: 2px;
-		}
-
-		.brand strong {
-			font-size: 1.05rem;
-		}
-
-		.brand span,
-		.section-head p,
-		.meta,
-		.card p {
-			color: var(--muted);
-		}
-
-		.backlink {
-			display: inline-flex;
-			align-items: center;
-			padding: 10px 14px;
-			border-radius: 999px;
-			background: rgba(15, 118, 110, 0.08);
-			border: 1px solid rgba(15, 118, 110, 0.12);
-			color: var(--accent-strong);
-			font-weight: 800;
-		}
-
-		.hero,
-		.section {
-			padding-top: 34px;
-		}
-
-		.hero-main,
-		.card {
-			border: 1px solid var(--line);
-			background: var(--surface);
-			backdrop-filter: blur(16px);
-			box-shadow: var(--shadow);
-			border-radius: var(--radius-xl);
-		}
-
-		.hero-main {
-			padding: 30px;
-		}
-
-		h1,
-		h2,
-		h3 {
-			margin: 0;
-			line-height: 1.08;
-			letter-spacing: -0.03em;
-		}
-
-		h1,
-		h2 {
-			font-family: "Fraunces", serif;
-		}
-
-		h1 {
-			font-family: "Sora", "Manrope", sans-serif;
-			font-size: clamp(2.1rem, 4vw, 3.6rem);
-			max-width: 12ch;
-		}
-
-		.eyebrow {
-			display: inline-flex;
-			padding: 8px 14px;
-			border-radius: 999px;
-			background: var(--accent-soft);
-			color: var(--accent-strong);
-			font-size: 0.85rem;
-			font-weight: 800;
-			margin-bottom: 14px;
-		}
-
-		.grid-two {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 16px;
-		}
-
-		.card {
-			padding: 22px;
-			display: grid;
-			gap: 16px;
-			align-content: start;
-		}
-
-		.card-head {
-			display: flex;
-			align-items: start;
-			justify-content: space-between;
-			gap: 14px;
-			flex-wrap: wrap;
-		}
-
-		.card-head h2 {
-			font-size: clamp(1.8rem, 3vw, 2.4rem);
-		}
-
-		.card-links {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-		}
-
-		.calendar-shell {
-			display: grid;
-			gap: 12px;
-		}
-
-		.calendar-panel {
-			display: grid;
-			grid-template-columns: minmax(0, 1fr) 28px;
-			gap: 10px;
-			align-items: start;
-		}
-
-		.weekday-strip {
-			display: grid;
-			grid-template-rows: repeat(7, 12px);
-			gap: 4px;
-			padding-top: 18px;
-			font-size: 0.68rem;
-			line-height: 1;
-			color: var(--muted);
-			grid-column: 2;
-			text-align: right;
-		}
-
-		.weekday-strip span {
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			height: 12px;
-		}
-
-		.calendar-grid-shell {
-			display: grid;
-			gap: 6px;
-			grid-column: 1;
-		}
-
-		.timeline-cue {
-			font-size: 0.82rem;
-			color: var(--muted);
-			font-weight: 700;
-		}
-
-		.month-strip {
-			display: grid;
-			grid-auto-flow: column;
-			grid-auto-columns: 12px;
-			gap: 4px;
-			min-width: fit-content;
-			font-size: 0.75rem;
-			color: var(--muted);
-		}
-
-		.month-strip span {
-			white-space: nowrap;
-			transform: translateY(-1px);
-		}
-
-		.calendar-wrap {
-			padding: 14px;
-			border-radius: 18px;
-			background: rgba(255, 255, 255, 0.72);
-			border: 1px solid rgba(23, 33, 43, 0.08);
-			overflow-x: auto;
-		}
-
-		.calendar-wrap .calendar {
-			min-width: 900px;
-		}
-
-		.button {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			padding: 10px 14px;
-			border-radius: 999px;
-			font-weight: 800;
-			border: 1px solid transparent;
-		}
-
-		.button.primary {
-			background: linear-gradient(145deg, var(--accent), var(--accent-strong));
-			color: #fff;
-		}
-
-		.button.secondary {
-			background: rgba(255, 255, 255, 0.8);
-			border-color: rgba(23, 33, 43, 0.12);
-		}
-
-		.note {
-			padding: 14px 16px;
-			border-radius: 18px;
-			background: rgba(15, 118, 110, 0.08);
-			border: 1px solid rgba(15, 118, 110, 0.12);
-			color: var(--accent-strong);
-		}
-
-		.summary {
-			display: grid;
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			gap: 10px;
-		}
-
-		.summary-item {
-			padding: 14px 16px;
-			border-radius: 18px;
-			background: rgba(255, 255, 255, 0.70);
-			border: 1px solid rgba(23, 33, 43, 0.08);
-			display: grid;
-			gap: 4px;
-		}
-
-		.summary-item strong {
-			font-size: 0.96rem;
-		}
-
-		.heat-shell {
-			display: grid;
-			gap: 12px;
-		}
-
-		.heat-grid {
-			display: grid;
-			grid-auto-flow: column;
-			grid-template-rows: repeat(7, 12px);
-			grid-auto-columns: 12px;
-			gap: 4px;
-			min-width: fit-content;
-			justify-content: start;
-		}
-
-		.heat-cell {
-			width: 12px;
-			height: 12px;
-			border-radius: 3px;
-			border: 1px solid rgba(23, 33, 43, 0.08);
-			background: rgba(23, 33, 43, 0.06);
-		}
-
-		.heat-cell.is-empty {
-			background: transparent;
-			border-color: rgba(23, 33, 43, 0.03);
-			opacity: 0.45;
-		}
-
-		.heat-cell.level-1 { background: rgba(15, 118, 110, 0.16); }
-		.heat-cell.level-2 { background: rgba(15, 118, 110, 0.30); }
-		.heat-cell.level-3 { background: rgba(15, 118, 110, 0.46); }
-		.heat-cell.level-4 { background: rgba(15, 118, 110, 0.66); }
-
-		.legend {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 12px;
-			font-size: 0.9rem;
-			color: var(--muted);
-		}
-
-		.legend-samples {
-			display: flex;
-			align-items: center;
-			gap: 6px;
-		}
-
-		.legend-samples span {
-			width: 12px;
-			height: 12px;
-			border-radius: 4px;
-			background: rgba(23, 33, 43, 0.06);
-			border: 1px solid rgba(23, 33, 43, 0.08);
-		}
-
-		.legend-samples span:nth-child(2) { background: rgba(15, 118, 110, 0.16); }
-		.legend-samples span:nth-child(3) { background: rgba(15, 118, 110, 0.30); }
-		.legend-samples span:nth-child(4) { background: rgba(15, 118, 110, 0.46); }
-		.legend-samples span:nth-child(5) { background: rgba(15, 118, 110, 0.66); }
-
-		.projects-shell {
-			display: grid;
-			gap: 16px;
-		}
-
-		.heat-grid.github-grid {
-			grid-template-rows: repeat(7, 12px);
-			grid-auto-columns: 12px;
-		}
-
-		.heat-grid.gitlab-grid {
-			grid-template-rows: repeat(7, 12px);
-			grid-auto-columns: 12px;
-		}
-
-		.project-grid {
-			display: grid;
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 14px;
-		}
-
-		.project-card {
-			padding: 18px;
-			border-radius: 22px;
-			background: rgba(255, 255, 255, 0.72);
-			border: 1px solid rgba(23, 33, 43, 0.08);
-			display: grid;
-			gap: 12px;
-		}
-
-		.project-top {
-			display: flex;
-			align-items: start;
-			justify-content: space-between;
-			gap: 12px;
-			flex-wrap: wrap;
-		}
-
-		.project-top h3 {
-			font-size: 1.06rem;
-		}
-
-		.project-pills {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 6px;
-		}
-
-		.pill {
-			display: inline-flex;
-			align-items: center;
-			padding: 6px 10px;
-			border-radius: 999px;
-			font-size: 0.78rem;
-			font-weight: 800;
-			background: rgba(15, 118, 110, 0.10);
-			color: var(--accent-strong);
-		}
-
-		.project-meta {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px 14px;
-			font-size: 0.9rem;
-			color: var(--muted);
-		}
-
-		.project-meta strong {
-			color: var(--text);
-		}
-
-		.footer {
-			padding: 26px 0 0;
-			color: var(--muted);
-			font-size: 0.94rem;
-		}
-
-		.footer-inner {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			gap: 12px;
-			align-items: center;
-			padding-top: 16px;
-			border-top: 1px solid rgba(23, 33, 43, 0.10);
-		}
-
-		.reveal {
-			animation: rise 0.7s ease both;
-		}
-
-		@keyframes rise {
-			from {
-				opacity: 0;
-				transform: translateY(18px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		.delay-1 { animation-delay: 0.08s; }
-		.delay-2 { animation-delay: 0.16s; }
-
-		@media (max-width: 1024px) {
-			.grid-two,
-			.summary {
-				grid-template-columns: 1fr;
-			}
-		}
-
-		@media (max-width: 720px) {
-			.page {
-				width: min(calc(100% - 22px), var(--max-width));
-			}
-
-			.topbar,
-			.hero-main,
-			.card {
-				border-radius: 20px;
-				padding: 16px;
-			}
-
-			.heat-grid {
-				gap: 6px;
-			}
-
-			.heat-grid {
-				min-width: 760px;
-			}
-
-			.month-strip {
-				min-width: 760px;
-			}
-
-			.timeline-cue {
-				font-size: 0.78rem;
-			}
+		:root { --heat-0: rgba(14, 26, 46, 0.06); --heat-rgb: 31, 95, 214; }
+		:root[data-theme="dark"] { --heat-0: rgba(238, 237, 244, 0.06); --heat-rgb: 179, 155, 255; }
+
+		.platforms { display: grid; gap: 18px; }
+
+		.platform { display: grid; gap: 18px; padding: 28px; }
+
+		.platform-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; }
+		.platform-head h2 { font-family: var(--serif); font-weight: 400; font-size: 2.6rem; line-height: 1; }
+		.platform-head .handle { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); margin-left: 10px; }
+
+		.summary { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.summary-item { display: grid; gap: 2px; padding: 14px 16px 14px 0; }
+		.summary-item + .summary-item { padding-left: 16px; border-left: 1px solid var(--line); }
+		.summary-item strong { font-family: var(--serif); font-weight: 400; font-size: 2.2rem; line-height: 1; }
+		.summary-item span { color: var(--muted); font-size: 0.88rem; }
+
+		.legend { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+		.legend-samples { display: flex; align-items: center; gap: 4px; }
+		.legend-samples span { width: 12px; height: 12px; border-radius: 3px; background: var(--heat-0); }
+		.legend-samples span:nth-child(2) { background: rgba(var(--heat-rgb), 0.25); }
+		.legend-samples span:nth-child(3) { background: rgba(var(--heat-rgb), 0.45); }
+		.legend-samples span:nth-child(4) { background: rgba(var(--heat-rgb), 0.70); }
+		.legend-samples span:nth-child(5) { background: rgba(var(--heat-rgb), 1); }
+
+		.timeline-cue { display: none; }
+
+		.calendar-wrap { --cell: 12px; --gap: 3px; overflow-x: auto; padding-bottom: 6px; }
+		@media (min-width: 1100px) { .calendar-wrap { --cell: 16px; --gap: 4px; } }
+		.calendar-grid-shell { display: grid; gap: 6px; min-width: fit-content; }
+
+		.month-strip { display: grid; grid-auto-flow: column; grid-auto-columns: var(--cell); gap: var(--gap); font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+		.month-strip span { white-space: nowrap; }
+
+		.heat-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, var(--cell)); grid-auto-columns: var(--cell); gap: var(--gap); }
+		.heat-cell { width: var(--cell); height: var(--cell); border-radius: 3px; background: var(--heat-0); }
+		.heat-cell.is-empty { background: transparent; }
+		.heat-cell.level-1 { background: rgba(var(--heat-rgb), 0.25); }
+		.heat-cell.level-2 { background: rgba(var(--heat-rgb), 0.45); }
+		.heat-cell.level-3 { background: rgba(var(--heat-rgb), 0.70); }
+		.heat-cell.level-4 { background: rgba(var(--heat-rgb), 1); }
+
+		.project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+		.project-card { display: grid; gap: 12px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised); align-content: start; }
+		.project-card h3 { font-family: var(--mono); font-size: 0.92rem; font-weight: 500; word-break: break-word; }
+		.project-card h3 a { text-decoration: none; }
+		.project-card h3 a:hover { color: var(--accent); }
+		.project-pills { display: flex; gap: 6px; margin-top: 8px; }
+		.pill { font-family: var(--mono); font-size: 0.7rem; padding: 2px 8px; border-radius: 5px; background: var(--accent-wash); color: var(--accent-ink); }
+		.project-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.84rem; color: var(--muted); }
+		.project-meta strong { color: var(--ink); font-weight: 600; }
+		.meta { color: var(--muted); }
+		.repo-desc { color: var(--muted); font-size: 0.9rem; }
+		.lang { display: inline-flex; align-items: center; gap: 6px; }
+		.lang i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+		.loading { color: var(--muted); font-family: var(--mono); font-size: 0.84rem; }
+
+		@media (max-width: 900px) { .project-grid { grid-template-columns: 1fr 1fr; } }
+		@media (max-width: 600px) {
+			.platform { padding: 20px; }
+			.project-grid { grid-template-columns: 1fr; }
+			.summary { grid-template-columns: 1fr; }
+			.summary-item + .summary-item { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
 		}
 	</style>
 </head>
 <body>
-	<div class="page">
-		<header class="topbar reveal">
-			<div class="brand">
-				<strong>Álvaro Silva</strong>
-				<span>Software activity and profile pages</span>
+	<header class="nav">
+		<div class="wrap">
+			<a class="mark" href="index.html"><span class="mark-glyph">Á</span>Álvaro Silva</a>
+			<ul class="nav-links" id="nav-links">
+				<li><a href="index.html#research">Research</a></li>
+				<li><a href="publications.html">Publications</a></li>
+				<li><a href="projects.html">Projects</a></li>
+				<li><a href="software.html" aria-current="page">Software</a></li>
+				<li><a href="index.html#contact">Contact</a></li>
+			</ul>
+			<div class="nav-tools">
+				<button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+				</button>
+				<button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+				</button>
 			</div>
-			<a class="backlink" href="index.html">Back to homepage</a>
-		</header>
+		</div>
+	</header>
 
-		<section class="section">
-			<div class="grid-two">
-				<article class="card reveal delay-1" id="github-card">
-					<div class="card-head">
-						<div>
-							<h2>GitHub</h2>
-						</div>
-						<div class="card-links">
-							<a class="button primary" href="https://github.com/ricostynha1" target="_blank" rel="noreferrer">Open profile front page</a>
-						</div>
+	<main class="wrap">
+		<section class="page-hero">
+			<span class="kicker">GitHub &amp; GitLab activity</span>
+			<h1 class="display" style="margin-top:14px">Soft<em>ware</em></h1>
+			<p>My contributions over the last year and the repositories where that work happened. The data is snapshotted from GitHub and GitLab twice a month, so this page stays fully static.</p>
+		</section>
+
+		<section class="section" style="padding-top:48px">
+			<div class="platforms">
+				<article class="card platform" id="github-card">
+					<div class="platform-head">
+						<h2>GitHub<span class="handle">@ricostynha1</span></h2>
+						<a class="btn" href="https://github.com/ricostynha1" target="_blank" rel="noreferrer">Open profile ↗</a>
 					</div>
 					<div class="summary" id="github-summary">
-						<div class="summary-item">
-							<strong>Loading</strong>
-							<span>Fetching contribution data.</span>
-						</div>
+						<div class="summary-item"><strong>…</strong><span>Fetching contribution data</span></div>
 					</div>
-					<div class="calendar-shell">
-						<div class="legend">
-							<span>Yearly contribution heatmap</span>
-							<div class="legend-samples" aria-hidden="true">
-								<span></span><span></span><span></span><span></span><span></span>
-							</div>
-						</div>
-						<div class="timeline-cue">Older &larr; scroll &rarr; Newest</div>
-						<div class="calendar-wrap">
-							<div class="heat-shell">
-								<div class="calendar-panel">
-									<div class="calendar-grid-shell">
-										<div class="month-strip" id="github-months" aria-hidden="true"></div>
-										<div class="heat-grid github-grid" id="github-heatmap" aria-label="GitHub yearly activity heatmap"></div>
-									</div>
-								</div>
-							</div>
+					<div class="legend">
+						<span>last 12 months · <span id="github-updated"></span></span>
+						<div class="legend-samples" aria-hidden="true">less <span></span><span></span><span></span><span></span><span></span> more</div>
+					</div>
+					<div class="calendar-wrap">
+						<div class="calendar-grid-shell">
+							<div class="month-strip" id="github-months" aria-hidden="true"></div>
+							<div class="heat-grid github-grid" id="github-heatmap" aria-label="GitHub yearly activity heatmap"></div>
 						</div>
 					</div>
 				</article>
 
-				<article class="card reveal delay-2" id="gitlab-card">
-					<div class="card-head">
-						<div>
-							<h2>GitLab</h2>
-						</div>
-						<div class="card-links">
-							<a class="button primary" href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer">Open profile front page</a>
-						</div>
+				<article class="card platform" id="gitlab-card">
+					<div class="platform-head">
+						<h2>GitLab<span class="handle">@ricostynha</span></h2>
+						<a class="btn" href="https://gitlab.com/ricostynha" target="_blank" rel="noreferrer">Open profile ↗</a>
 					</div>
 					<div class="summary" id="gitlab-summary">
-						<div class="summary-item">
-							<strong>Loading</strong>
-							<span>Fetching contribution data.</span>
-						</div>
+						<div class="summary-item"><strong>…</strong><span>Fetching contribution data</span></div>
 					</div>
-					<div class="calendar-shell">
-						<div class="legend">
-							<span>Yearly activity grid</span>
-							<div class="legend-samples" aria-hidden="true">
-								<span></span><span></span><span></span><span></span><span></span>
-							</div>
-						</div>
-						<div class="timeline-cue">Older &larr; scroll &rarr; Newest</div>
-						<div class="calendar-wrap">
-							<div class="heat-shell">
-								<div class="calendar-panel">
-									<div class="calendar-grid-shell">
-										<div class="month-strip" id="gitlab-months" aria-hidden="true"></div>
-										<div class="heat-grid gitlab-grid" id="gitlab-heatmap" aria-label="GitLab activity heatmap"></div>
-									</div>
-								</div>
-							</div>
+					<div class="legend">
+						<span>last 12 months · <span id="gitlab-updated"></span></span>
+						<div class="legend-samples" aria-hidden="true">less <span></span><span></span><span></span><span></span><span></span> more</div>
+					</div>
+					<div class="calendar-wrap">
+						<div class="calendar-grid-shell">
+							<div class="month-strip" id="gitlab-months" aria-hidden="true"></div>
+							<div class="heat-grid gitlab-grid" id="gitlab-heatmap" aria-label="GitLab activity heatmap"></div>
 						</div>
 					</div>
 				</article>
@@ -603,488 +153,121 @@
 		</section>
 
 		<section class="section">
-			<div class="card reveal delay-1">
-				<div class="card-head">
-					<div>
-						<h2>Contributed projects</h2>
-					</div>
-				</div>
-				<div class="projects-shell">
-					<div id="project-grid" class="project-grid"></div>
+			<div class="section-head">
+				<span class="kicker"><span class="n">↻</span> / Recent</span>
+				<div>
+					<h2>Where the commits went</h2>
+					<p class="aside" style="grid-column:auto">Public repositories I contributed to over the last year, ranked by number of contributions. For the curated research tools, see <a href="projects.html">Projects</a>.</p>
 				</div>
 			</div>
+			<div id="project-grid" class="project-grid"><p class="loading">loading repositories…</p></div>
 		</section>
+	</main>
 
-		<footer class="footer">
-			<div class="footer-inner">
-				<span>Built for GitHub Pages.</span>
-				<span>Álvaro Silva · verification, research, and systems engineering.</span>
-			</div>
-		</footer>
-	</div>
+	<footer class="footer">
+		<div class="wrap">
+			<span>© <span id="year">2026</span> Álvaro Silva · Porto, Portugal</span>
+			<code>assert site.handcrafted;</code>
+		</div>
+	</footer>
 
+	<script src="assets/site.js"></script>
+	<script src="data/github.js"></script>
+	<script src="data/gitlab.js"></script>
 	<script>
-		const githubHeatmap = document.getElementById('github-heatmap');
-		const githubMonths = document.getElementById('github-months');
-		const gitlabHeatmap = document.getElementById('gitlab-heatmap');
-		const gitlabMonths = document.getElementById('gitlab-months');
-		const githubSummary = document.getElementById('github-summary');
-		const gitlabSummary = document.getElementById('gitlab-summary');
-		const projectGrid = document.getElementById('project-grid');
+		// Renders data/github.js and data/gitlab.js, snapshots refreshed twice a month by
+		// .github/workflows/refresh-data.yml (scripts/update_data.py). No live API calls.
+		const LANGUAGE_COLORS = { Rust: '#dea584', 'C#': '#178600', Python: '#3572a5', Dafny: '#6f42c1', 'Jupyter Notebook': '#da5b0b', Verilog: '#b2b7f8', TypeScript: '#3178c6', JavaScript: '#f1e05a', HTML: '#e34c26', Haskell: '#5e5086', C: '#555555', 'C++': '#f34b7d' };
 
 		function escapeHtml(value) {
-			return String(value)
-				.replaceAll('&', '&amp;')
-				.replaceAll('<', '&lt;')
-				.replaceAll('>', '&gt;')
-				.replaceAll('"', '&quot;')
-				.replaceAll("'", '&#39;');
+			return String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 		}
 
-		function formatDate(date) {
-			return date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-		}
+		const isoDay = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+		const parseDay = (text) => new Date(`${text.slice(0, 10)}T00:00:00`);
+		const formatDay = (date, withYear) => date.toLocaleDateString(undefined, withYear ? { year: 'numeric', month: 'short', day: 'numeric' } : { weekday: 'short', month: 'short', day: 'numeric' });
 
-		function formatProjectDate(date) {
-			return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-		}
-
-		function dayKey(date) {
-			return date.toISOString().slice(0, 10);
-		}
-
-		function parseIsoDate(value) {
-			return new Date(`${value}T00:00:00`);
-		}
-
-		function makeRange(days) {
-			const values = [];
-			const today = new Date();
-			today.setHours(0, 0, 0, 0);
-			for (let index = days - 1; index >= 0; index -= 1) {
-				const date = new Date(today);
-				date.setDate(today.getDate() - index);
-				values.push(date);
-			}
-			return values;
-		}
-
-		function startOfWeek(date) {
-			const copy = new Date(date);
-			copy.setHours(0, 0, 0, 0);
-			copy.setDate(copy.getDate() - copy.getDay());
-			return copy;
-		}
-
-		function endOfWeek(date) {
-			const copy = new Date(date);
-			copy.setHours(0, 0, 0, 0);
-			copy.setDate(copy.getDate() + (6 - copy.getDay()));
-			return copy;
-		}
-
-		function buildCounts(events, extractor, days = 365) {
-			const range = makeRange(days);
-			const counts = new Map();
-			for (const event of events) {
-				const date = extractor(event);
-				if (!date) continue;
-				const key = dayKey(date);
-				counts.set(key, (counts.get(key) || 0) + 1);
-			}
-			return range.map((date) => ({ date, count: counts.get(dayKey(date)) || 0 }));
-		}
-
-		function buildCountsFromDateMap(dateMap, days = 365) {
-			const range = makeRange(days);
-			return range.map((date) => ({ date, count: dateMap.get(dayKey(date)) || 0 }));
-		}
-
-		function buildCommitCountsFromGithubEvents(events, days = 365) {
-			const range = makeRange(days);
-			const counts = new Map();
-			for (const event of events) {
-				if (event.type !== 'PushEvent' || !event.created_at) continue;
-				const date = new Date(event.created_at);
-				const key = dayKey(date);
-				const commits = Number(event.payload?.size || event.payload?.commits?.length || 0);
-				counts.set(key, (counts.get(key) || 0) + commits);
-			}
-			return range.map((date) => ({ date, count: counts.get(dayKey(date)) || 0 }));
-		}
-
-		function buildCommitCountsFromGitlabEvents(events, days = 365) {
-			const range = makeRange(days);
-			const counts = new Map();
-			for (const event of events) {
-				if (event.action_name !== 'pushed to' || !event.created_at) continue;
-				const date = new Date(event.created_at);
-				const key = dayKey(date);
-				const commits = Number(event.push_data?.commit_count || 0);
-				counts.set(key, (counts.get(key) || 0) + commits);
-			}
-			return range.map((date) => ({ date, count: counts.get(dayKey(date)) || 0 }));
-		}
-
-		function buildCalendarCells(days) {
-			if (!days.length) return [];
-			const cells = [];
-			const firstDate = startOfWeek(days[0].date);
-			const lastDate = endOfWeek(days[days.length - 1].date);
-			const dayMap = new Map(days.map((item) => [dayKey(item.date), item]));
-			for (let cursor = new Date(firstDate); cursor <= lastDate; cursor.setDate(cursor.getDate() + 1)) {
-				const key = dayKey(cursor);
-				const item = dayMap.get(key);
-				cells.push({
-					date: new Date(cursor),
-					count: item ? item.count : 0,
-					empty: !item
-				});
-			}
-			return cells;
-		}
-
-		function buildWeekColumns(cells) {
-			const columns = [];
-			for (let index = 0; index < cells.length; index += 7) {
-				columns.push(cells.slice(index, index + 7));
-			}
-			return columns;
-		}
-
-		function renderMonthLabels(container, weekColumns) {
-			if (!container) return;
-			const labels = new Array(weekColumns.length).fill('<span></span>');
-			for (let index = 0; index < weekColumns.length; index += 1) {
-				const monthStart = weekColumns[index].find((day) => !day.empty && day.date.getDate() === 1);
-				if (monthStart) {
-					labels[index] = `<span>${monthStart.date.toLocaleDateString(undefined, { month: 'short' })}</span>`;
-				}
-			}
-			container.innerHTML = labels.join('');
-		}
-
-		function scaleLevel(count, maxCount) {
+		function level(count, max) {
 			if (count <= 0) return 0;
-			if (maxCount <= 1) return 1;
-			const ratio = count / maxCount;
-			if (ratio < 0.25) return 1;
-			if (ratio < 0.5) return 2;
-			if (ratio < 0.75) return 3;
-			return 4;
+			const ratio = count / Math.max(max, 1);
+			return ratio < 0.25 ? 1 : ratio < 0.5 ? 2 : ratio < 0.75 ? 3 : 4;
 		}
 
-		function renderHeatmap(container, weekColumns) {
-			if (!container) return;
-			const days = weekColumns.flat();
-			const maxCount = Math.max(0, ...days.map((item) => item.count));
-			container.innerHTML = days
-				.map((item) => {
-					if (item.empty) {
-						return '<div class="heat-cell is-empty" aria-hidden="true"></div>';
-					}
-					const level = scaleLevel(item.count, maxCount);
-					return `<div class="heat-cell level-${level}" title="${formatDate(item.date)}: ${item.count} contributions"></div>`;
-				})
-				.join('');
-		}
+		function renderPlatform(prefix, data) {
+			const end = parseDay(data.updated);
+			const start = new Date(end);
+			start.setDate(start.getDate() - 364);
+			const first = new Date(start);
+			first.setDate(first.getDate() - first.getDay()); // align columns to Sundays
 
-		function scrollCalendarsToNewest() {
-			for (const calendar of document.querySelectorAll('.calendar-wrap')) {
-				calendar.scrollLeft = calendar.scrollWidth;
+			const days = [];
+			for (const cursor = new Date(first); cursor <= end; cursor.setDate(cursor.getDate() + 1)) {
+				const key = isoDay(cursor);
+				days.push({ date: new Date(cursor), count: data.calendar[key] || 0, outside: cursor < start });
 			}
+
+			const inRange = days.filter((d) => !d.outside);
+			const max = Math.max(0, ...inRange.map((d) => d.count));
+			const total = inRange.reduce((sum, d) => sum + d.count, 0);
+			const peak = inRange.reduce((best, d) => (d.count > best.count ? d : best), { count: 0, date: null });
+
+			document.getElementById(`${prefix}-heatmap`).innerHTML = days.map((d) => d.outside
+				? '<div class="heat-cell is-empty" aria-hidden="true"></div>'
+				: `<div class="heat-cell level-${level(d.count, max)}" title="${formatDay(d.date)}: ${d.count} contribution${d.count === 1 ? '' : 's'}"></div>`).join('');
+
+			const months = [];
+			for (let i = 0; i < days.length; i += 7) {
+				const firstOfMonth = days.slice(i, i + 7).find((d) => !d.outside && d.date.getDate() === 1);
+				months.push(`<span>${firstOfMonth ? firstOfMonth.date.toLocaleDateString(undefined, { month: 'short' }) : ''}</span>`);
+			}
+			document.getElementById(`${prefix}-months`).innerHTML = months.join('');
+
+			document.getElementById(`${prefix}-summary`).innerHTML = `
+				<div class="summary-item"><strong>${total}</strong><span>Contributions in the last year</span></div>
+				<div class="summary-item"><strong>${peak.count}</strong><span>Busiest day${peak.date ? `, ${formatDay(peak.date)}` : ''}</span></div>
+				<div class="summary-item"><strong>${inRange.filter((d) => d.count > 0).length}</strong><span>Active days</span></div>`;
+
+			document.getElementById(`${prefix}-updated`).textContent = `snapshot ${formatDay(end, true)}`;
 		}
 
-		function renderProjectGrid(container, projects) {
-			if (!container) return;
-			if (!projects.length) {
-				container.innerHTML = '<div class="project-card"><strong>No public projects found.</strong><span class="meta">The public event feeds did not expose enough data to build a ranked list.</span></div>';
+		function renderRepos(sources) {
+			const repos = sources.flatMap((data) => (data?.repos || []).map((repo) => ({ ...repo, platform: data.platform })))
+				// Untouched forks are listed on the Projects page; here, show where the work happened.
+				.filter((repo) => repo.contributions > 0 || !repo.fork)
+				.sort((a, b) => b.contributions - a.contributions || String(b.last_activity).localeCompare(String(a.last_activity)))
+				.slice(0, 12);
+
+			const grid = document.getElementById('project-grid');
+			if (!repos.length) {
+				grid.innerHTML = '<p class="loading">No public repository activity in the snapshot.</p>';
 				return;
 			}
-
-			container.innerHTML = projects.map((project) => `
+			grid.innerHTML = repos.map((repo) => `
 				<article class="project-card">
-					<div class="project-top">
-						<div>
-							<h3><a href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">${escapeHtml(project.name)}</a></h3>
-							<div class="project-pills">
-								<span class="pill">${escapeHtml(project.platform)}</span>
-								<span class="pill">${escapeHtml(project.source)}</span>
-							</div>
-						</div>
+					<div>
+						<h3><a href="${escapeHtml(repo.url)}" target="_blank" rel="noreferrer">${escapeHtml(repo.name)}</a></h3>
+						<div class="project-pills"><span class="pill">${escapeHtml(repo.platform)}</span>${repo.fork ? '<span class="pill">fork</span>' : ''}</div>
 					</div>
+					${repo.description ? `<p class="repo-desc">${escapeHtml(repo.description)}</p>` : ''}
 					<div class="project-meta">
-						<span><strong>${project.popularity}</strong> stars</span>
-						<span><strong>${project.contributorCount}</strong> contributors</span>
-						<span><strong>${formatProjectDate(project.lastActivity)}</strong></span>
+						${repo.language ? `<span class="lang"><i style="background:${escapeHtml(repo.color || LANGUAGE_COLORS[repo.language] || 'var(--faint)')}"></i>${escapeHtml(repo.language)}</span>` : ''}
+						${repo.contributions ? `<span><strong>${repo.contributions}</strong> contribution${repo.contributions === 1 ? '' : 's'}</span>` : ''}
+						${repo.stars ? `<span><strong>${repo.stars}</strong> ★</span>` : ''}
+						${repo.last_activity ? `<span>${formatDay(parseDay(repo.last_activity), true)}</span>` : ''}
 					</div>
-				</article>
-			`).join('');
+				</article>`).join('');
 		}
 
-		function renderSummary(container, items) {
-			if (!container) return;
-			const total = items.reduce((sum, item) => sum + item.count, 0);
-			const peak = items.reduce((best, item) => (item.count > best.count ? item : best), { count: 0, date: null });
-			container.innerHTML = `
-				<div class="summary-item">
-					<strong>${total}</strong>
-					<span>Commits in the last year</span>
-				</div>
-				<div class="summary-item">
-					<strong>${peak.count}</strong>
-					<span>Peak day on ${peak.date ? formatDate(peak.date) : 'n/a'}</span>
-				</div>
-				<div class="summary-item">
-					<strong>${items.filter((item) => item.count > 0).length}</strong>
-					<span>Days with commits</span>
-				</div>
-			`;
-		}
-
-		async function fetchGithubContributionMap() {
-			const response = await fetch('https://github-contributions-api.jogruber.de/v4/ricostynha1', {
-				headers: { Accept: 'application/json' }
-			});
-			if (!response.ok) {
-				throw new Error(`GitHub request failed: ${response.status}`);
-			}
-			const payload = await response.json();
-			const map = new Map();
-			for (const item of payload?.contributions || []) {
-				if (!item?.date) continue;
-				map.set(item.date, Number(item.count) || 0);
-			}
-			return map;
-		}
-
-		async function fetchGitlabContributionMap() {
-			const response = await fetch('https://gitlab.com/users/ricostynha/calendar.json', {
-				headers: { Accept: 'application/json' }
-			});
-			if (!response.ok) {
-				throw new Error(`GitLab request failed: ${response.status}`);
-			}
-			const payload = await response.json();
-			const map = new Map();
-			for (const [dateText, count] of Object.entries(payload || {})) {
-				map.set(dateText, Number(count) || 0);
-			}
-			return map;
-		}
-
-		async function fetchGithubActivity() {
-			const response = await fetch('https://api.github.com/users/ricostynha1/events/public?per_page=100', {
-				headers: { Accept: 'application/vnd.github+json' }
-			});
-			if (!response.ok) {
-				return [];
-			}
-			return response.json();
-		}
-
-		async function fetchGitlabActivity() {
-			const response = await fetch('https://gitlab.com/api/v4/users/ricostynha/events?per_page=100', {
-				headers: { Accept: 'application/json' }
-			});
-			if (!response.ok) {
-				return [];
-			}
-			return response.json();
-		}
-        
-		function collectGithubProjects(events) {
-			const projects = new Map();
-			for (const event of events) {
-				const repoName = event.repo?.name;
-				if (!repoName) continue;
-				const current = projects.get(repoName) || {
-					platform: 'GitHub',
-					source: 'public feed',
-					name: repoName,
-					url: `https://github.com/${repoName}`,
-					apiUrl: event.repo?.url || `https://api.github.com/repos/${repoName}`,
-					activityCount: 0,
-					popularity: 0,
-					contributorCount: 0,
-					lastActivity: new Date(event.created_at)
-				};
-				current.activityCount += 1;
-				const eventDate = new Date(event.created_at);
-				if (eventDate > current.lastActivity) {
-					current.lastActivity = eventDate;
-				}
-				projects.set(repoName, current);
-			}
-			return [...projects.values()];
-		}
-
-		function collectGitlabProjects(events) {
-			const projects = new Map();
-			for (const event of events) {
-				if (!event.project_id) continue;
-				const key = String(event.project_id);
-				const current = projects.get(key) || {
-					platform: 'GitLab',
-					source: 'public feed',
-					name: event.target_title || `Project ${event.project_id}`,
-					url: event.author?.web_url || 'https://gitlab.com/ricostynha',
-					apiUrl: `https://gitlab.com/api/v4/projects/${event.project_id}`,
-					contributorsUrl: `https://gitlab.com/api/v4/projects/${event.project_id}/repository/contributors?per_page=100`,
-					activityCount: 0,
-					popularity: 0,
-					contributorCount: 0,
-					lastActivity: new Date(event.created_at)
-				};
-				current.activityCount += 1;
-				const eventDate = new Date(event.created_at);
-				if (eventDate > current.lastActivity) {
-					current.lastActivity = eventDate;
-				}
-				projects.set(key, current);
-			}
-			return [...projects.values()];
-		}
-
-		async function fetchGithubStats(project) {
-			try {
-				const response = await fetch(`${project.apiUrl}`, {
-					headers: { Accept: 'application/vnd.github+json' }
-				});
-				if (!response.ok) {
-					return project;
-				}
-				const data = await response.json();
-				const contributorsResponse = await fetch(`${data.contributors_url}?per_page=100&anon=1`, {
-					headers: { Accept: 'application/vnd.github+json' }
-				});
-				let contributorCount = project.activityCount;
-				if (contributorsResponse.ok) {
-					const contributors = await contributorsResponse.json();
-					if (Array.isArray(contributors)) {
-						contributorCount = contributors.length;
-					}
-				}
-				return {
-					...project,
-					url: data.html_url || project.url,
-					popularity: data.stargazers_count || 0,
-					contributorCount
-				};
-			} catch {
-				return project;
+		const data = window.SITE_DATA || {};
+		for (const prefix of ['github', 'gitlab']) {
+			if (data[prefix]) {
+				renderPlatform(prefix, data[prefix]);
+			} else {
+				document.getElementById(`${prefix}-summary`).innerHTML = '<div class="summary-item"><strong>—</strong><span>Snapshot unavailable</span></div>';
 			}
 		}
-
-		async function fetchGitlabStats(project) {
-			try {
-				const [projectResponse, contributorsResponse] = await Promise.all([
-					fetch(project.apiUrl, { headers: { Accept: 'application/json' } }),
-					fetch(project.contributorsUrl, { headers: { Accept: 'application/json' } })
-				]);
-				if (!projectResponse.ok) {
-					return project;
-				}
-				const data = await projectResponse.json();
-				let contributorCount = project.activityCount;
-				if (contributorsResponse.ok) {
-					const contributors = await contributorsResponse.json();
-					if (Array.isArray(contributors)) {
-						contributorCount = contributors.length;
-					}
-				}
-				return {
-					...project,
-					name: data.name_with_namespace || data.path_with_namespace || project.name,
-					url: data.web_url || project.url,
-					popularity: data.star_count || 0,
-					contributorCount
-				};
-			} catch {
-				return project;
-			}
-		}
-
-		function compareProjects(left, right) {
-			const leftStars = Number(left.popularity || 0);
-			const rightStars = Number(right.popularity || 0);
-			const leftContrib = Number(left.contributorCount || 0);
-			const rightContrib = Number(right.contributorCount || 0);
-			const leftTime = left.lastActivity instanceof Date ? left.lastActivity.getTime() : new Date(left.lastActivity).getTime() || 0;
-			const rightTime = right.lastActivity instanceof Date ? right.lastActivity.getTime() : new Date(right.lastActivity).getTime() || 0;
-			return rightStars - leftStars || rightContrib - leftContrib || rightTime - leftTime;
-		}
-
-		async function renderContributedProjects(githubEvents, gitlabEvents) {
-			const candidates = [...collectGithubProjects(githubEvents), ...collectGitlabProjects(gitlabEvents)];
-
-			const enriched = [];
-			for (const project of candidates) {
-				if (project.platform === 'GitHub') {
-					enriched.push(await fetchGithubStats(project));
-				} else {
-					enriched.push(await fetchGitlabStats(project));
-				}
-			}
-
-			enriched.sort(compareProjects);
-			renderProjectGrid(projectGrid, enriched.slice(0, 12));
-		}
-
-		function showFallback(container, summary, message) {
-			if (summary) {
-				summary.innerHTML = `<div class="summary-item"><strong>Unavailable</strong><span>${message}</span></div>`;
-			}
-			if (container) {
-				container.innerHTML = '';
-			}
-		}
-
-		async function loadSoftwareData() {
-			const [githubEvents, gitlabEvents] = await Promise.all([fetchGithubActivity(), fetchGitlabActivity()]);
-			await renderContributedProjects(githubEvents, gitlabEvents);
-
-			let githubDays = buildCommitCountsFromGithubEvents(githubEvents, 365);
-			let gitlabDays = buildCommitCountsFromGitlabEvents(gitlabEvents, 365);
-
-			const renderGithubCalendar = (days) => {
-				const githubCalendar = buildWeekColumns(buildCalendarCells(days));
-				renderMonthLabels(githubMonths, githubCalendar);
-				renderHeatmap(githubHeatmap, githubCalendar);
-				renderSummary(githubSummary, days);
-			};
-
-			const renderGitlabCalendar = (days) => {
-				const gitlabCalendar = buildWeekColumns(buildCalendarCells(days));
-				renderMonthLabels(gitlabMonths, gitlabCalendar);
-				renderHeatmap(gitlabHeatmap, gitlabCalendar);
-				renderSummary(gitlabSummary, days);
-			};
-
-			try {
-				const githubMap = await fetchGithubContributionMap();
-				if (githubMap.size > 0) {
-					githubDays = buildCountsFromDateMap(githubMap, 365);
-				}
-				renderGithubCalendar(githubDays);
-			} catch {
-				renderGithubCalendar(githubDays);
-			}
-
-			try {
-				const gitlabMap = await fetchGitlabContributionMap();
-				if (gitlabMap.size > 0) {
-					gitlabDays = buildCountsFromDateMap(gitlabMap, 365);
-				}
-				renderGitlabCalendar(gitlabDays);
-			} catch {
-				renderGitlabCalendar(gitlabDays);
-			}
-
-			scrollCalendarsToNewest();
-		}
-
-		loadSoftwareData();
+		renderRepos([data.github, data.gitlab]);
+		for (const wrap of document.querySelectorAll('.calendar-wrap')) wrap.scrollLeft = wrap.scrollWidth;
 	</script>
 </body>
 </html>

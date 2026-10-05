@@ -3,72 +3,217 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Álvaro Silva projects page. Research, verification, and hardware verification highlights.">
-	<title>Projects | Álvaro Silva</title>
+	<title>Projects · Álvaro Silva</title>
+	<meta name="description" content="Research tools, open-source work, and engineering projects by Álvaro Silva: DAISY, ProofPulse, DSpec2Test, VeriFixer, TraceLean IDE, and MIPI CSI-2 verification.">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5fd6'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' fill='%23ffffff'>Á</text></svg>">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+	<link rel="stylesheet" href="assets/site.css">
 	<style>
-		:root { --bg:#f5f1ea; --surface:rgba(255,255,255,.78); --text:#17212b; --muted:#5c6773; --line:rgba(23,33,43,.10); --accent:#0f766e; --accent-strong:#134e4a; --accent-soft:rgba(15,118,110,.12); --shadow:0 18px 40px rgba(23,33,43,.08); --radius-xl:30px; --max-width:1160px; }
-		*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--text);background:linear-gradient(180deg,var(--bg) 0%,#f7f3ee 45%,#f2ece4 100%);font-family:"Manrope",sans-serif;line-height:1.6;min-height:100vh} a{color:inherit;text-decoration:none} .page{width:min(calc(100% - 32px),var(--max-width));margin:0 auto;padding:16px 0 42px} .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.65);backdrop-filter:blur(16px);box-shadow:0 10px 30px rgba(23,33,43,.06)} .brand{display:grid;gap:2px} .brand strong{font-size:1.05rem} .brand span,.section-head p,.card p,.meta{color:var(--muted)} .hero,.section{padding-top:34px} .hero-main,.card{border:1px solid var(--line);background:var(--surface);backdrop-filter:blur(16px);box-shadow:var(--shadow);border-radius:var(--radius-xl)} .hero-main{padding:30px} h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.03em;font-family:"Sora","Manrope",sans-serif} h1{font-size:clamp(2.2rem,4.2vw,3.8rem);max-width:13ch} .eyebrow{display:inline-flex;padding:8px 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);font-size:.85rem;font-weight:800;margin-bottom:14px} .section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px;margin-bottom:18px} .section-head h2{font-size:clamp(2rem,4vw,3rem)} .backlink{display:inline-flex;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(15,118,110,.08);border:1px solid rgba(15,118,110,.12);color:var(--accent-strong);font-weight:800} .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px} .card{padding:20px;display:grid;gap:10px} .tag{display:inline-flex;align-items:center;width:fit-content;padding:7px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase} .footer{padding:26px 0 0;color:var(--muted);font-size:.94rem} .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;padding-top:16px;border-top:1px solid rgba(23,33,43,.10)} @media (max-width: 720px){.page{width:min(calc(100% - 22px),var(--max-width))}.topbar,.hero-main,.card{border-radius:20px;padding:16px}.cards{grid-template-columns:1fr}}
+		.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+		.bento .card { display: flex; flex-direction: column; gap: 12px; }
+		.span-3 { grid-column: span 3; }
+		.span-2 { grid-column: span 2; }
+		.span-4 { grid-column: span 4; }
+		.span-6 { grid-column: span 6; }
+
+		.tool-name { font-family: var(--serif); font-weight: 400; font-size: 2.3rem; line-height: 1; letter-spacing: -0.01em; }
+		.tool-tag { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+		.card p { color: var(--ink-soft); font-size: 0.97rem; }
+		.card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+
+		.card.feature { background: var(--code-bg); color: var(--code-ink); border-color: rgba(255, 255, 255, 0.08); }
+		.card.feature .tool-name { color: #fff; }
+		.card.feature p { color: rgba(230, 238, 251, 0.78); }
+		.card.feature .tool-tag { color: var(--code-dim); }
+		.card.feature .chip { color: var(--code-ink); border-color: rgba(255, 255, 255, 0.16); background: transparent; }
+
+		.metric { font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--accent); }
+
+		@media (max-width: 980px) {
+			.span-2, .span-3, .span-4 { grid-column: span 3; }
+		}
+		@media (max-width: 640px) {
+			.bento { grid-template-columns: 1fr; }
+			.span-2, .span-3, .span-4, .span-6 { grid-column: auto; }
+		}
+
+		/* repo list */
+		.repos { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+		.repo {
+			display: grid;
+			grid-template-columns: 240px 1fr auto;
+			gap: 20px;
+			padding: 16px 0;
+			border-bottom: 1px solid var(--line);
+			align-items: baseline;
+		}
+		.repo a.name { font-family: var(--mono); font-size: 0.9rem; font-weight: 500; text-decoration: none; }
+		.repo a.name:hover { color: var(--accent); }
+		.repo p { color: var(--muted); font-size: 0.95rem; }
+		.lang { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); white-space: nowrap; }
+		.lang i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+		@media (max-width: 720px) { .repo { grid-template-columns: 1fr auto; gap: 4px 12px; } .repo p { grid-column: 1 / -1; } .repo .lang { grid-row: 1; grid-column: 2; } }
 	</style>
 </head>
 <body>
-	<div class="page">
-		<header class="topbar">
-			<div class="brand">
-				<strong>Álvaro Silva</strong>
-				<span>Projects and verification work</span>
+	<header class="nav">
+		<div class="wrap">
+			<a class="mark" href="index.html"><span class="mark-glyph">Á</span>Álvaro Silva</a>
+			<ul class="nav-links" id="nav-links">
+				<li><a href="index.html#research">Research</a></li>
+				<li><a href="publications.html">Publications</a></li>
+				<li><a href="projects.html" aria-current="page">Projects</a></li>
+				<li><a href="software.html">Software</a></li>
+				<li><a href="index.html#contact">Contact</a></li>
+			</ul>
+			<div class="nav-tools">
+				<button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+				</button>
+				<button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+				</button>
 			</div>
-			<a class="backlink" href="index.html">Back to homepage</a>
-		</header>
+		</div>
+	</header>
 
-		<section class="section">
-			<div class="section-head">
-				<div>
-					<h2>Project highlights</h2>
-				</div>
+	<main class="wrap">
+		<section class="page-hero">
+			<span class="kicker">Tools, systems &amp; things I've built</span>
+			<h1 class="display" style="margin-top:14px">Pro<em>jects</em></h1>
+			<p>Research prototypes from my Ph.D., the open-source verification ecosystem I work in, and the hardware and university projects that came before.</p>
+		</section>
+
+		<!-- ========== Research tools ========== -->
+		<section class="section" style="padding-top:56px">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">01</span> / Research tools</span>
+				<h2>Built during the Ph.D.</h2>
 			</div>
-			<div class="cards">
-				<article class="card">
-					<span class="tag">Research</span>
-					<h3>Dafny usability research</h3>
-					<p>I investigate how AI and better tool feedback can improve the experience of writing and proving programs in Dafny. The aim is clearer proof workflows, stronger automation, and more approachable formal development.</p>
+			<div class="bento">
+				<article class="card feature span-4 reveal">
+					<span class="tool-tag">LLM-assisted proof · 2025</span>
+					<h3 class="tool-name">DAISY</h3>
+					<p>The Dafny Assertion Inference System. When Dafny gives up on a proof, DAISY combines LLM predictions with the verifier's error messages to propose the helper assertions that are missing, including several at once. It comes with an extension of DafnyBench whose programs have had assertions removed.</p>
+					<div class="meta"><span class="chip">LLMs</span><span class="chip">Dafny</span><span class="chip">DafnyBench</span><a class="chip" href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/daisy" target="_blank" rel="noreferrer">code ↗</a></div>
 				</article>
-				<article class="card">
-					<span class="tag">Project</span>
-					<h3>VeriFixer</h3>
-					<p>Research on automated repair for verification-aware languages, starting with Dafny. The goal is to narrow the gap between verifier errors and actionable fixes.</p>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">DAISY results</span>
+					<span class="metric">63.4%</span>
+					<p>of programs missing one assertion verify again; 31.7% when several assertions are missing.</p>
 				</article>
-				<article class="card">
-					<span class="tag">Exploration</span>
-					<h3>Verus and verification ergonomics</h3>
-					<p>Verus is a useful comparison point for thinking about how verification integrates with systems programming. It helps frame a broader usability story for formal methods.</p>
+
+				<article class="card span-3 reveal">
+					<span class="tool-tag">Specification quality · 2026</span>
+					<h3 class="tool-name">ProofPulse</h3>
+					<p>Interactive proof-coverage analysis. A three-valued model classifies each spec element as essential, auxiliary or irrelevant to the proof, which exposes vacuous proofs and unnecessary preconditions. Evaluated on 252 programs.</p>
+					<div class="meta"><span class="chip">proof deps</span><span class="chip">unsat cores</span><a class="chip" href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/ProofPulse" target="_blank" rel="noreferrer">code ↗</a></div>
 				</article>
-				<article class="card">
-					<span class="tag">Industry</span>
-					<h3>MIPI camera controllers</h3>
-					<p>As verification lead engineer, I built constrained-random environments, temporal assertions, and formal checks for CSI-2 camera controllers in automotive-oriented contexts.</p>
+				<article class="card span-3 reveal">
+					<span class="tool-tag">Testing · 2026</span>
+					<h3 class="tool-name">DSpec2Test</h3>
+					<p>Generates tests from the specification alone, without looking at the implementation. It uses DNF equivalence-class partitioning and boundary-value analysis, with Z3 synthesizing inputs and expected outputs. The tests kill 93.9% of mutants.</p>
+					<div class="meta"><span class="chip">Z3</span><span class="chip">mutation testing</span><a class="chip" href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/DSpec2Test" target="_blank" rel="noreferrer">code ↗</a></div>
 				</article>
-				<article class="card">
-					<span class="tag">Systems</span>
-					<h3>Hardware verification workflows</h3>
-					<p>My industry work focused on turning specifications into checks, assertions, and verification environments that supported practical, high-confidence hardware design.</p>
+
+				<article class="card span-2 reveal">
+					<span class="tool-tag">Debugging · ISSRE 2026</span>
+					<h3 class="tool-name">Fault localization</h3>
+					<p>Ranks the statements most likely to cause a failed verification using counterexamples from several traces. Evaluated with MutDafny mutants of DafnyBench programs.</p>
+					<div class="meta"><a class="chip" href="https://arxiv.org/abs/2608.05399" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/verifixer_fault_localization" target="_blank" rel="noreferrer">code ↗</a></div>
 				</article>
-				<article class="card">
-					<span class="tag">Research</span>
-					<h3>AI support for proof workflows</h3>
-					<p>Recent work explores how language models can assist with proof development in verification-aware languages while keeping the human in control of the workflow.</p>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">Repair · FCT project</span>
+					<h3 class="tool-name">VeriFixer</h3>
+					<p>An open-source tool that automatically fixes problems reported by software verifiers, starting with Dafny. It is a collaboration between INESC TEC, INESC-ID and Carnegie Mellon. DafnyFix, which repairs programs with a single transformation, is part of this work.</p>
+					<div class="meta"><span class="chip">APR</span><a class="chip accent" href="https://github.com/VeriFixer/DafnyFix" target="_blank" rel="noreferrer">DafnyFix ↗</a><a class="chip" href="https://github.com/VeriFixer" target="_blank" rel="noreferrer">org ↗</a></div>
+				</article>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">LLM plugin · FormaliSE 2024</span>
+					<h3 class="tool-name">Lemma suggester</h3>
+					<p>A Dafny plugin that asks an LLM for lemmas Dafny cannot find on its own, and for a calculational proof when a lemma does not verify automatically.</p>
+					<div class="meta"><a class="chip" href="https://arxiv.org/abs/2401.00963" target="_blank" rel="noreferrer">paper ↗</a></div>
+				</article>
+
+				<article class="card span-6 reveal" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:24px">
+					<div style="flex:1 1 320px">
+						<span class="tool-tag">Side project · Rust</span>
+						<h3 class="tool-name" style="margin-top:8px">TraceLean IDE</h3>
+					</div>
+					<p style="flex:2 1 420px">A code editor built on command sourcing, with an AI coding agent inside it. Every edit, whether you or the agent made it, is a small undoable command, so a session's history is a tree you can navigate instead of a linear undo stack. It runs as a Tauri + React desktop app, a Ratatui terminal UI, or headless CLI agents for benchmarks.</p>
+					<a class="btn" href="https://github.com/ricostynha1/trace_code_ide" target="_blank" rel="noreferrer">View on GitHub ↗</a>
 				</article>
 			</div>
 		</section>
 
-		<footer class="footer">
-			<div class="footer-inner">
-				<span>Built for GitHub Pages.</span>
-				<span>Álvaro Silva · verification, research, and systems engineering.</span>
+		<!-- ========== Ecosystem ========== -->
+		<section class="section">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">02</span> / Open source</span>
+				<div>
+					<h2>The ecosystem I work in</h2>
+					<p class="aside" style="grid-column:auto">Forks I use for experiments, benchmarks and tooling. Live activity is on the <a href="software.html">Software</a> page.</p>
+				</div>
 			</div>
-		</footer>
-	</div>
+			<ul class="repos reveal">
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/verus" target="_blank" rel="noreferrer">verus</a><p>Verified Rust for low-level systems code.</p><span class="lang"><i style="background:#dea584"></i>Rust</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/human-eval-verus" target="_blank" rel="noreferrer">human-eval-verus</a><p>Verified Verus solutions to HumanEval problems.</p><span class="lang"><i style="background:#dea584"></i>Rust</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/mutdafny" target="_blank" rel="noreferrer">mutdafny</a><p>Mutation testing for Dafny programs.</p><span class="lang"><i style="background:#178600"></i>C#</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/DafnyTestGen" target="_blank" rel="noreferrer">DafnyTestGen</a><p>Test generation for Dafny programs.</p><span class="lang"><i style="background:#6f42c1"></i>Dafny</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/VeriEquivBench" target="_blank" rel="noreferrer">VeriEquivBench</a><p>Equivalence-score benchmark of over 2,000 verifiable Dafny programs for evaluation without ground truth.</p><span class="lang"><i style="background:#3572a5"></i>Python</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/dafny_laurel_repair" target="_blank" rel="noreferrer">dafny_laurel_repair</a><p>Laurel: LLM-generated Dafny assertions, evaluated on DafnyGym.</p><span class="lang"><i style="background:#da5b0b"></i>Jupyter</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/DafnyBenchFork" target="_blank" rel="noreferrer">DafnyBenchFork</a><p>DafnyBench, a benchmark for formal software verification.</p><span class="lang"><i style="background:#6f42c1"></i>Dafny</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/dafny_fork" target="_blank" rel="noreferrer">dafny_fork</a><p>Fork of the Dafny compiler and verifier.</p><span class="lang"><i style="background:#178600"></i>C#</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/boogie" target="_blank" rel="noreferrer">boogie</a><p>Boogie, the intermediate verification language Dafny compiles to.</p><span class="lang"><i style="background:#178600"></i>C#</span></li>
+				<li class="repo"><a class="name" href="https://github.com/ricostynha1/chimera" target="_blank" rel="noreferrer">chimera</a><p>Synthesizing Verilog programs, where formal methods meet hardware.</p><span class="lang"><i style="background:#b2b7f8"></i>Verilog</span></li>
+			</ul>
+		</section>
+
+		<!-- ========== Industry & earlier ========== -->
+		<section class="section">
+			<div class="section-head reveal">
+				<span class="kicker"><span class="n">03</span> / Before the Ph.D.</span>
+				<h2>Silicon &amp; university</h2>
+			</div>
+			<div class="bento">
+				<article class="card span-6 reveal">
+					<span class="tool-tag">Synopsys · 2021–2024 · verification lead</span>
+					<h3 class="tool-name">MIPI CSI-2 camera controllers</h3>
+					<p>I led verification for a new generation of CSI-2 camera controllers for automotive use. I built constrained-random UVM environments that model the design under test, wrote temporal assertions derived from the MIPI specifications, and used formal verification (VCFormal) on the parts of the design that needed stronger guarantees. I hold an ISO 26262 certification for automotive functional safety.</p>
+					<div class="meta"><span class="chip">SystemVerilog</span><span class="chip">UVM</span><span class="chip">SVA</span><span class="chip">VCFormal</span><span class="chip">ISO 26262</span></div>
+				</article>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">FEUP · team leader</span>
+					<h3 class="tool-name">Wind Flow</h3>
+					<p>A 40-person university project that built a long-range wireless mesh of wind sensors. I led the 10-person team that implemented the physical layer on software-defined radio.</p>
+					<div class="meta"><span class="chip">SDR</span><span class="chip">leadership</span></div>
+				</article>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">University · 3-person team</span>
+					<h3 class="tool-name">Research Paper Graph</h3>
+					<p>A web app that shows research papers as a graph and clusters them by similarity. I built the clustering that sets the distances between nodes.</p>
+					<div class="meta"><span class="chip">clustering</span><a class="chip" href="https://github.com/Jibbow/research-paper-graph" target="_blank" rel="noreferrer">repo ↗</a></div>
+				</article>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">INESC TEC · TRUST-AI</span>
+					<h3 class="tool-name">Interpretable scheduling</h3>
+					<p>For my M.Sc. thesis I used dimensionally aware genetic programming to evolve human-readable dispatching rules for the job-shop scheduling problem.</p>
+					<div class="meta"><span class="chip">genetic programming</span><span class="chip">XAI</span></div>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="wrap">
+			<span>© <span id="year">2026</span> Álvaro Silva · Porto, Portugal</span>
+			<code>assert site.handcrafted;</code>
+		</div>
+	</footer>
+
+	<script src="assets/site.js"></script>
 </body>
 </html>

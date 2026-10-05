@@ -3,74 +3,267 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Álvaro Silva publications page.">
-	<title>Publications | Álvaro Silva</title>
+	<title>Publications · Álvaro Silva</title>
+	<meta name="description" content="Publications by Álvaro Silva on Dafny, LLM-assisted verification, fault localization, proof coverage, and specification-driven testing.">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5fd6'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' fill='%23ffffff'>Á</text></svg>">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+	<link rel="stylesheet" href="assets/site.css">
 	<style>
-		:root { --bg:#f5f1ea; --surface:rgba(255,255,255,.78); --text:#17212b; --muted:#5c6773; --line:rgba(23,33,43,.10); --accent:#0f766e; --accent-strong:#134e4a; --accent-soft:rgba(15,118,110,.12); --shadow:0 18px 40px rgba(23,33,43,.08); --radius-xl:30px; --max-width:1160px; }
-		*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--text);background:linear-gradient(180deg,var(--bg) 0%,#f7f3ee 45%,#f2ece4 100%);font-family:"Manrope",sans-serif;line-height:1.6;min-height:100vh} a{color:inherit;text-decoration:none} .page{width:min(calc(100% - 32px),var(--max-width));margin:0 auto;padding:16px 0 42px} .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.65);backdrop-filter:blur(16px);box-shadow:0 10px 30px rgba(23,33,43,.06)} .brand{display:grid;gap:2px} .brand strong{font-size:1.05rem} .brand span,.section-head p,.publication span,.meta{color:var(--muted)} .hero,.section{padding-top:34px} .hero-main,.publication{border:1px solid var(--line);background:var(--surface);backdrop-filter:blur(16px);box-shadow:var(--shadow);border-radius:var(--radius-xl)} .hero-main{padding:30px} h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.03em;font-family:"Sora","Manrope",sans-serif} h1{font-size:clamp(2.15rem,4vw,3.7rem);max-width:15ch} .eyebrow{display:inline-flex;padding:8px 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);font-size:.85rem;font-weight:800;margin-bottom:14px} .section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px;margin-bottom:18px} .section-head h2{font-size:clamp(2rem,4vw,3rem)} .backlink{display:inline-flex;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(15,118,110,.08);border:1px solid rgba(15,118,110,.12);color:var(--accent-strong);font-weight:800} .publication-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px} .publication{padding:22px;display:grid;gap:12px;position:relative} .publication::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:8px 0 0 8px;background:rgba(15,118,110,.32)} .publication strong{font-size:1.06rem;line-height:1.35;padding-left:8px} .publication span{padding-left:8px} .tag{display:inline-flex;align-items:center;width:fit-content;padding:7px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase} .publication-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;padding-left:8px} .publication-link{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border-radius:999px;border:1px solid rgba(23,33,43,.10);background:rgba(255,255,255,.78);font-weight:800;color:var(--accent-strong)} .footer{padding:26px 0 0;color:var(--muted);font-size:.94rem} .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;padding-top:16px;border-top:1px solid rgba(23,33,43,.10)} @media (max-width: 720px){.page{width:min(calc(100% - 22px),var(--max-width))}.topbar,.hero-main,.publication{border-radius:20px;padding:16px}.publication-grid{grid-template-columns:1fr}}
+		.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+
+		.filter {
+			padding: 7px 14px;
+			border-radius: 999px;
+			border: 1px solid var(--line-strong);
+			background: transparent;
+			color: var(--muted);
+			font: 500 0.88rem/1 var(--sans);
+			cursor: pointer;
+			transition: all 0.15s;
+		}
+
+		.filter:hover { color: var(--ink); border-color: var(--ink); }
+		.filter[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+		.filter .count { font-family: var(--mono); font-size: 0.74rem; opacity: 0.7; margin-left: 4px; }
+
+		.year-group { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding-top: 48px; }
+		.year-group > h2 {
+			font-family: var(--serif);
+			font-weight: 400;
+			font-size: 3.4rem;
+			line-height: 1;
+			color: var(--faint);
+			position: sticky;
+			top: 84px;
+			align-self: start;
+		}
+		.year-group[hidden] { display: none; }
+		.pub[hidden] { display: none; }
+
+		@media (max-width: 720px) {
+			.year-group { grid-template-columns: 1fr; gap: 12px; padding-top: 36px; }
+			.year-group > h2 { position: static; font-size: 2.6rem; }
+		}
+
+		.profiles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 	</style>
 </head>
 <body>
-	<div class="page">
-		<header class="topbar">
-			<div class="brand">
-				<strong>Álvaro Silva</strong>
-				<span>Selected publications</span>
+	<header class="nav">
+		<div class="wrap">
+			<a class="mark" href="index.html"><span class="mark-glyph">Á</span>Álvaro Silva</a>
+			<ul class="nav-links" id="nav-links">
+				<li><a href="index.html#research">Research</a></li>
+				<li><a href="publications.html" aria-current="page">Publications</a></li>
+				<li><a href="projects.html">Projects</a></li>
+				<li><a href="software.html">Software</a></li>
+				<li><a href="index.html#contact">Contact</a></li>
+			</ul>
+			<div class="nav-tools">
+				<button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+				</button>
+				<button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+				</button>
 			</div>
-			<a class="backlink" href="index.html">Back to homepage</a>
-		</header>
+		</div>
+	</header>
 
-		<section class="section">
-			<div class="section-head">
-				<div>
-					<h2>Selected papers</h2>
-				</div>
+	<main class="wrap">
+		<section class="page-hero">
+			<span class="kicker">Papers, preprints, theses &amp; talks</span>
+			<h1 class="display" style="margin-top:14px">Publi<em>cations</em></h1>
+			<p>Work on making verification-aware languages, mostly Dafny, easier to use: LLM-assisted proofs, debugging failed verifications, and checking whether a specification is strong enough.</p>
+			<div class="profiles">
+				<a class="pub-link" href="https://www.alphaxiv.org/@alvaro-silva" target="_blank" rel="noreferrer">alphaXiv profile ↗</a>
+				<a class="pub-link" href="https://orcid.org/0009-0005-2941-9942" target="_blank" rel="noreferrer">ORCID ↗</a>
+				<a class="pub-link" href="https://scholar.google.com/citations?user=24BoIRsAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">Google Scholar ↗</a>
 			</div>
-			<div class="publication-grid">
-				<article class="publication">
-					<span class="tag">FormaliSE 2024</span>
-					<strong>Leveraging Large Language Models to Boost Dafny's Developers Productivity</strong>
-					<span>Álvaro Silva, Alexandra Mendes, and João F. Ferreira</span>
-					<div class="publication-links">
-						<a class="publication-link" href="https://scholar.google.com/scholar?q=Leveraging+Large+Language+Models+to+Boost+Dafny%27s+Developers+Productivity" target="_blank" rel="noreferrer">Google Scholar</a>
-					</div>
-				</article>
-				<article class="publication">
-					<span class="tag">SEFM 2025</span>
-					<strong>Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny</strong>
-					<span>Carolina Carreira, Álvaro Silva, Alexandre Abreu, and Alexandra Mendes</span>
-					<div class="publication-links">
-						<a class="publication-link" href="https://scholar.google.com/scholar?q=Can+Large+Language+Models+Help+Students+Prove+Software+Correctness%3F+An+Experimental+Study+with+Dafny" target="_blank" rel="noreferrer">Google Scholar</a>
-					</div>
-				</article>
-				<article class="publication">
-					<span class="tag">Under review 2025</span>
-					<strong>Inferring Multiple Helper Dafny Assertions with LLMs</strong>
-					<span>Álvaro Silva, Alexandra Mendes, and Ruben Martins</span>
-					<div class="publication-links">
-						<a class="publication-link" href="https://scholar.google.com/scholar?q=Inferring+Multiple+Helper+Dafny+Assertions+with+LLMs" target="_blank" rel="noreferrer">Google Scholar</a>
-					</div>
-				</article>
-				<article class="publication">
-					<span class="tag">Master's thesis</span>
-					<strong>Using Dimensional Aware Genetic Programming to find interpretable Dispatching Rules for the Job Shop Scheduling Problem</strong>
-					<span>Faculty of Engineering of the University of Porto, 2021</span>
-					<div class="publication-links">
-						<a class="publication-link" href="https://scholar.google.com/scholar?q=Using+Dimensional+Aware+Genetic+Programming+to+find+interpretable+Dispatching+Rules+for+the+Job+Shop+Scheduling+Problem" target="_blank" rel="noreferrer">Google Scholar</a>
-					</div>
-				</article>
+			<div class="scholar-metrics" data-scholar-metrics hidden></div>
+			<div class="filters" role="group" aria-label="Filter publications">
+				<button class="filter" type="button" data-filter="all" aria-pressed="true">All<span class="count" data-count="all"></span></button>
+				<button class="filter" type="button" data-filter="peer" aria-pressed="false">Peer-reviewed<span class="count" data-count="peer"></span></button>
+				<button class="filter" type="button" data-filter="preprint" aria-pressed="false">Preprints<span class="count" data-count="preprint"></span></button>
+				<button class="filter" type="button" data-filter="other" aria-pressed="false">Thesis &amp; talks<span class="count" data-count="other"></span></button>
 			</div>
 		</section>
 
-		<footer class="footer">
-			<div class="footer-inner">
-				<span>Built for GitHub Pages.</span>
-				<span>Álvaro Silva · verification, research, and systems engineering.</span>
-			</div>
-		</footer>
-	</div>
+		<div id="pub-list">
+			<!-- ========== 2026 ========== -->
+			<section class="year-group">
+				<h2>2026</h2>
+				<ol class="pubs">
+					<li class="pub" data-kind="peer">
+						<div class="pub-venue"><strong>ISSRE</strong>Conference</div>
+						<div>
+							<h3><a href="https://arxiv.org/abs/2608.05399" target="_blank" rel="noreferrer">Improving Debugging in Verification-Aware Languages Through Automated Fault Localization: A Case Study in Dafny</a></h3>
+							<p class="authors"><span class="me">Álvaro Silva</span>, Isabel Amaral, João Pascoal Faria, Alexandra Mendes</p>
+							<p class="summary">A comparison of state-based and counterexample-based fault localization for failing Dafny verifications, evaluated on mutated DafnyBench programs. Counterexample-based localization, using structured ranking and aggregation over several traces, performs substantially better.</p>
+							<div class="pub-links">
+								<span class="chip ok">37th IEEE ISSRE 2026</span>
+								<a class="pub-link" href="https://arxiv.org/abs/2608.05399" target="_blank" rel="noreferrer">arXiv</a>
+								<a class="pub-link" href="https://arxiv.org/pdf/2608.05399" target="_blank" rel="noreferrer">PDF</a>
+								<a class="pub-link" href="https://github.com/VeriFixer/verifixer_fault_localization" target="_blank" rel="noreferrer">Code</a>
+							</div>
+						</div>
+					</li>
+					<li class="pub" data-kind="preprint">
+						<div class="pub-venue"><strong>arXiv</strong>Preprint</div>
+						<div>
+							<h3><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse: Interactive Proof Coverage Analysis for Dafny</a></h3>
+							<p class="authors"><span class="me">Álvaro F. Silva</span>, Ruben Martins, Alexandra Mendes</p>
+							<p class="summary">A three-valued proof-coverage model that shows which specification elements a proof depends on and which are auxiliary or irrelevant. On 252 programs it detects unnecessary preconditions and vacuous proofs well, especially when combined with unsat-core minimization.</p>
+							<div class="pub-links">
+								<a class="pub-link" href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">arXiv</a>
+								<a class="pub-link" href="https://arxiv.org/pdf/2608.30818" target="_blank" rel="noreferrer">PDF</a>
+								<a class="pub-link" href="https://github.com/VeriFixer/ProofPulse" target="_blank" rel="noreferrer">Code</a>
+							</div>
+						</div>
+					</li>
+					<li class="pub" data-kind="preprint">
+						<div class="pub-venue"><strong>arXiv</strong>Preprint</div>
+						<div>
+							<h3><a href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">DSpec2Test: Specification-Driven Test Generation in Dafny</a></h3>
+							<p class="authors">Sofia Vieira Pinto, <span class="me">Álvaro F. Silva</span>, João Pascoal Faria, Alexandra Mendes</p>
+							<p class="summary">Black-box test generation from Dafny specifications. It partitions the spec into equivalence classes in disjunctive normal form, optionally adds boundary-value analysis, and uses Z3 to synthesize inputs and expected outputs. The generated tests kill 93.9% of mutants, more than an implementation-based baseline.</p>
+							<div class="pub-links">
+								<a class="pub-link" href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">arXiv</a>
+								<a class="pub-link" href="https://arxiv.org/pdf/2609.29713" target="_blank" rel="noreferrer">PDF</a>
+								<a class="pub-link" href="https://github.com/VeriFixer/DSpec2Test" target="_blank" rel="noreferrer">Code</a>
+							</div>
+						</div>
+					</li>
+					<li class="pub" data-kind="preprint">
+						<div class="pub-venue"><strong>Forthcoming</strong>Manuscript</div>
+						<div>
+							<h3>DafnyFix: Single-Transformation Automated Repair in Dafny</h3>
+							<p class="authors">Isabel Amaral, <span class="me">Álvaro F. Silva</span>, João F. Ferreira, Alexandra Mendes</p>
+							<p class="summary">Automated repair of failing Dafny programs through single program transformations.</p>
+							<div class="pub-links">
+								<a class="pub-link" href="https://github.com/VeriFixer/DafnyFix" target="_blank" rel="noreferrer">Code</a>
+							</div>
+						</div>
+					</li>
+				</ol>
+			</section>
+
+			<!-- ========== 2025 ========== -->
+			<section class="year-group">
+				<h2>2025</h2>
+				<ol class="pubs">
+					<li class="pub" data-kind="preprint">
+						<div class="pub-venue"><strong>arXiv</strong>Preprint</div>
+						<div>
+							<h3><a href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">Inferring Multiple Helper Dafny Assertions with LLMs</a></h3>
+							<p class="authors"><span class="me">Álvaro Silva</span>, Alexandra Mendes, Ruben Martins</p>
+							<p class="summary">Introduces DAISY (Dafny Assertion Inference SYstem), which combines LLM predictions with analysis of verifier error messages, and extends DafnyBench with programs whose assertions have been removed. DAISY repairs 63.4% of programs missing one assertion and 31.7% of programs missing several.</p>
+							<div class="pub-links">
+								<span class="chip accent">tool: DAISY</span>
+								<a class="pub-link" href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">arXiv</a>
+								<a class="pub-link" href="https://arxiv.org/pdf/2511.00125" target="_blank" rel="noreferrer">PDF</a>
+								<a class="pub-link" href="https://github.com/VeriFixer/daisy" target="_blank" rel="noreferrer">Code</a>
+							</div>
+						</div>
+					</li>
+					<li class="pub" data-kind="peer">
+						<div class="pub-venue"><strong>SEFM</strong>Conference</div>
+						<div>
+							<h3><a href="https://link.springer.com/chapter/10.1007/978-3-032-10444-1_13" target="_blank" rel="noreferrer">Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny</a></h3>
+							<p class="authors">Carolina Carreira, <span class="me">Álvaro Silva</span>, Alexandre Abreu, Alexandra Mendes</p>
+							<p class="summary">An experimental study of how students interact with an LLM while solving formal verification exercises in Dafny.</p>
+							<div class="pub-links">
+								<span class="chip ok">SEFM 2025 · Toledo</span>
+								<a class="pub-link" href="https://link.springer.com/chapter/10.1007/978-3-032-10444-1_13" target="_blank" rel="noreferrer">Springer</a>
+								<a class="pub-link" href="https://arxiv.org/abs/2506.22370" target="_blank" rel="noreferrer">arXiv</a>
+							</div>
+						</div>
+					</li>
+				</ol>
+			</section>
+
+			<!-- ========== 2024 ========== -->
+			<section class="year-group">
+				<h2>2024</h2>
+				<ol class="pubs">
+					<li class="pub" data-kind="peer">
+						<div class="pub-venue"><strong>FormaliSE</strong>Conference</div>
+						<div>
+							<h3><a href="https://conf.researchr.org/details/Formalise-2024/Formalise-2024-papers/5/Leveraging-Large-Language-Models-to-Boost-Dafny-s-Developers-Productivity" target="_blank" rel="noreferrer">Leveraging Large Language Models to Boost Dafny's Developers Productivity</a></h3>
+							<p class="authors"><span class="me">Álvaro Silva</span>, Alexandra Mendes, João F. Ferreira</p>
+							<p class="summary">A research-idea paper on a Dafny plugin that uses LLMs to suggest lemmas the verifier cannot find on its own and, when a lemma cannot be proved automatically, to propose a calculational proof for it.</p>
+							<div class="pub-links">
+								<span class="chip ok">IEEE/ACM FormaliSE 2024</span>
+								<a class="pub-link" href="https://arxiv.org/abs/2401.00963" target="_blank" rel="noreferrer">arXiv</a>
+								<a class="pub-link" href="https://repositorio.inesctec.pt/handle/123456789/15273" target="_blank" rel="noreferrer">INESC TEC repository</a>
+							</div>
+						</div>
+					</li>
+					<li class="pub" data-kind="other">
+						<div class="pub-venue"><strong>M.Sc.</strong>Supervision</div>
+						<div>
+							<h3>Evaluating High-Level SystemC Formal Verification Compared to RTL Verification</h3>
+							<p class="authors">Renato Pedrosa de Jesus · <span class="me">Álvaro Silva</span> as company supervisor (Synopsys)</p>
+						</div>
+					</li>
+				</ol>
+			</section>
+
+			<!-- ========== 2021 ========== -->
+			<section class="year-group">
+				<h2>2021</h2>
+				<ol class="pubs">
+					<li class="pub" data-kind="other">
+						<div class="pub-venue"><strong>M.Sc.</strong>Thesis</div>
+						<div>
+							<h3>Using Dimensional Aware Genetic Programming to Find Interpretable Dispatching Rules for the Job Shop Scheduling Problem</h3>
+							<p class="authors"><span class="me">Álvaro Silva</span> · Faculty of Engineering, University of Porto</p>
+						</div>
+					</li>
+					<li class="pub" data-kind="other">
+						<div class="pub-venue"><strong>IJUP</strong>Talk</div>
+						<div>
+							<h3>A Simple Approach to Lamport's State Machine Replication</h3>
+							<p class="authors"><span class="me">Álvaro Silva</span>, Bruno Maurício · IJUP 2021 (14th edition), oral communication</p>
+						</div>
+					</li>
+				</ol>
+			</section>
+		</div>
+		<div id="scholar-unlisted" data-scholar-unlisted hidden></div>
+	</main>
+
+	<footer class="footer">
+		<div class="wrap">
+			<span>© <span id="year">2026</span> Álvaro Silva · Porto, Portugal</span>
+			<code>assert site.handcrafted;</code>
+		</div>
+	</footer>
+
+	<script src="assets/site.js"></script>
+	<script src="data/scholar.js"></script>
+	<script src="assets/scholar.js"></script>
+	<script>
+		(function () {
+			const pubs = [...document.querySelectorAll('#pub-list .pub')];
+			const groups = [...document.querySelectorAll('#pub-list .year-group')];
+			const buttons = [...document.querySelectorAll('.filter')];
+
+			const counts = { all: pubs.length };
+			for (const pub of pubs) counts[pub.dataset.kind] = (counts[pub.dataset.kind] || 0) + 1;
+			for (const el of document.querySelectorAll('[data-count]')) el.textContent = counts[el.dataset.count] || 0;
+
+			function apply(kind) {
+				for (const pub of pubs) pub.hidden = kind !== 'all' && pub.dataset.kind !== kind;
+				for (const group of groups) group.hidden = !group.querySelector('.pub:not([hidden])');
+				for (const btn of buttons) btn.setAttribute('aria-pressed', String(btn.dataset.filter === kind));
+			}
+
+			for (const btn of buttons) btn.addEventListener('click', () => apply(btn.dataset.filter));
+		})();
+	</script>
 </body>
 </html>
