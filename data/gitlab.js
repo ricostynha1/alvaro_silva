@@ -3,10 +3,8 @@ window.SITE_DATA["gitlab"] = {
 	"platform": "GitLab",
 	"handle": "ricostynha",
 	"profile_url": "https://gitlab.com/ricostynha",
-	"updated": "2026-10-05",
+	"updated": "2026-10-15",
 	"calendar": {
-		"2025-10-07": 2,
-		"2025-10-14": 2,
 		"2025-10-20": 1,
 		"2025-10-22": 1,
 		"2025-10-29": 1,

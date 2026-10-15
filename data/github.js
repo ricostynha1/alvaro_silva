@@ -3,18 +3,8 @@ window.SITE_DATA["github"] = {
 	"platform": "GitHub",
 	"handle": "ricostynha1",
 	"profile_url": "https://github.com/ricostynha1",
-	"updated": "2026-10-05",
+	"updated": "2026-10-15",
 	"calendar": {
-		"2025-10-05": 0,
-		"2025-10-06": 2,
-		"2025-10-07": 3,
-		"2025-10-08": 2,
-		"2025-10-09": 0,
-		"2025-10-10": 5,
-		"2025-10-11": 0,
-		"2025-10-12": 0,
-		"2025-10-13": 0,
-		"2025-10-14": 2,
 		"2025-10-15": 5,
 		"2025-10-16": 0,
 		"2025-10-17": 0,
@@ -232,8 +222,8 @@ window.SITE_DATA["github"] = {
 		"2026-05-17": 1,
 		"2026-05-18": 0,
 		"2026-05-19": 2,
-		"2026-05-20": 2,
-		"2026-05-21": 2,
+		"2026-05-20": 1,
+		"2026-05-21": 3,
 		"2026-05-22": 1,
 		"2026-05-23": 0,
 		"2026-05-24": 0,
@@ -370,7 +360,17 @@ window.SITE_DATA["github"] = {
 		"2026-10-02": 5,
 		"2026-10-03": 4,
 		"2026-10-04": 0,
-		"2026-10-05": 2
+		"2026-10-05": 4,
+		"2026-10-06": 1,
+		"2026-10-07": 1,
+		"2026-10-08": 12,
+		"2026-10-09": 3,
+		"2026-10-10": 0,
+		"2026-10-11": 2,
+		"2026-10-12": 4,
+		"2026-10-13": 1,
+		"2026-10-14": 3,
+		"2026-10-15": 0
 	},
 	"repos": [
 		{
@@ -379,10 +379,10 @@ window.SITE_DATA["github"] = {
 			"description": "Verified Rust for low-level systems code",
 			"language": "Rust",
 			"color": "#dea584",
-			"stars": 3302,
+			"stars": 3336,
 			"fork": false,
 			"contributions": 1,
-			"last_activity": "2026-10-05T15:19:22Z"
+			"last_activity": "2026-10-15T09:39:55Z"
 		},
 		{
 			"name": "boogie-org/boogie",
@@ -390,10 +390,32 @@ window.SITE_DATA["github"] = {
 			"description": "Boogie",
 			"language": "Boogie",
 			"color": "#c80fa0",
-			"stars": 604,
+			"stars": 603,
 			"fork": false,
 			"contributions": 3,
-			"last_activity": "2026-10-03T18:58:58Z"
+			"last_activity": "2026-10-12T09:59:45Z"
+		},
+		{
+			"name": "ricostynha1/trace_code_ide",
+			"url": "https://github.com/ricostynha1/trace_code_ide",
+			"description": "",
+			"language": "Rust",
+			"color": "#dea584",
+			"stars": 0,
+			"fork": false,
+			"contributions": 67,
+			"last_activity": "2026-10-11T09:28:55Z"
+		},
+		{
+			"name": "ricostynha1/alvaro_silva",
+			"url": "https://github.com/ricostynha1/alvaro_silva",
+			"description": "Personal Page",
+			"language": "HTML",
+			"color": "#e34c26",
+			"stars": 0,
+			"fork": false,
+			"contributions": 3,
+			"last_activity": "2026-10-05T21:21:44Z"
 		},
 		{
 			"name": "secure-foundations/human-eval-verus",
@@ -412,7 +434,7 @@ window.SITE_DATA["github"] = {
 			"description": "Dafny is a verification-aware programming language",
 			"language": "C#",
 			"color": "#7355dd",
-			"stars": 3573,
+			"stars": 3584,
 			"fork": false,
 			"contributions": 5,
 			"last_activity": "2026-09-20T23:04:59Z"
@@ -438,17 +460,6 @@ window.SITE_DATA["github"] = {
 			"fork": true,
 			"contributions": 0,
 			"last_activity": "2026-09-17T14:08:59Z"
-		},
-		{
-			"name": "ricostynha1/trace_code_ide",
-			"url": "https://github.com/ricostynha1/trace_code_ide",
-			"description": "",
-			"language": "Rust",
-			"color": "#dea584",
-			"stars": 0,
-			"fork": false,
-			"contributions": 67,
-			"last_activity": "2026-09-10T21:18:17Z"
 		},
 		{
 			"name": "VeriFixer/DafnyFix",
@@ -480,7 +491,7 @@ window.SITE_DATA["github"] = {
 			"color": "#FFEC25",
 			"stars": 2,
 			"fork": false,
-			"contributions": 96,
+			"contributions": 94,
 			"last_activity": "2026-08-18T21:54:43Z"
 		},
 		{
@@ -535,7 +546,7 @@ window.SITE_DATA["github"] = {
 			"color": "#3572A5",
 			"stars": 0,
 			"fork": false,
-			"contributions": 30,
+			"contributions": 28,
 			"last_activity": "2026-07-24T14:57:59Z"
 		},
 		{
@@ -592,17 +603,6 @@ window.SITE_DATA["github"] = {
 			"fork": true,
 			"contributions": 0,
 			"last_activity": "2026-05-23T14:04:57Z"
-		},
-		{
-			"name": "ricostynha1/alvaro_silva",
-			"url": "https://github.com/ricostynha1/alvaro_silva",
-			"description": "Personal Page",
-			"language": "HTML",
-			"color": "#e34c26",
-			"stars": 0,
-			"fork": false,
-			"contributions": 1,
-			"last_activity": "2026-04-22T19:26:52Z"
 		},
 		{
 			"name": "ricostynha1/dafny_laurel_repair",
