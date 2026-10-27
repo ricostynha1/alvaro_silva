@@ -279,8 +279,9 @@
 					<h1 class="display">Making formal proofs <em>usable</em>.</h1>
 					<p class="hero-lede">
 						I'm Álvaro, a software-verification researcher in Porto. I build tools that make verification-aware languages like
-						<strong>Dafny</strong> easier to work with. That means LLMs that suggest the missing assertion, debuggers that point to
-						the line where a proof broke, and diagnostics that check whether a verified spec says anything useful.
+						<strong>Dafny</strong> easier to trust and to work with. My current focus is checking whether a verified spec is actually strong enough:
+						<a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer"><strong>ProofPulse</strong></a> (ASE 2026) shows which parts of a specification a proof really depends on,
+						exposing vacuous proofs and unnecessary preconditions. I also work on LLMs that suggest the missing assertion and debuggers that point to the line where a proof broke.
 						I'm advised by <a href="https://web.fe.up.pt/~afmendes/" target="_blank" rel="noreferrer">Alexandra Mendes</a> (FEUP / INESC TEC)
 						and <a href="https://www.cs.cmu.edu/~rubenm/" target="_blank" rel="noreferrer">Ruben Martins</a> (Carnegie Mellon).
 					</p>
@@ -317,7 +318,7 @@
 
 			<div class="facts">
 				<div class="fact"><span class="kicker">Program</span><strong>CMU Portugal Affiliated Ph.D.</strong></div>
-				<div class="fact"><span class="kicker">Focus</span><strong>Dafny · LLMs · Proof debugging</strong></div>
+				<div class="fact"><span class="kicker">Focus</span><strong>Spec strength · ProofPulse · Dafny</strong></div>
 				<div class="fact"><span class="kicker">Before</span><strong>3 yrs ASIC verification at Synopsys</strong></div>
 				<div class="fact"><span class="kicker">Also</span><strong>Guest assistant at FEUP</strong></div>
 			</div>
@@ -332,11 +333,11 @@
 			<ol class="log reveal">
 				<li>
 					<time datetime="2026-09">Sep 2026</time>
-					<div><span class="chip">preprint</span><a href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">DSpec2Test</a>: tests generated from Dafny specifications alone, which kill 93.9% of mutants.</div>
+					<div><span class="chip ok">ASE 2026</span><a href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">DSpec2Test</a>: tests generated from Dafny specifications alone, which kill 93.9% of mutants.</div>
 				</li>
 				<li>
 					<time datetime="2026-08">Aug 2026</time>
-					<div><span class="chip">preprint</span><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse</a>: proof-coverage analysis that flags specifications which verify but say little.</div>
+					<div><span class="chip ok">ASE 2026</span><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse</a>: proof-coverage analysis that flags specifications which verify but say little.</div>
 				</li>
 				<li>
 					<time datetime="2026-08">Aug 2026</time>
@@ -368,25 +369,25 @@
 			</div>
 			<div class="threads">
 				<article class="card thread reveal">
-					<span class="glyph">assert ?</span>
+					<span class="glyph">ensures true</span>
 					<span class="num">i</span>
+					<h3>Specification quality</h3>
+					<p>A proof that verifies can still rest on a weak spec. My main focus is <strong>ProofPulse</strong> (ASE 2026), which measures which spec elements a proof actually relies on and flags vacuous proofs and unnecessary preconditions. DSpec2Test (ASE 2026) complements it by turning the spec itself into a test suite.</p>
+					<div class="outputs"><span class="chip ok">ASE '26</span><span class="chip accent">ProofPulse</span><span class="chip accent">DSpec2Test</span><span class="chip">MutDafny</span></div>
+				</article>
+				<article class="card thread reveal">
+					<span class="glyph">assert ?</span>
+					<span class="num">ii</span>
 					<h3>LLM-assisted proof</h3>
 					<p>Language models that fill in the tedious parts of a proof, such as helper assertions and lemmas, while the verifier checks every suggestion. I also study how students use these assistants when they write proofs.</p>
 					<div class="outputs"><span class="chip accent">DAISY</span><span class="chip">FormaliSE '24</span><span class="chip">SEFM '25</span></div>
 				</article>
 				<article class="card thread reveal">
 					<span class="glyph">✗ → ✓</span>
-					<span class="num">ii</span>
+					<span class="num">iii</span>
 					<h3>Debugging &amp; repair</h3>
 					<p>When verification fails, I want the tool to say where and why. This thread covers fault localization from counterexamples, single-transformation repair, and the FCT-funded VeriFixer project with INESC TEC, INESC-ID and CMU.</p>
-					<div class="outputs"><span class="chip ok">ISSRE '26</span><span class="chip accent">DafnyFix</span><span class="chip accent">VeriFixer</span></div>
-				</article>
-				<article class="card thread reveal">
-					<span class="glyph">ensures true</span>
-					<span class="num">iii</span>
-					<h3>Specification quality</h3>
-					<p>A proof that verifies can still rest on a weak spec. ProofPulse measures which spec elements a proof actually relies on, and DSpec2Test turns the spec itself into a test suite.</p>
-					<div class="outputs"><span class="chip accent">ProofPulse</span><span class="chip accent">DSpec2Test</span><span class="chip">MutDafny</span></div>
+					<div class="outputs"><span class="chip ok">ISSRE '26</span><span class="chip ok">APR @ ASE '26</span><span class="chip accent">DafnyFix</span><span class="chip accent">VeriFixer</span></div>
 				</article>
 				<article class="card thread reveal">
 					<span class="glyph">rtl ∪ rust</span>
@@ -410,6 +411,13 @@
 			<div class="scholar-metrics reveal" data-scholar-metrics hidden style="margin:0 0 32px"></div>
 			<ol class="pubs reveal">
 				<li class="pub">
+					<div class="pub-venue"><strong>ASE</strong>2026</div>
+					<div>
+						<h3><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse: Interactive Proof Coverage Analysis for Dafny</a></h3>
+						<p class="authors"><span class="me">Álvaro F. Silva</span>, Ruben Martins, Alexandra Mendes</p>
+					</div>
+				</li>
+				<li class="pub">
 					<div class="pub-venue"><strong>ISSRE</strong>2026</div>
 					<div>
 						<h3><a href="https://arxiv.org/abs/2608.05399" target="_blank" rel="noreferrer">Improving Debugging in Verification-Aware Languages Through Automated Fault Localization: A Case Study in Dafny</a></h3>
@@ -417,10 +425,10 @@
 					</div>
 				</li>
 				<li class="pub">
-					<div class="pub-venue"><strong>arXiv</strong>2026</div>
+					<div class="pub-venue"><strong>ASE</strong>2026</div>
 					<div>
-						<h3><a href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">ProofPulse: Interactive Proof Coverage Analysis for Dafny</a></h3>
-						<p class="authors"><span class="me">Álvaro F. Silva</span>, Ruben Martins, Alexandra Mendes</p>
+						<h3><a href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">DSpec2Test: Specification-Driven Test Generation in Dafny</a></h3>
+						<p class="authors">Sofia Vieira Pinto, <span class="me">Álvaro F. Silva</span>, João Pascoal Faria, Alexandra Mendes</p>
 					</div>
 				</li>
 				<li class="pub">

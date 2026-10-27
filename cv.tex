@@ -76,7 +76,7 @@
 
 \begin{document}
 \name{Álvaro Silva}
-\tagline{Ph.D Candidate in Software Enginnering FEUP affiliated with Carnegie Mellom }
+\tagline{Ph.D. Candidate in Software Engineering at FEUP, affiliated with Carnegie Mellon University}
 % Cropped to square from https://en.wikipedia.org/wiki/Marissa_Mayer#/media/File:Marissa_Mayer_May_2014_(cropped).jpg, CC-BY 2.0
 %% You can add multiple photos on the left or right
 \photoR{2.5cm}{alvaro_photo_better.jpg}
@@ -103,6 +103,7 @@
 \personalinfo{%
   \email{amfpsilva@hotmail.com}
   \orcid{0009-0005-2941-9942}
+  \homepage{ricostynha1.github.io/alvaro_silva}
   %\socialicon{https://orcid.org/}{{\faOrcid}}{0009-0005-2941-9942}\quad
   \socialicon{https://www.linkedin.com/in/}{{\faLinkedinIn}}{AlvaroFestasSilva}\quad
   \socialicon{https://gitlab.com/}{{\faGitlab}}{ricostynha}\quad
@@ -179,27 +180,21 @@ Specialization in Micro-electronics
 
 \cvsection{Projects}
 \begin{itemize}
- \item \textbf{Current investigation:} 
+ \item \textbf{Current Research: Specification Strength}
 
-I am pursuing my Ph.D. under the supervision of Professor Alexandra Mendes from the Faculty of Engineering of the University of Porto, with co-supervision from Professor Ruben Martins from Carnegie Mellon University.
+I am pursuing my Ph.D. under the supervision of Professor Alexandra Mendes (Faculty of Engineering of the University of Porto), co-supervised by Professor Ruben Martins (Carnegie Mellon University).
 
-I am investigating ways to apply recent advances in artificial intelligence to enhance the usability of verification-aware languages, focusing on Dafny. I have already published work on this subject. I am also exploring other usability improvements for Dafny, such as better proof visualizations.  I plan to use this usability improvements to explore Dafny as a platform for hardware modeling and verification as a new application domain for the language.
+My current work focuses on automatic methods to assess \textbf{how strong a specification is}, i.e., whether a verified program is actually proving what the developer intended. I lead \textbf{ProofPulse} (ASE 2026), an interactive proof-coverage analysis for Dafny: a three-valued model classifies each specification element as essential, auxiliary or irrelevant to the proof, exposing \textbf{vacuous proofs} and \textbf{unnecessary preconditions} (evaluated on 252 programs, strengthened with unsat-core minimization).
 
- \item \textbf{VeriFixer: Automated Repair of Verification-Aware Languages:} I am a researcher on this project that intends to develops an open-source tool to automatically fix code issues identified by software verifiers, starting with the Dafny language. Funded through a competitive FCT grant and involving INESC TEC, INESC ID, and Carnegie Mellon University, it aims to bridge the gap between error detection and correction, reducing manual effort in building reliable software for critical domains.
- 
-    \item \textbf{MIPI Camera Controllers:} I was the verification lead engineer on the new CSI2 camera controllers. The project demands high competences in creating reliable and extensive verification environments.
+\textbf{Ongoing work, SeVerus:} a context-aware benchmark for \textbf{Verus} proof generation. Starting from verified open-source \textbf{Rust} projects, it extracts the dependency graph between proof artifacts (lemmas, invariants, assertions) and builds sequences of tasks in which agents must write and prove the missing \textbf{auxiliary lemmas} themselves, instead of proving a single isolated lemma. Preliminary results show it produces tasks that current coding agents cannot yet solve. Preprint coming soon.
 
-    The environments model the Device under test (DUT) and stimulate it with all kinds of constrained randomized traffic. I also wrote a lot of temporal assertions and applied formal methods to small parts of the design when stronger behaviour assurances are needed.
+ \item \textbf{Verified Rust: human-eval-verus.} Contributed \textbf{11 merged pull requests} to \underline{\href{https://github.com/secure-foundations/human-eval-verus}{human-eval-verus}}, the Verus translation of HumanEval: verified Rust implementations with specifications, loop invariants and proofs for 10 problems (40, 46, 77, 96, 110, 120, 121, 126, 133, 151) and a partial proof for problem 47.
 
-    I have extensive knowledge in MIPI specifications and to convert them to assertions modules.
-    
+ \item \textbf{VeriFixer (FCT project):} researcher on an open-source tool that automatically repairs errors reported by verifiers, starting with Dafny (INESC TEC, INESC-ID, CMU).
 
-    \item \textbf{Wind Flow:} I was a \textbf{team leader} in a university project of \textbf{40 people}. My team (10 members) was responsible for implementing a communication wireless physical protocol using an SDR (software-defined radio). The project was a mesh of high-speed wind sensors that communicate wirelessly through long distances. 
-    
-    
-    \item \textbf{Research Paper graph:} I was a member of a three-member team. The project consisted of a GUI Web-based application exposing research papers in graph structures and clustering papers by similarity. The details can be seen in \underline{
-    \href{https://github.com/Jibbow/research-paper-graph}{research-paper-graph}}. I was responsible for doing the \textbf{AI clustering} distances between nodes which are plotted for the different publications. 
-    
+ \item \textbf{MIPI Camera Controllers (Synopsys):} verification lead for the CSI-2 camera controllers: constrained-random SystemVerilog/UVM environments, temporal assertions derived from the MIPI specifications, and formal verification where stronger guarantees were needed.
+
+ \item \textbf{Wind Flow:} \textbf{team leader} (10 of 40 students) implementing a long-range wireless physical layer on an SDR for a mesh of wind sensors.
 \end{itemize}
 
 %% Switch to the right column. This will now automatically move to the second
@@ -226,34 +221,37 @@ I am investigating ways to apply recent advances in artificial intelligence to e
 %    \end{itemize}
 
 
-\cvsection{ACADEMIC OUTPUT}
+\cvsection{Programming}
+\cvskill{Verus}{5}
+\cvskill{Dafny}{5}
+\cvskill{Python}{5}
+\cvskill{C}{5}
+\cvskill{SystemVerilog/UVM}{5}
+\cvskill{Lean}{3.5}
 
-\textbf{Papers}
+
+\cvsection{Academic Output}
+
 \begin{itemize}
-\item 
-Silva, Álvaro, Alexandra Mendes, and João F. Ferreira. "Leveraging Large Language Models to Boost Dafny's Developers Productivity." FormaliSE 2024 (2024).
 \item
-Carreira, Carolina; Silva, Álvaro; Abreu, Alexandre; Mendes, Alexandra. “Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny.” 
-arXiv (accepted in SEFM 2025)
-\item 
-Silva, Álvaro, Alexandra Mendes, and Ruben Martins. “Inferring Multiple Helper Dafny Assertions with LLMs.” 
-arXiv (under review 2025)
+Silva, Álvaro F., Ruben Martins, and Alexandra Mendes. ``ProofPulse: Interactive Proof Coverage Analysis for Dafny.'' \textbf{ASE 2026}.
+\item
+Pinto, Sofia Vieira, Álvaro F. Silva, João Pascoal Faria, and Alexandra Mendes. ``DSpec2Test: Specification-Driven Test Generation in Dafny.'' \textbf{ASE 2026}.
+\item
+Silva, Álvaro, Isabel Amaral, João Pascoal Faria, and Alexandra Mendes. ``Improving Debugging in Verification-Aware Languages Through Automated Fault Localization: A Case Study in Dafny.'' \textbf{ISSRE 2026}.
+\item
+Amaral, Isabel, Álvaro F. Silva, João F. Ferreira, and Alexandra Mendes. ``DafnyFix: Single-Transformation Automated Repair in Dafny.'' \textbf{APR Workshop @ ASE 2026}.
+\item
+Silva, Álvaro, Alexandra Mendes, and Ruben Martins. ``Inferring Multiple Helper Dafny Assertions with LLMs.'' \textbf{arXiv preprint} 2511.00125 (2025).
+\item
+Carreira, Carolina, Álvaro Silva, Alexandre Abreu, and Alexandra Mendes. ``Can Large Language Models Help Students Prove Software Correctness? An Experimental Study with Dafny.'' \textbf{SEFM 2025}.
+\item
+Silva, Álvaro, Alexandra Mendes, and João F. Ferreira. ``Leveraging Large Language Models to Boost Dafny's Developers Productivity.'' \textbf{FormaliSE 2024}.
 \end{itemize}
 
 \textbf{Thesis}
 \begin{itemize}
     \item Silva, Álvaro. "Using Dimensional Aware Genetic Programming to find interpretable Dispatching Rules for the Job Shop Scheduling Problem". Faculty of Engineering of the University of Porto. (2021).
-\end{itemize}
-
-\textbf{Conference Presentations}
-\begin{itemize}
-\item Silva, Álvaro, Bruno Maurício. "A Simple Approach to Lamport's State Machine Replication". IJUP'2021- 14º edition. Oral communication. (2021)
-\end{itemize}
-
-\textbf{Supervising of thesis}
-\begin{itemize}
-\item
-de Jesus, Renato Pedrosa. "Evaluating High-Level SystemC Formal Verification Compared to RTL Verification." (2024) (Company supervisor of the thesis).
 \end{itemize}
 
 
@@ -262,40 +260,21 @@ de Jesus, Renato Pedrosa. "Evaluating High-Level SystemC Formal Verification Com
     \item \textbf{Reviewer}, Symposium on Formal Methods (FM 2026)
     \item \textbf{Artifact Evaluator}, FormaliSE 2026
 \end{itemize}
-%\cvsection{Strengths}
-
-%\cvtag{Hard-working} 
-%\cvtag{Innovator} 
-%\cvtag {Analytics}  \\
-%\cvtag{Team-player}
-%\cvtag{Coding} 
-%\cvtag{Hardware} \\
-%\cvtag{AI} 
-%\cvtag{Leadership}
-%\cvtag {Problem Solving}
 
 
+\cvsection{Supervision \& Talks}
 
-\cvsection{Languages}
+\textbf{Thesis Supervision}
+\begin{itemize}
+\item
+de Jesus, Renato Pedrosa. "Evaluating High-Level SystemC Formal Verification Compared to RTL Verification." (2024) (Company supervisor of the thesis).
+\end{itemize}
 
-\cvskill{Portuguese}{5}
-\cvskill{English}{5}
-%\cvskill{Spanish}{3.5}
-%\cvskill{German}{2} %% supports X.5 values.
+\textbf{Conference Presentations}
+\begin{itemize}
+\item Silva, Álvaro, Bruno Maurício. "A Simple Approach to Lamport's State Machine Replication". IJUP'2021- 14º edition. Oral communication. (2021)
+\end{itemize}
 
-\cvsection{Programming}
-\cvskill{C}{5}
-\cvskill{Python}{5}
-%\cvskill{Verilog}{5}
-\cvskill{SystemVerilog/UVM}{5}
-\cvskill{Dafny}{4.5}
-\cvskill{C++}{4}
-\cvskill{Haskell}{3.5}
-
-%\cvskill{Bash}{3.5}
-%\cvskill{Lean4}{2}
-
-\newpage
 
 \cvsection{References}
 
@@ -314,7 +293,6 @@ de Jesus, Renato Pedrosa. "Evaluating High-Level SystemC Formal Verification Com
 
 \divider
 \cvref{Prof.\ Gonçalo Reis Figueira}{INESC TEC and FEUP}{lfigueira@fe.up.pt}
-
 
 
 \end{paracol}

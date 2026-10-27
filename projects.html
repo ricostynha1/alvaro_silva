@@ -95,25 +95,25 @@
 			</div>
 			<div class="bento">
 				<article class="card feature span-4 reveal">
-					<span class="tool-tag">LLM-assisted proof · 2025</span>
-					<h3 class="tool-name">DAISY</h3>
-					<p>The Dafny Assertion Inference System. When Dafny gives up on a proof, DAISY combines LLM predictions with the verifier's error messages to propose the helper assertions that are missing, including several at once. It comes with an extension of DafnyBench whose programs have had assertions removed.</p>
-					<div class="meta"><span class="chip">LLMs</span><span class="chip">Dafny</span><span class="chip">DafnyBench</span><a class="chip" href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/daisy" target="_blank" rel="noreferrer">code ↗</a></div>
-				</article>
-				<article class="card span-2 reveal">
-					<span class="tool-tag">DAISY results</span>
-					<span class="metric">63.4%</span>
-					<p>of programs missing one assertion verify again; 31.7% when several assertions are missing.</p>
-				</article>
-
-				<article class="card span-3 reveal">
-					<span class="tool-tag">Specification quality · 2026</span>
+					<span class="tool-tag">Specification quality · ASE 2026</span>
 					<h3 class="tool-name">ProofPulse</h3>
 					<p>Interactive proof-coverage analysis. A three-valued model classifies each spec element as essential, auxiliary or irrelevant to the proof, which exposes vacuous proofs and unnecessary preconditions. Evaluated on 252 programs.</p>
 					<div class="meta"><span class="chip">proof deps</span><span class="chip">unsat cores</span><a class="chip" href="https://arxiv.org/abs/2608.30818" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/ProofPulse" target="_blank" rel="noreferrer">code ↗</a></div>
 				</article>
+				<article class="card span-2 reveal">
+					<span class="tool-tag">ProofPulse evaluation</span>
+					<span class="metric">252</span>
+					<p>Dafny programs analysed for vacuous proofs and unnecessary preconditions, with unsat-core minimization sharpening the results.</p>
+				</article>
+
 				<article class="card span-3 reveal">
-					<span class="tool-tag">Testing · 2026</span>
+					<span class="tool-tag">LLM-assisted proof · 2025</span>
+					<h3 class="tool-name">DAISY</h3>
+					<p>The Dafny Assertion Inference System. When Dafny gives up on a proof, DAISY combines LLM predictions with the verifier's error messages to propose the helper assertions that are missing, including several at once. It comes with an extension of DafnyBench whose programs have had assertions removed. It repairs 63.4% of programs missing one assertion and 31.7% missing several.</p>
+					<div class="meta"><span class="chip">LLMs</span><span class="chip">Dafny</span><span class="chip">DafnyBench</span><a class="chip" href="https://arxiv.org/abs/2511.00125" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/daisy" target="_blank" rel="noreferrer">code ↗</a></div>
+				</article>
+				<article class="card span-3 reveal">
+					<span class="tool-tag">Testing · ASE 2026</span>
 					<h3 class="tool-name">DSpec2Test</h3>
 					<p>Generates tests from the specification alone, without looking at the implementation. It uses DNF equivalence-class partitioning and boundary-value analysis, with Z3 synthesizing inputs and expected outputs. The tests kill 93.9% of mutants.</p>
 					<div class="meta"><span class="chip">Z3</span><span class="chip">mutation testing</span><a class="chip" href="https://arxiv.org/abs/2609.29713" target="_blank" rel="noreferrer">paper ↗</a><a class="chip" href="https://github.com/VeriFixer/DSpec2Test" target="_blank" rel="noreferrer">code ↗</a></div>
@@ -128,7 +128,7 @@
 				<article class="card span-2 reveal">
 					<span class="tool-tag">Repair · FCT project</span>
 					<h3 class="tool-name">VeriFixer</h3>
-					<p>An open-source tool that automatically fixes problems reported by software verifiers, starting with Dafny. It is a collaboration between INESC TEC, INESC-ID and Carnegie Mellon. DafnyFix, which repairs programs with a single transformation, is part of this work.</p>
+					<p>An open-source tool that automatically fixes problems reported by software verifiers, starting with Dafny. It is a collaboration between INESC TEC, INESC-ID and Carnegie Mellon. DafnyFix, which repairs programs with a single transformation (APR Workshop @ ASE 2026), is part of this work.</p>
 					<div class="meta"><span class="chip">APR</span><a class="chip accent" href="https://github.com/VeriFixer/DafnyFix" target="_blank" rel="noreferrer">DafnyFix ↗</a><a class="chip" href="https://github.com/VeriFixer" target="_blank" rel="noreferrer">org ↗</a></div>
 				</article>
 				<article class="card span-2 reveal">
