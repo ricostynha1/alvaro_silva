@@ -3,26 +3,8 @@ window.SITE_DATA["github"] = {
 	"platform": "GitHub",
 	"handle": "ricostynha1",
 	"profile_url": "https://github.com/ricostynha1",
-	"updated": "2026-10-15",
+	"updated": "2026-11-01",
 	"calendar": {
-		"2025-10-15": 5,
-		"2025-10-16": 0,
-		"2025-10-17": 0,
-		"2025-10-18": 0,
-		"2025-10-19": 0,
-		"2025-10-20": 1,
-		"2025-10-21": 0,
-		"2025-10-22": 0,
-		"2025-10-23": 1,
-		"2025-10-24": 1,
-		"2025-10-25": 0,
-		"2025-10-26": 0,
-		"2025-10-27": 1,
-		"2025-10-28": 1,
-		"2025-10-29": 3,
-		"2025-10-30": 4,
-		"2025-10-31": 2,
-		"2025-11-01": 0,
 		"2025-11-02": 0,
 		"2025-11-03": 2,
 		"2025-11-04": 1,
@@ -368,9 +350,26 @@ window.SITE_DATA["github"] = {
 		"2026-10-10": 0,
 		"2026-10-11": 2,
 		"2026-10-12": 4,
-		"2026-10-13": 1,
-		"2026-10-14": 3,
-		"2026-10-15": 0
+		"2026-10-13": 2,
+		"2026-10-14": 4,
+		"2026-10-15": 1,
+		"2026-10-16": 0,
+		"2026-10-17": 0,
+		"2026-10-18": 0,
+		"2026-10-19": 0,
+		"2026-10-20": 0,
+		"2026-10-21": 0,
+		"2026-10-22": 3,
+		"2026-10-23": 0,
+		"2026-10-24": 0,
+		"2026-10-25": 0,
+		"2026-10-26": 2,
+		"2026-10-27": 2,
+		"2026-10-28": 0,
+		"2026-10-29": 0,
+		"2026-10-30": 27,
+		"2026-10-31": 0,
+		"2026-11-01": 0
 	},
 	"repos": [
 		{
@@ -379,21 +378,65 @@ window.SITE_DATA["github"] = {
 			"description": "Verified Rust for low-level systems code",
 			"language": "Rust",
 			"color": "#dea584",
-			"stars": 3336,
+			"stars": 3526,
 			"fork": false,
 			"contributions": 1,
-			"last_activity": "2026-10-15T09:39:55Z"
+			"last_activity": "2026-11-01T04:09:28Z"
 		},
 		{
-			"name": "boogie-org/boogie",
-			"url": "https://github.com/boogie-org/boogie",
+			"name": "VeriFixer/ProofPulse",
+			"url": "https://github.com/VeriFixer/ProofPulse",
+			"description": "",
+			"language": "Dafny",
+			"color": "#FFEC25",
+			"stars": 2,
+			"fork": false,
+			"contributions": 112,
+			"last_activity": "2026-10-30T23:04:00Z"
+		},
+		{
+			"name": "VeriFixer/dafny_proofpulse",
+			"url": "https://github.com/VeriFixer/dafny_proofpulse",
+			"description": "Dafny is a verification-aware programming language. ",
+			"language": "C#",
+			"color": "#7355dd",
+			"stars": 0,
+			"fork": true,
+			"contributions": 0,
+			"last_activity": "2026-10-30T22:42:47Z"
+		},
+		{
+			"name": "VeriFixer/boogie",
+			"url": "https://github.com/VeriFixer/boogie",
 			"description": "Boogie",
 			"language": "Boogie",
 			"color": "#c80fa0",
-			"stars": 603,
+			"stars": 0,
+			"fork": true,
+			"contributions": 0,
+			"last_activity": "2026-10-30T21:48:20Z"
+		},
+		{
+			"name": "dafny-lang/dafny",
+			"url": "https://github.com/dafny-lang/dafny",
+			"description": "Dafny is a verification-aware programming language",
+			"language": "C#",
+			"color": "#7355dd",
+			"stars": 3608,
 			"fork": false,
-			"contributions": 3,
-			"last_activity": "2026-10-12T09:59:45Z"
+			"contributions": 2,
+			"last_activity": "2026-10-29T16:14:58Z"
+		},
+		{
+			"name": "ricostynha1/alvaro_silva",
+			"url": "https://github.com/ricostynha1/alvaro_silva",
+			"description": "Personal Page",
+			"language": "HTML",
+			"color": "#e34c26",
+			"stars": 0,
+			"fork": false,
+			"contributions": 4,
+			"last_activity": "2026-10-27T09:06:36Z"
 		},
 		{
 			"name": "ricostynha1/trace_code_ide",
@@ -404,18 +447,40 @@ window.SITE_DATA["github"] = {
 			"stars": 0,
 			"fork": false,
 			"contributions": 67,
-			"last_activity": "2026-10-11T09:28:55Z"
+			"last_activity": "2026-10-26T14:18:44Z"
 		},
 		{
-			"name": "ricostynha1/alvaro_silva",
-			"url": "https://github.com/ricostynha1/alvaro_silva",
-			"description": "Personal Page",
-			"language": "HTML",
-			"color": "#e34c26",
-			"stars": 0,
+			"name": "MutDafny/mutdafny",
+			"url": "https://github.com/MutDafny/mutdafny",
+			"description": "A tool for mutation testing of Dafny programs",
+			"language": "C#",
+			"color": "#7355dd",
+			"stars": 2,
 			"fork": false,
-			"contributions": 3,
-			"last_activity": "2026-10-05T21:21:44Z"
+			"contributions": 21,
+			"last_activity": "2026-10-24T12:20:56Z"
+		},
+		{
+			"name": "boogie-org/boogie",
+			"url": "https://github.com/boogie-org/boogie",
+			"description": "Boogie",
+			"language": "Boogie",
+			"color": "#c80fa0",
+			"stars": 606,
+			"fork": false,
+			"contributions": 2,
+			"last_activity": "2026-10-18T21:35:27Z"
+		},
+		{
+			"name": "ricostynha1/dafny_fork",
+			"url": "https://github.com/ricostynha1/dafny_fork",
+			"description": "Fork of Dafny",
+			"language": "C#",
+			"color": "#7355dd",
+			"stars": 0,
+			"fork": true,
+			"contributions": 0,
+			"last_activity": "2026-10-15T16:11:29Z"
 		},
 		{
 			"name": "secure-foundations/human-eval-verus",
@@ -427,28 +492,6 @@ window.SITE_DATA["github"] = {
 			"fork": false,
 			"contributions": 24,
 			"last_activity": "2026-09-26T19:13:25Z"
-		},
-		{
-			"name": "dafny-lang/dafny",
-			"url": "https://github.com/dafny-lang/dafny",
-			"description": "Dafny is a verification-aware programming language",
-			"language": "C#",
-			"color": "#7355dd",
-			"stars": 3584,
-			"fork": false,
-			"contributions": 5,
-			"last_activity": "2026-09-20T23:04:59Z"
-		},
-		{
-			"name": "MutDafny/mutdafny",
-			"url": "https://github.com/MutDafny/mutdafny",
-			"description": "A tool for mutation testing of Dafny programs",
-			"language": "C#",
-			"color": "#7355dd",
-			"stars": 2,
-			"fork": false,
-			"contributions": 21,
-			"last_activity": "2026-09-17T14:26:38Z"
 		},
 		{
 			"name": "ricostynha1/mutdafny",
@@ -484,17 +527,6 @@ window.SITE_DATA["github"] = {
 			"last_activity": "2026-09-01T20:28:30Z"
 		},
 		{
-			"name": "VeriFixer/ProofPulse",
-			"url": "https://github.com/VeriFixer/ProofPulse",
-			"description": "",
-			"language": "Dafny",
-			"color": "#FFEC25",
-			"stars": 2,
-			"fork": false,
-			"contributions": 94,
-			"last_activity": "2026-08-18T21:54:43Z"
-		},
-		{
 			"name": "VeriFixer/verifixer_fault_localization",
 			"url": "https://github.com/VeriFixer/verifixer_fault_localization",
 			"description": "",
@@ -526,17 +558,6 @@ window.SITE_DATA["github"] = {
 			"fork": false,
 			"contributions": 16,
 			"last_activity": "2026-08-05T19:47:04Z"
-		},
-		{
-			"name": "dafny-lang/ide-vscode",
-			"url": "https://github.com/dafny-lang/ide-vscode",
-			"description": "VSCode IDE Integration for Dafny",
-			"language": "TypeScript",
-			"color": "#3178c6",
-			"stars": 28,
-			"fork": false,
-			"contributions": 1,
-			"last_activity": "2026-08-05T04:47:45Z"
 		},
 		{
 			"name": "VeriFixer/daisy",
@@ -581,17 +602,6 @@ window.SITE_DATA["github"] = {
 			"fork": true,
 			"contributions": 0,
 			"last_activity": "2026-06-09T01:52:06Z"
-		},
-		{
-			"name": "VeriFixer/dafny_proofpulse",
-			"url": "https://github.com/VeriFixer/dafny_proofpulse",
-			"description": "Dafny is a verification-aware programming language. ",
-			"language": "C#",
-			"color": "#7355dd",
-			"stars": 0,
-			"fork": true,
-			"contributions": 0,
-			"last_activity": "2026-06-04T16:23:20Z"
 		},
 		{
 			"name": "ricostynha1/boogie",
