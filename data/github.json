@@ -2,22 +2,8 @@
 	"platform": "GitHub",
 	"handle": "ricostynha1",
 	"profile_url": "https://github.com/ricostynha1",
-	"updated": "2026-11-01",
+	"updated": "2026-11-15",
 	"calendar": {
-		"2025-11-02": 0,
-		"2025-11-03": 2,
-		"2025-11-04": 1,
-		"2025-11-05": 8,
-		"2025-11-06": 0,
-		"2025-11-07": 1,
-		"2025-11-08": 0,
-		"2025-11-09": 3,
-		"2025-11-10": 1,
-		"2025-11-11": 0,
-		"2025-11-12": 2,
-		"2025-11-13": 1,
-		"2025-11-14": 0,
-		"2025-11-15": 0,
 		"2025-11-16": 0,
 		"2025-11-17": 1,
 		"2025-11-18": 0,
@@ -350,8 +336,8 @@
 		"2026-10-11": 2,
 		"2026-10-12": 4,
 		"2026-10-13": 2,
-		"2026-10-14": 4,
-		"2026-10-15": 1,
+		"2026-10-14": 6,
+		"2026-10-15": 2,
 		"2026-10-16": 0,
 		"2026-10-17": 0,
 		"2026-10-18": 0,
@@ -367,8 +353,22 @@
 		"2026-10-28": 0,
 		"2026-10-29": 0,
 		"2026-10-30": 27,
-		"2026-10-31": 0,
-		"2026-11-01": 0
+		"2026-10-31": 3,
+		"2026-11-01": 0,
+		"2026-11-02": 7,
+		"2026-11-03": 1,
+		"2026-11-04": 39,
+		"2026-11-05": 12,
+		"2026-11-06": 41,
+		"2026-11-07": 11,
+		"2026-11-08": 2,
+		"2026-11-09": 6,
+		"2026-11-10": 1,
+		"2026-11-11": 1,
+		"2026-11-12": 0,
+		"2026-11-13": 0,
+		"2026-11-14": 0,
+		"2026-11-15": 0
 	},
 	"repos": [
 		{
@@ -377,43 +377,21 @@
 			"description": "Verified Rust for low-level systems code",
 			"language": "Rust",
 			"color": "#dea584",
-			"stars": 3526,
+			"stars": 3798,
 			"fork": false,
 			"contributions": 1,
-			"last_activity": "2026-11-01T04:09:28Z"
+			"last_activity": "2026-11-15T04:25:54Z"
 		},
 		{
-			"name": "VeriFixer/ProofPulse",
-			"url": "https://github.com/VeriFixer/ProofPulse",
-			"description": "",
-			"language": "Dafny",
-			"color": "#FFEC25",
-			"stars": 2,
-			"fork": false,
-			"contributions": 112,
-			"last_activity": "2026-10-30T23:04:00Z"
-		},
-		{
-			"name": "VeriFixer/dafny_proofpulse",
-			"url": "https://github.com/VeriFixer/dafny_proofpulse",
-			"description": "Dafny is a verification-aware programming language. ",
-			"language": "C#",
-			"color": "#7355dd",
-			"stars": 0,
-			"fork": true,
-			"contributions": 0,
-			"last_activity": "2026-10-30T22:42:47Z"
-		},
-		{
-			"name": "VeriFixer/boogie",
-			"url": "https://github.com/VeriFixer/boogie",
+			"name": "boogie-org/boogie",
+			"url": "https://github.com/boogie-org/boogie",
 			"description": "Boogie",
 			"language": "Boogie",
 			"color": "#c80fa0",
-			"stars": 0,
-			"fork": true,
-			"contributions": 0,
-			"last_activity": "2026-10-30T21:48:20Z"
+			"stars": 610,
+			"fork": false,
+			"contributions": 4,
+			"last_activity": "2026-11-14T16:37:21Z"
 		},
 		{
 			"name": "dafny-lang/dafny",
@@ -421,21 +399,10 @@
 			"description": "Dafny is a verification-aware programming language",
 			"language": "C#",
 			"color": "#7355dd",
-			"stars": 3608,
+			"stars": 3630,
 			"fork": false,
 			"contributions": 2,
-			"last_activity": "2026-10-29T16:14:58Z"
-		},
-		{
-			"name": "ricostynha1/alvaro_silva",
-			"url": "https://github.com/ricostynha1/alvaro_silva",
-			"description": "Personal Page",
-			"language": "HTML",
-			"color": "#e34c26",
-			"stars": 0,
-			"fork": false,
-			"contributions": 4,
-			"last_activity": "2026-10-27T09:06:36Z"
+			"last_activity": "2026-11-13T17:01:59Z"
 		},
 		{
 			"name": "ricostynha1/trace_code_ide",
@@ -446,7 +413,62 @@
 			"stars": 0,
 			"fork": false,
 			"contributions": 67,
-			"last_activity": "2026-10-26T14:18:44Z"
+			"last_activity": "2026-11-11T17:30:05Z"
+		},
+		{
+			"name": "VeriFixer/boogie",
+			"url": "https://github.com/VeriFixer/boogie",
+			"description": "Boogie",
+			"language": "Boogie",
+			"color": "#c80fa0",
+			"stars": 0,
+			"fork": true,
+			"contributions": 0,
+			"last_activity": "2026-11-09T15:19:29Z"
+		},
+		{
+			"name": "VeriFixer/ProofPulse",
+			"url": "https://github.com/VeriFixer/ProofPulse",
+			"description": "",
+			"language": "Dafny",
+			"color": "#FFEC25",
+			"stars": 3,
+			"fork": false,
+			"contributions": 112,
+			"last_activity": "2026-11-09T13:30:40Z"
+		},
+		{
+			"name": "VeriFixer/dafny_proofpulse",
+			"url": "https://github.com/VeriFixer/dafny_proofpulse",
+			"description": "Dafny is a verification-aware programming language. ",
+			"language": "C#",
+			"color": "#7355dd",
+			"stars": 0,
+			"fork": true,
+			"contributions": 0,
+			"last_activity": "2026-11-09T12:40:38Z"
+		},
+		{
+			"name": "secure-foundations/human-eval-verus",
+			"url": "https://github.com/secure-foundations/human-eval-verus",
+			"description": "",
+			"language": "Rust",
+			"color": "#dea584",
+			"stars": 29,
+			"fork": false,
+			"contributions": 24,
+			"last_activity": "2026-11-06T19:59:24Z"
+		},
+		{
+			"name": "ricostynha1/alvaro_silva",
+			"url": "https://github.com/ricostynha1/alvaro_silva",
+			"description": "Personal Page",
+			"language": "HTML",
+			"color": "#e34c26",
+			"stars": 0,
+			"fork": false,
+			"contributions": 4,
+			"last_activity": "2026-11-01T11:53:59Z"
 		},
 		{
 			"name": "MutDafny/mutdafny",
@@ -460,17 +482,6 @@
 			"last_activity": "2026-10-24T12:20:56Z"
 		},
 		{
-			"name": "boogie-org/boogie",
-			"url": "https://github.com/boogie-org/boogie",
-			"description": "Boogie",
-			"language": "Boogie",
-			"color": "#c80fa0",
-			"stars": 606,
-			"fork": false,
-			"contributions": 2,
-			"last_activity": "2026-10-18T21:35:27Z"
-		},
-		{
 			"name": "ricostynha1/dafny_fork",
 			"url": "https://github.com/ricostynha1/dafny_fork",
 			"description": "Fork of Dafny",
@@ -480,17 +491,6 @@
 			"fork": true,
 			"contributions": 0,
 			"last_activity": "2026-10-15T16:11:29Z"
-		},
-		{
-			"name": "secure-foundations/human-eval-verus",
-			"url": "https://github.com/secure-foundations/human-eval-verus",
-			"description": "",
-			"language": "Rust",
-			"color": "#dea584",
-			"stars": 29,
-			"fork": false,
-			"contributions": 24,
-			"last_activity": "2026-09-26T19:13:25Z"
 		},
 		{
 			"name": "ricostynha1/mutdafny",
@@ -564,7 +564,7 @@
 			"description": "",
 			"language": "Python",
 			"color": "#3572A5",
-			"stars": 0,
+			"stars": 1,
 			"fork": false,
 			"contributions": 28,
 			"last_activity": "2026-07-24T14:57:59Z"
