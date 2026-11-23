@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Blog · Álvaro Silva</title>
+	<meta name="description" content="Essays and notes by Álvaro Silva on formal verification, mathematics and AI.">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5fd6'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='40' fill='%23ffffff'>Á</text></svg>">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+	<link rel="stylesheet" href="assets/site.css">
+	<style>
+		.blog-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 56px; padding-top: 48px; align-items: start; }
+		.blog-side { position: sticky; top: 88px; display: grid; gap: 28px; }
+		.side-title { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+		.side-list { list-style: none; display: grid; gap: 2px; margin: 0; padding: 0; }
+		.side-list button { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; padding: 8px 12px; border-radius: 8px; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.35; display: flex; justify-content: space-between; gap: 10px; }
+		.side-list button:hover { background: var(--accent-wash); color: var(--ink); }
+		.side-list button:focus-visible { outline: 2px solid var(--accent); }
+		.side-list button[aria-current="true"] { background: var(--accent-wash); color: var(--accent-ink); font-weight: 600; }
+		.side-list .count { font-family: var(--mono); font-size: 0.76rem; color: var(--faint); }
+		.entry-date { display: block; font-family: var(--mono); font-size: 0.72rem; color: var(--faint); margin-top: 2px; font-weight: 400; }
+		.side-list button.entry-btn { flex-direction: column; justify-content: flex-start; gap: 0; }
+
+		.post-head { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
+		.post-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.08; margin-top: 12px; }
+		.post-meta { margin-top: 14px; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+		.post-body { max-width: 68ch; font-size: 1.08rem; line-height: 1.75; color: var(--ink-soft); }
+		.post-body p { margin: 0 0 1.2em; }
+		.post-body h2, .post-body h3 { font-family: var(--serif); font-weight: 400; color: var(--ink); line-height: 1.15; margin: 1.8em 0 0.6em; }
+		.post-body h2 { font-size: 2rem; }
+		.post-body h3 { font-size: 1.5rem; }
+		.post-body blockquote { margin: 0 0 1.2em; padding-left: 18px; border-left: 3px solid var(--accent); color: var(--muted); font-style: italic; }
+		.post-body ul, .post-body ol { margin: 0 0 1.2em 1.3em; }
+		.post-body code { font-family: var(--mono); font-size: 0.9em; background: var(--accent-wash); padding: 1px 5px; border-radius: 4px; }
+		.post-body pre { background: var(--code-bg); color: var(--code-ink); padding: 16px; border-radius: 10px; overflow-x: auto; margin: 0 0 1.2em; }
+		.post-body pre code { background: none; padding: 0; }
+		.post-body a { color: var(--accent); }
+		.post-body hr { border: 0; border-top: 1px solid var(--line); margin: 2em 0; }
+		.notice { color: var(--muted); font-family: var(--mono); font-size: 0.88rem; }
+
+		@media (max-width: 860px) {
+			.blog-layout { grid-template-columns: 1fr; gap: 32px; }
+			.blog-side { position: static; }
+		}
+	</style>
+</head>
+<body>
+	<header class="nav">
+		<div class="wrap">
+			<a class="mark" href="index.html"><span class="mark-glyph">Á</span>Álvaro Silva</a>
+			<ul class="nav-links" id="nav-links">
+				<li><a href="index.html#research">Research</a></li>
+				<li><a href="publications.html">Publications</a></li>
+				<li><a href="projects.html">Projects</a></li>
+				<li><a href="software.html">Software</a></li>
+				<li><a href="blog.html" aria-current="page">Blog</a></li>
+				<li><a href="index.html#contact">Contact</a></li>
+			</ul>
+			<div class="nav-tools">
+				<button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+				</button>
+				<button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<main class="wrap">
+		<div class="blog-layout">
+			<aside class="blog-side" aria-label="Blog navigation">
+				<div>
+					<div class="side-title">Themes</div>
+					<ul class="side-list" id="theme-list"></ul>
+				</div>
+				<div>
+					<div class="side-title">Entries</div>
+					<ul class="side-list" id="entry-list"></ul>
+				</div>
+			</aside>
+			<article id="post"><p class="notice">Loading…</p></article>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="wrap">
+			<span>© <span id="year">2026</span> Álvaro Silva · Porto, Portugal</span>
+			<code>assert site.handcrafted;</code>
+		</div>
+	</footer>
+
+	<script src="assets/site.js"></script>
+	<script src="blog/posts.js"></script>
+	<script>
+		const ALL = 'All';
+		const posts = (window.BLOG_POSTS || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+		const state = { theme: ALL, slug: null };
+
+		const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+		const fmtDate = (d) => new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+		// Minimal Markdown: headings, paragraphs, lists, quotes, code, rules, bold/italic/links.
+		function inline(s) {
+			return esc(s)
+				.replace(/`([^`]+)`/g, '<code>$1</code>')
+				.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+				.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<em>$2</em>')
+				.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+		}
+		function render(text) {
+			const out = [];
+			let para = [], list = null, code = null;
+			const flushPara = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
+			const flushList = () => { if (list) { out.push(`<${list.t}>` + list.items.map((i) => '<li>' + inline(i) + '</li>').join('') + `</${list.t}>`); list = null; } };
+			for (const raw of text.replace(/\r\n?/g, '\n').split('\n')) {
+				if (code !== null) {
+					if (raw.startsWith('```')) { out.push('<pre><code>' + esc(code.join('\n')) + '</code></pre>'); code = null; } else code.push(raw);
+					continue;
+				}
+				const line = raw.trimEnd();
+				let m;
+				if (line.startsWith('```')) { flushPara(); flushList(); code = []; }
+				else if (!line.trim()) { flushPara(); flushList(); }
+				else if ((m = line.match(/^(#{1,3})\s+(.*)/))) { flushPara(); flushList(); const l = Math.max(2, m[1].length); out.push(`<h${l}>${inline(m[2])}</h${l}>`); }
+				else if (/^(-{3,}|\*{3,})$/.test(line)) { flushPara(); flushList(); out.push('<hr>'); }
+				else if ((m = line.match(/^>\s?(.*)/))) { flushPara(); flushList(); out.push('<blockquote>' + inline(m[1]) + '</blockquote>'); }
+				else if ((m = line.match(/^(?:([-*])|(\d+)\.)\s+(.*)/))) {
+					flushPara();
+					const t = m[1] ? 'ul' : 'ol';
+					if (!list || list.t !== t) { flushList(); list = { t, items: [] }; }
+					list.items.push(m[3]);
+				}
+				else { flushList(); para.push(line.trim()); }
+			}
+			if (code !== null) out.push('<pre><code>' + esc(code.join('\n')) + '</code></pre>');
+			flushPara(); flushList();
+			return out.join('\n');
+		}
+
+		function readHash() {
+			const h = decodeURIComponent(location.hash.slice(1));
+			if (h.startsWith('theme=')) { state.theme = h.slice(6) || ALL; state.slug = null; }
+			else if (h) { state.slug = h; }
+		}
+		const setHash = (h) => { location.hash = encodeURIComponent(h); };
+		const visiblePosts = () => posts.filter((p) => state.theme === ALL || p.theme === state.theme);
+
+		function renderSide() {
+			const themes = [...new Set(posts.map((p) => p.theme))].sort();
+			const themeItems = [[ALL, posts.length], ...themes.map((t) => [t, posts.filter((p) => p.theme === t).length])];
+			document.getElementById('theme-list').innerHTML = themeItems.map(([t, n]) =>
+				`<li><button type="button" data-theme="${esc(t)}" aria-current="${t === state.theme}">${esc(t)}<span class="count">${n}</span></button></li>`).join('');
+			document.getElementById('entry-list').innerHTML = visiblePosts().map((p) =>
+				`<li><button type="button" class="entry-btn" data-slug="${esc(p.slug)}" aria-current="${p.slug === state.slug}">${esc(p.title)}<span class="entry-date">${fmtDate(p.date)}</span></button></li>`).join('')
+				|| '<li class="notice" style="padding:8px 12px">No entries yet.</li>';
+		}
+
+		async function renderPost() {
+			const box = document.getElementById('post');
+			const post = posts.find((p) => p.slug === state.slug) || visiblePosts()[0];
+			if (!post) { box.innerHTML = '<p class="notice">No posts yet.</p>'; return; }
+			state.slug = post.slug;
+			renderSide();
+			document.title = post.title + ' · Álvaro Silva';
+			box.innerHTML = `<header class="post-head"><span class="kicker">${esc(post.theme)}</span><h1>${esc(post.title)}</h1><div class="post-meta">${fmtDate(post.date)}</div></header><div class="post-body"><p class="notice">Loading…</p></div>`;
+			try {
+				const res = await fetch(post.file);
+				if (!res.ok) throw new Error(res.status);
+				const text = await res.text();
+				if (state.slug !== post.slug) return;
+				box.querySelector('.post-body').innerHTML = text.trim() ? render(text) : '<p class="notice">This post is empty.</p>';
+			} catch (e) {
+				box.querySelector('.post-body').innerHTML = '<p class="notice">Could not load this post.</p>';
+			}
+		}
+
+		function update() { renderSide(); renderPost(); }
+
+		document.addEventListener('click', (e) => {
+			const b = e.target.closest('button[data-theme], button[data-slug]');
+			if (!b) return;
+			if (b.dataset.theme) { state.theme = b.dataset.theme; state.slug = null; setHash('theme=' + state.theme); }
+			else { setHash(b.dataset.slug); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+		});
+		window.addEventListener('hashchange', () => { readHash(); update(); });
+		readHash(); update();
+	</script>
+</body>
+</html>
